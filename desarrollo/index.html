@@ -1,0 +1,1317 @@
+<!doctype html>
+<html lang="es">
+<head><script>try{var t=localStorage.getItem('laser-espia-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Simulador del láser espía: corta el haz, mira cómo decide el Arduino y supera los tres retos. Proyecto de robótica de 7.º grado.">
+<meta property="og:title" content="Láser espía: el laboratorio">
+<meta property="og:description" content="Corta el haz y mira qué piensa el Arduino. Proyecto de robótica de 7.º grado.">
+<meta property="og:image" content="https://laser-espia.github.io/assets/hero_web.jpg">
+<meta property="og:url" content="https://laser-espia.github.io/desarrollo/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316212E'/%3E%3Crect x='4' y='13' width='9' height='6' rx='1.5' fill='%23EEF3F8'/%3E%3Cline x1='13' y1='16' x2='28' y2='16' stroke='%23E3262E' stroke-width='2.5'/%3E%3C/svg%3E">
+<style>
+/* Local Google Fonts: OFL notices and full licenses in *-OFL.txt beside this stylesheet. */
+/* latin-ext */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/atkinson-hyperlegible-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../assets/fonts/atkinson-hyperlegible-700-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../assets/fonts/atkinson-hyperlegible-700-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../assets/fonts/bricolage-grotesque-600-800-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../assets/fonts/bricolage-grotesque-600-800-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../assets/fonts/bricolage-grotesque-600-800-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../assets/fonts/bricolage-grotesque-600-800-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/jetbrains-mono-400-600-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/jetbrains-mono-400-600-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../assets/fonts/jetbrains-mono-400-600-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../assets/fonts/jetbrains-mono-400-600-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Laboratorio Láser Espía</title>
+<style>
+/* Layout: cuaderno de laboratorio en papel cuadriculado; el simulador manda, todo lo demás lo acompaña en una sola columna */
+:root{
+  --paper:#EEF2F6; --grid:#DCE3EB; --card:#FFFFFF; --ink:#16212E; --muted:#56657A; --line:#C9D3DE;
+  --laser:#C91D28; --laser-glow:rgba(227,38,46,.35); --ok:#176D3B; --ok-bg:#E2F4EA; --alarm-bg:#FDE4E5;
+  --code-bg:#16212E; --code-fg:#D8E1EC; --code-hl:rgba(255,214,102,.18); --code-dim:#A0AFC2; --amber:#F2B53A; --focus:#8A5A00; --on-laser:#FFFFFF;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0F1722; --grid:#18222F; --card:#152030; --ink:#E6ECF3; --muted:#93A2B6; --line:#26354A;
+  --laser:#FF4048; --laser-glow:rgba(255,64,72,.45); --ok:#4CC383; --ok-bg:#12301F; --alarm-bg:#3A1418;
+  --code-bg:#0A1018; --code-fg:#D8E1EC; --code-hl:rgba(255,214,102,.14); --code-dim:#99ABC1; --amber:#F2B53A; --focus:#F2B53A; --on-laser:#FFFFFF; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0F1722; --grid:#18222F; --card:#152030; --ink:#E6ECF3; --muted:#93A2B6; --line:#26354A;
+  --laser:#FF4048; --laser-glow:rgba(255,64,72,.45); --ok:#4CC383; --ok-bg:#12301F; --alarm-bg:#3A1418;
+  --code-bg:#0A1018; --code-fg:#D8E1EC; --code-hl:rgba(255,214,102,.14); --code-dim:#99ABC1; --amber:#F2B53A; --focus:#F2B53A; --on-laser:#FFFFFF; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+h1{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:800;letter-spacing:-.02em}
+h1 span{color:var(--laser)}
+h2{font-size:clamp(1.4rem,3.4vw,1.85rem);font-weight:800}
+h3{font-size:1.1rem;font-weight:600}
+p{margin:0}
+code{font-family:var(--mono);font-size:.9em}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{color:var(--muted);max-width:60ch;font-size:1.08rem}
+section{display:flex;flex-direction:column;gap:14px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+
+/* Portada */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:center}
+.hero .txt{display:flex;flex-direction:column;gap:14px;min-width:0}
+.hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;max-width:100%;background:var(--card)}
+.hero figure img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero figure{order:-1}}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+
+button,.btn{font:inherit;font-weight:700;border-radius:10px;padding:10px 16px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+button.primary,.btn.primary{background:#C91D28;border-color:#C91D28;color:#FFFFFF}
+button.big{font-size:1.08rem;padding:13px 20px}
+button[aria-pressed="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,.btn:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* Simulador */
+.sim{display:flex;flex-direction:column;gap:16px;padding:16px}
+.stage{position:relative;border-radius:10px;overflow:hidden;background:var(--paper);border:1px solid var(--line)}
+@media (max-width:820px){.stage{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;box-shadow:0 8px 18px rgba(0,0,0,.35)}.sim.touring .stage{position:relative;box-shadow:none}}
+.stage svg{display:block;width:100%;height:auto;touch-action:none;cursor:grab;user-select:none}
+@media (max-width:600px){.hint{display:none!important}.pill{font-size:1.02rem;padding:7px 12px}}
+.hint{position:absolute;left:12px;bottom:10px;font-size:.92rem;color:var(--muted);font-family:var(--mono);pointer-events:none}
+.status{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.pill{font-family:var(--display);font-weight:800;font-size:1.25rem;padding:8px 16px;border-radius:999px;display:inline-flex;gap:10px;align-items:center}
+.pill .dot{width:12px;height:12px;border-radius:50%;background:currentColor}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+.pill.alarm{background:var(--alarm-bg);color:var(--laser);animation:blink .35s steps(2) infinite}
+@keyframes blink{50%{opacity:.55}}
+.reading{flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.reading .lbl{display:flex;justify-content:space-between;gap:8px;font-size:.9rem;color:var(--muted)}
+.reading .lbl b{font-family:var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+.meter{position:relative;margin-top:14px;height:16px;border-radius:8px;background:var(--paper);border:1px solid var(--line)}
+.meter .fill{position:absolute;inset:0 auto 0 0;border-radius:8px;background:var(--amber);transition:width .08s linear}
+.meter .thr{position:absolute;top:-6px;bottom:-6px;width:3px;background:var(--ink);border-radius:2px}
+.meter .thr::after{content:"umbral";position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.simgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.simgrid{grid-template-columns:1fr}}
+.side{display:flex;flex-direction:column;gap:12px;min-width:0}
+.buttons{display:flex;flex-wrap:wrap;gap:8px}
+.buttons button{padding:8px 12px;font-size:.92rem}
+.ctl{display:flex;flex-direction:column;gap:6px;padding:12px;border:1px solid var(--line);border-radius:10px;min-width:0}
+.ctl label{font-weight:700;font-size:.95rem;display:flex;justify-content:space-between;gap:8px}
+.ctl label output{font-family:var(--mono);font-weight:400;color:var(--muted)}
+.ctl small{color:var(--muted);font-size:.82rem;line-height:1.4}
+input[type=range]{width:100%;accent-color:var(--laser)}
+
+/* Código */
+.code{background:var(--code-bg);color:var(--code-fg);border-radius:12px;padding:12px 0;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.65;min-width:0}
+.code div{padding:0 14px 0 calc(14px + 4ch);text-indent:-4ch;white-space:pre-wrap;overflow-wrap:anywhere;border-left:3px solid transparent}
+.code div.on{background:var(--code-hl);border-left-color:var(--amber)}
+.code .c{color:var(--code-dim)}
+.code .k{color:#8FB8FF}
+.code .v{color:var(--amber)}
+.code .bad{color:#FF7A80;font-weight:600}
+.serial{display:flex;flex-direction:column;gap:6px;min-width:0}
+.serial pre{margin:0;background:var(--code-bg);color:var(--code-fg);border-radius:12px;padding:10px 14px;font-family:var(--mono);font-size:.85rem;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;min-height:calc(7 * 1.5em + 20px)}
+.serial pre b{color:var(--amber);font-weight:600}
+.codehead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+pre.full{margin:0;background:var(--code-bg);color:var(--code-fg);border-radius:12px;padding:14px 16px;overflow:auto;max-height:440px;font-family:var(--mono);font-size:.8rem;line-height:1.6}
+
+/* Retos */
+.mission{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--paper);transition:border-color .3s,background .3s}
+.mission .avatar{width:64px;flex:none}
+.mission .avatar svg{display:block;width:100%;height:auto}
+.mission .eye{transform-box:fill-box;transform-origin:center;animation:blinkEye 4.2s infinite}
+.mbody{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.mhead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.mdots{display:flex;gap:6px}
+.mdots button{width:30px;height:30px;padding:0;border-radius:50%;justify-content:center;font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--muted)}
+.mdots button[aria-current="step"]{border-color:var(--laser);color:var(--ink);border-width:2px}
+.mdots button.ok{background:var(--ok);border-color:var(--ok);color:var(--on-laser)}
+.mission h3{font-size:1.2rem}
+.mission .goal{margin:0}
+.mlive{margin:0;font-family:var(--mono);font-size:.84rem;line-height:1.5;color:var(--ink);border-left:3px solid var(--amber);padding:4px 0 4px 10px;min-height:2.6em}
+.mdone{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.mdone p{margin:0;flex:1 1 260px;color:var(--ink)}
+.mdone p:empty{display:none}
+.mission.solved,.mission.all{border-color:var(--ok);background:var(--ok-bg)}
+.mission.solved .mdone p::before{content:"Lo que aprendiste: ";font-weight:700}
+@media (max-width:600px){.mission .avatar{display:none}.mission{padding:12px}}
+
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.two>*{min-width:0}
+ul.bul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+ol.wk{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.how{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;list-style:none;margin:0;padding:0;counter-reset:paso}
+.how li{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.how li:not(:last-child)::after{content:"→";position:absolute;right:-13px;top:44px;font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--laser);z-index:1}
+.how svg{width:72px;height:72px;display:block}
+.how .n{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;color:var(--laser)}
+.how h3{font-size:1.35rem;font-weight:800}
+.how p{margin:0;color:var(--muted);font-size:.98rem;line-height:1.45}
+@media (max-width:820px){.how{grid-template-columns:repeat(2,minmax(0,1fr))}.how li:nth-child(2)::after{content:none}}
+@media (max-width:420px){.how{grid-template-columns:1fr}.how li::after{content:none!important}}
+.bugs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.bug{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.bug .tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--laser);font-weight:600;margin-top:6px}
+.bug .tag.cause{color:#5B9BE0}
+.bug .tag.test{color:var(--ok)}
+.bug h3{font-size:1.2rem}
+.bug .big{font-family:var(--display);font-weight:800;font-size:1.25rem;line-height:1.25;margin:0}
+.bug p{margin:0;color:var(--muted)}
+.bug .big{color:var(--ink)}
+.states{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:4px}
+.state{border-radius:14px;padding:14px 18px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;gap:4px}
+.state b{font-family:var(--display);font-size:1.15rem}
+.state p{margin:0;color:var(--muted)}
+.state.calm{border-color:var(--ok)}.state.calm b{color:var(--ok)}
+.state.alert{border-color:var(--laser)}.state.alert b{color:var(--laser)}
+.uses{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:center}
+.uses img{width:100%;border-radius:14px;border:1px solid var(--line);display:block}
+@media (max-width:760px){.uses{grid-template-columns:1fr}}
+
+ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+ol.steps li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}
+ol.steps .who{font-family:var(--mono);font-size:.75rem;color:var(--laser);letter-spacing:.06em;text-transform:uppercase}
+ol.steps .say{font-size:.95rem}
+ol.steps .do{font-size:.85rem;color:var(--muted)}
+.qa{display:flex;flex-direction:column;gap:8px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+summary{cursor:pointer;font-weight:700}
+details.build{padding:16px 18px}
+details.build summary{display:flex;flex-direction:column;gap:4px;list-style:none}
+details.build summary::-webkit-details-marker{display:none}
+details.build summary .h{font-family:var(--display);font-size:clamp(1.2rem,3vw,1.5rem);font-weight:800}
+details.build summary .h::before{content:"＋ ";color:var(--laser)}
+details.build[open] summary .h::before{content:"− "}
+details.build summary .sub{font-weight:400;color:var(--muted);font-size:.92rem}
+details.build[open] summary{margin-bottom:16px}
+details p{margin-top:8px;color:var(--muted)}
+.share{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center}
+.share img{width:220px;max-width:100%;border-radius:12px;border:1px solid var(--line);background:#fff;padding:8px}
+@media (max-width:600px){.share{grid-template-columns:1fr}.share img{margin:0 auto}}
+.safety{display:flex;gap:14px;align-items:flex-start;border:2px solid var(--amber);border-radius:12px;padding:14px 16px;background:var(--card)}
+.safety .ico{font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--amber);line-height:1}
+footer{color:var(--muted);font-size:.85rem}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ok);color:var(--on-laser);font-weight:700;padding:10px 18px;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.2)}
+.sim.touring .side button:not(#sound),.sim.touring input,.sim.touring .mission button{pointer-events:none;opacity:.55}
+/* Recorrido guiado por Lumi: foco con sombra gigante, robot que viaja y barra de subtítulos */
+.crumb{font-family:var(--mono);font-size:.78rem;color:var(--muted);text-decoration:none;letter-spacing:.04em}
+.crumb:hover{color:var(--laser)}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:4px}
+.crumbs .crumb{padding:4px 0;white-space:nowrap}
+.lumi-card{display:flex;align-items:center;gap:12px;margin-top:6px}
+.lumi-card .avatar{width:58px;flex:none}
+.lumi-card p{font-size:.92rem;color:var(--muted);margin:0}
+.lumi-card b{color:var(--ink)}
+.tour-spot{position:fixed;left:0;top:0;width:0;height:0;z-index:1000;border-radius:16px;pointer-events:none;
+  box-shadow:0 0 0 3px #F2B53A,0 0 28px 8px rgba(242,181,58,.45),0 0 0 200vmax rgba(5,9,15,.74);
+  transition:left .45s ease,top .45s ease,width .45s ease,height .45s ease}
+.lumi{position:fixed;left:0;top:0;z-index:1002;width:118px;pointer-events:none;transition:transform .8s cubic-bezier(.3,1.25,.5,1);will-change:transform}
+.lumi .bob{animation:bob 2.4s ease-in-out infinite}
+.lumi svg,.lumi-card svg{display:block;width:100%;height:auto;overflow:visible}
+@keyframes bob{50%{transform:translateY(-7px)}}
+.lumi .eye,.lumi-card .eye{transform-box:fill-box;transform-origin:center;animation:blinkEye 4.2s infinite}
+@keyframes blinkEye{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.lumi .arm-r{transform-box:fill-box;transform-origin:0% 50%}
+.lumi.wave .arm-r{animation:wave .5s ease-in-out 4 alternate}
+@keyframes wave{from{transform:rotate(10deg)}to{transform:rotate(-40deg)}}
+.tour-bar{position:fixed;z-index:1003;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  width:min(680px,calc(100% - 24px));background:#0F1722;color:#F3F6FA;border:1px solid #2A3B52;border-radius:18px;
+  padding:12px 12px 12px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 12px 40px rgba(0,0,0,.45)}
+.tour-bar .who{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F2B53A}
+.tour-bar .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.tour-bar .say{font-size:clamp(.92rem,2.4vw,1.08rem);line-height:1.4;margin:0}
+.tour-bar button{background:#1C2A3C;color:#F3F6FA;border-color:#2A3B52;padding:0;width:46px;height:46px;justify-content:center;border-radius:50%;flex:none;font-size:1.05rem}
+.tour-bar button:focus-visible{outline-color:#F2B53A}
+.tour-bar .play{position:relative;width:56px;height:56px;background:#F3F6FA;color:#0F1722}
+.tour-bar .play svg{position:absolute;inset:-4px;width:64px;height:64px;transform:rotate(-90deg);pointer-events:none}
+.tour-bar .ctrls{display:flex;gap:8px;flex:none;align-items:center}
+.tour-bar .next{width:auto;padding:0 18px;border-radius:999px;background:#E3262E;border-color:#E3262E;color:#fff;font-weight:800;font-size:1rem}
+.tour-bar button:disabled{opacity:.35}
+@media (max-width:760px){.tour-bar{flex-wrap:wrap}.tour-bar .txt{flex-basis:calc(100% - 70px)}.tour-bar .ctrls{margin-left:auto}}
+@media (max-width:600px){.lumi{width:56px}.tour-bar{flex-wrap:wrap}.tour-bar .txt{flex-basis:calc(100% - 70px)}.tour-bar .ctrls{margin-left:auto}}
+/* zoom de presentación: el objetivo del recorrido se agranda por encima de sus vecinos (fondo y borde los pone el motor) */
+.tz{z-index:999}.tz:not(.tzp){position:relative}
+/* Modo exposición: el simulador se lee desde el fondo del salón */
+html[data-presentation="true"] .code{font-size:1.35rem}
+html[data-presentation="true"] .reading .lbl,html[data-presentation="true"] .ctl label{font-size:1.25rem}
+html[data-presentation="true"] .ctl small{font-size:1.05rem}
+html[data-presentation="true"] .serial pre{font-size:1rem}
+html[data-presentation="true"] .codehead{font-size:.82rem}
+html[data-presentation="true"] .status{flex-direction:column;align-items:stretch}
+html[data-presentation="true"] .status .pill{align-self:flex-start}
+html[data-presentation="true"] .reading{flex:none}
+html[data-presentation="true"] .meter{margin-top:24px}html[data-presentation="true"] .meter .thr::after{font-size:.95rem;top:-24px}
+@media (min-width:1100px){.tour-bar{width:min(1100px,calc(100% - 48px))}.tour-bar .say{font-size:1.3rem}}
+@media (prefers-reduced-motion: reduce){.pill.alarm{animation:none}.meter .fill{transition:none}.tour-spot,.lumi{transition:none}.lumi .bob,.lumi .eye,.lumi-card .eye,.mission .eye,.lumi.wave .arm-r{animation:none}}
+</style>
+
+<style>.presentation-tools{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:10px}
+.presentation-tools button{font:inherit;font-size:16px;font-weight:700;padding:10px 16px;border-radius:10px;border:2px solid var(--line,#C9D3DE);background:var(--card,#fff);color:var(--ink,#16212E);cursor:pointer;min-height:44px;min-width:44px}
+.presentation-tools button:focus-visible{outline:3px solid var(--focus,#806000);outline-offset:3px}
+.presentation-tools button[aria-pressed="true"]{background:#C91D28;border-color:#C91D28;color:#fff}
+.presentation-hint,.presentation-tools [role="status"]{font-size:15px;color:var(--muted,#56657A)}
+@media(min-width:1000px){
+  /* los tamaños de las páginas van en rem: crecer la raíz agranda todo, no solo el texto suelto */
+  html[data-presentation="true"]:not([data-support="true"]){font-size:21px}
+  html[data-presentation="true"]:not([data-support="true"]) body{font-size:1.3rem}
+  html[data-presentation="true"] .wrap:not([data-module]){max-width:1500px}
+  html[data-presentation="true"] .tour-bar{width:calc(100% - 48px);max-width:1400px;padding:18px 22px}
+  html[data-presentation="true"] .tour-bar .say{font-size:24px;line-height:1.35}
+  html[data-presentation="true"] .tour-bar .who{font-size:18px;letter-spacing:.04em}
+  html[data-presentation="true"] .tour-bar button{min-width:52px;min-height:52px;font-size:20px}
+  html[data-presentation="true"] .tour-bar .next{font-size:20px}
+  html[data-presentation="true"] .lumi-card p{font-size:22px}
+}
+@media(max-width:600px){.presentation-tools{justify-content:flex-start}.presentation-tools button{font-size:14px;padding:9px 11px;min-height:44px}.presentation-hint{width:100%}}
+/* Objetivos táctiles de al menos 44 px en todas las partes (iPad, celular) */
+.presentation-tools button[hidden]{display:none}
+.mdots button{width:44px;height:44px}
+.crumbs a,main[data-module] .topline a,main[data-module] .pager a,main[data-module] details.legend>summary,nav.parts a{min-height:44px;display:inline-flex;align-items:center}
+input#servo,input#umbral,input#servoAngle{height:44px}
+#walk,#sound,#lampBtn{min-height:44px}
+nav.parts a{white-space:nowrap}
+</style></head>
+<body>
+<main class="wrap" id="contenido"><div class="presentation-tools" role="group" aria-label="Preparar el monitor">
+<button type="button" id="presentationMode" aria-pressed="false">🖥 Modo exposición</button>
+<button type="button" id="presentationFullscreen" aria-pressed="false">⛶ Pantalla completa</button>
+<button type="button" id="themeToggle" data-theme-choice="auto" aria-label="Tema: automático (sigue al dispositivo). Pulsa para cambiar a claro."><span aria-hidden="true">◐</span> Tema: automático</button>
+<span class="presentation-hint">Letras más grandes para proyectar.</span>
+<span id="presentationStatus" role="status"></span></div>
+  <header class="hero">
+    <div class="txt">
+      <nav class="crumbs" aria-label="Navegación superior"><a class="crumb" href="../">← Volver al inicio</a><a class="crumb" href="../materiales/">← Parte 02 · Materiales</a><a class="crumb" href="../especificaciones/">Parte 04 · SG90 →</a></nav>
+      <p class="eyebrow">Láser espía · Parte 03 · Desarrollo</p>
+      <h1>Así se activa <span>la misión</span></h1>
+      <p class="lead">Cuatro pasos: <b>activar, alinear, detectar y avisar</b>. Mira cómo el láser espía atrapa a quien cruza el haz, y pruébalo tú en el simulador.</p>
+      <div class="cta">
+        <button class="primary big" id="tourBtn" type="button">▶ Lumi lo presenta</button>
+        <button class="big" id="tourManualBtn" type="button">⏭ Paso a paso</button>
+      </div>
+      <div class="lumi-card"><div class="avatar" data-lumi></div><p><b>Lumi</b> te lo presenta con su voz en menos de un minuto. En <b>Paso a paso</b> avanzas tú, a tu ritmo: con el botón <b>Siguiente</b>, las flechas del teclado o un control de presentaciones.</p></div>
+    </div>
+    <figure><img src="../assets/image-72b8fd805a27d5bb.jpg" alt="Ilustración de un escritorio con un Arduino, un láser rojo sobre un servomotor y un sensor de luz recibiendo el haz"></figure>
+  </header>
+
+  <section id="comoFunciona">
+    <p class="eyebrow">03 · Desarrollo</p>
+    <h2>Los 4 pasos de la misión</h2>
+    <ol class="how">
+      <li id="paso1"><svg viewBox="0 0 72 72" aria-hidden="true"><rect x="8" y="20" width="56" height="40" rx="6" fill="#1F6FB2" stroke="var(--ink)" stroke-width="2.5"/><path d="M14 20v-6M24 20v-6M34 20v-6M44 20v-6M54 20v-6" stroke="var(--ink)" stroke-width="2.5"/><path d="M29 33a9 9 0 1 0 14 0" fill="none" stroke="#F2B53A" stroke-width="4" stroke-linecap="round"/><line x1="36" y1="27" x2="36" y2="37" stroke="#F2B53A" stroke-width="4" stroke-linecap="round"/></svg>
+        <span class="n">PASO 1</span><h3>Activar</h3><p>El circuito recibe energía y el Arduino empieza el programa: primero mide la luz.</p></li>
+      <li id="paso2"><svg viewBox="0 0 72 72" aria-hidden="true"><rect x="4" y="40" width="22" height="14" rx="3" fill="var(--muted)"/><rect x="6" y="26" width="18" height="12" rx="3" fill="var(--ink)"/><line x1="26" y1="32" x2="54" y2="32" stroke="var(--laser)" stroke-width="3.5" stroke-linecap="round"/><circle cx="60" cy="32" r="9" fill="none" stroke="var(--ok)" stroke-width="3"/><circle cx="60" cy="32" r="3" fill="var(--ok)"/><path d="M8 62 q8 -8 16 0" fill="none" stroke="var(--amber)" stroke-width="3" stroke-linecap="round"/></svg>
+        <span class="n">PASO 2</span><h3>Alinear</h3><p>El servo SG90 apunta el haz justo al sensor.</p></li>
+      <li id="paso3"><svg viewBox="0 0 72 72" aria-hidden="true"><line x1="2" y1="36" x2="30" y2="36" stroke="var(--laser)" stroke-width="3.5" stroke-linecap="round"/><rect x="30" y="18" width="10" height="36" rx="5" fill="var(--ink)" opacity=".85"/><rect x="52" y="22" width="16" height="28" rx="4" fill="var(--card)" stroke="var(--ink)" stroke-width="2.5"/><circle cx="60" cy="36" r="5" fill="var(--line)"/><text x="60" y="68" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="var(--ink)">≈150</text></svg>
+        <span class="n">PASO 3</span><h3>Detectar</h3><p>Algo interrumpe el haz: el sensor recibe menos luz y el número baja.</p></li>
+      <li id="paso4"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="24" cy="34" r="13" fill="var(--laser)"/><circle cx="24" cy="34" r="20" fill="var(--laser)" opacity=".25"/><path d="M46 24q8 10 0 20M54 18q14 16 0 32" fill="none" stroke="var(--amber)" stroke-width="4" stroke-linecap="round"/></svg>
+        <span class="n">PASO 4</span><h3>Avisar</h3><p>Si el número baja del umbral, se encienden el LED y el zumbador.</p></li>
+    </ol>
+    <div class="states">
+      <div class="state calm"><b>● Haz libre · Estado normal</b><p>La luz llega al sensor y el sistema permanece a la espera.</p></div>
+      <div class="state alert"><b>● Haz interrumpido · Alerta</b><p>El cambio de luz desencadena la respuesta programada.</p></div>
+    </div>
+  </section>
+
+  <section id="simulador">
+    <p class="eyebrow">Simulador</p>
+    <h2>Pruébalo: corta el haz</h2>
+    <div class="panel sim">
+      <div class="stage">
+        <svg id="scene" viewBox="0 0 800 300" role="img" aria-label="Láser apuntando a un sensor de luz. Arrastra para cortar el haz.">
+          <defs><filter id="glow" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="4"/></filter></defs>
+          <rect id="flash" x="-100" y="-100" width="1000" height="500" fill="#E3262E" opacity="0" pointer-events="none"/>
+          <g id="lampWrap"><g id="lamp" opacity="0">
+            <circle cx="400" cy="0" r="140" fill="var(--amber)" opacity=".18"/>
+            <circle cx="400" cy="0" r="22" fill="var(--amber)"/>
+          </g></g>
+          <rect x="72" y="160" width="16" height="22" fill="var(--muted)" stroke="#16212E" stroke-width="1.2"/>
+          <rect x="42" y="195" width="76" height="8" rx="2.5" fill="#3F7FE6" stroke="#16212E" stroke-width="1.4"/>
+          <circle cx="47" cy="199" r="2.2" fill="#0E2A5C"/><circle cx="113" cy="199" r="2.2" fill="#0E2A5C"/>
+          <circle cx="47" cy="199" r="1.3" fill="#C9CED6"/><circle cx="113" cy="199" r="1.3" fill="#C9CED6"/>
+          <rect x="52" y="185" width="56" height="34" rx="4" fill="#2F6FDB" stroke="#16212E" stroke-width="2"/>
+          <rect x="55" y="188" width="50" height="28" rx="2.5" fill="#5C93F0" opacity=".5"/>
+          <path d="M55.5 189v25" stroke="#BFD6FF" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+          <text x="80" y="207" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#FFFFFF">SG90</text>
+          <rect x="106" y="203" width="6" height="12" rx="1.5" fill="#24408A" stroke="#16212E" stroke-width="1"/>
+          <path d="M112 206h9" stroke="#8A5A1F" stroke-width="2"/><path d="M112 209h9" stroke="#E3262E" stroke-width="2"/><path d="M112 212h9" stroke="#F28C28" stroke-width="2"/>
+          <path d="M60 179.5h40a2.5 2.5 0 0 1 0 5h-40a2.5 2.5 0 0 1 0 -5z" fill="#F4F4F4" stroke="#16212E" stroke-width="1.3"/>
+          <circle cx="80" cy="182" r="2.2" fill="#C9CED6" stroke="#16212E" stroke-width=".8"/>
+          <circle cx="65" cy="182" r=".9" fill="#8A93A0"/><circle cx="95" cy="182" r=".9" fill="#8A93A0"/>
+          <g id="laserBody" transform="rotate(0 80 150)">
+            <rect x="43" y="143" width="8" height="15" rx="1" fill="#0B0F17"/>
+            <path d="M39 145.5h5M39 150.5h5M39 155.5h5" stroke="#E2C25A" stroke-width="1.6"/>
+            <rect x="49" y="138" width="46" height="24" rx="2.5" fill="#D8352E" stroke="#16212E" stroke-width="1.8"/>
+            <circle cx="55" cy="143" r="2.3" fill="#7A1A16" stroke="#F2C9A0" stroke-width=".9"/><circle cx="55" cy="157" r="2.3" fill="#7A1A16" stroke="#F2C9A0" stroke-width=".9"/>
+            <rect x="63" y="146" width="7" height="4" fill="#2B2F3A"/><rect x="63" y="153" width="5" height="3" fill="#E9C98F"/><rect x="73" y="147" width="9" height="8" rx="1" fill="#22262E"/>
+            <rect x="86" y="140" width="24" height="20" rx="2" fill="#C99A2E" stroke="#16212E" stroke-width="1.6"/>
+            <rect x="87.5" y="141.5" width="21" height="4" rx="1.5" fill="#F3D27A"/>
+            <path d="M93 140.8v18.4M101 140.8v18.4" stroke="#8A6414" stroke-width="1.2"/>
+            <rect x="108" y="143" width="10" height="14" rx="2" fill="var(--laser)" stroke="#8A6414" stroke-width="1.4"/>
+          </g>
+          <text x="80" y="248" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="17" font-weight="600" fill="var(--ink)">LÁSER</text>
+          <line id="beamGlow" x1="118" y1="150" x2="720" y2="150" stroke="var(--laser-glow)" stroke-width="10" filter="url(#glow)"/>
+          <line id="beam" x1="118" y1="150" x2="720" y2="150" stroke="var(--laser)" stroke-width="3" stroke-linecap="round"/>
+          <circle id="spot" cx="720" cy="150" r="6" fill="var(--laser)"/>
+          <text id="beamLabel" x="420" y="132" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" font-weight="600" fill="var(--laser)" opacity=".9">HAZ DE LUZ</text>
+          <text id="falseTxt" x="420" y="282" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="22" font-weight="800" fill="var(--laser)" opacity="0">FALSA ALARMA · nadie cruzó</text>
+          <g id="rightSide">
+          <path d="M728 160v30M736 160v26h6" fill="none" stroke="#A8B2BE" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M762 186h6" stroke="#A8B2BE" stroke-width="2.4" stroke-linecap="round"/>
+          <rect x="742" y="182" width="20" height="8" rx="3" fill="#E8D3A8" stroke="#16212E" stroke-width="1.2"/>
+          <path d="M747 182v8M751 182v8" stroke="#7A4A2A" stroke-width="1.8"/><path d="M756 182v8" stroke="#E07B00" stroke-width="1.8"/>
+          <circle id="ldr" cx="732" cy="150" r="12" fill="#E9B44C" stroke="#16212E" stroke-width="1.6"/>
+          <path d="M724 145h16v2.5h-16v2.5h16v2.5h-16v2.5h16" fill="none" stroke="#9A2D27" stroke-width="1.4" stroke-linejoin="round"/>
+          <text x="738" y="204" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="17" font-weight="600" fill="var(--ink)">SENSOR</text>
+          <text id="stageVal" x="738" y="228" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="var(--amber)">900</text>
+          <circle id="ledHalo" cx="738" cy="58" r="30" fill="var(--laser)" opacity="0"/>
+          <circle id="led" cx="738" cy="58" r="16" fill="var(--line)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="738" y="100" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="17" font-weight="600" fill="var(--ink)">LED</text>
+          <g id="buzzer">
+            <g id="buzzWaves" opacity="0" fill="none" stroke="var(--laser)" stroke-width="3.5" stroke-linecap="round">
+              <path d="M624 48q-7 10 0 20M676 48q7 10 0 20"/><path id="buzzOuter" d="M614 41q-13 17 0 34M686 41q13 17 0 34"/>
+            </g>
+            <circle cx="650" cy="58" r="20" fill="#1A1F26" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="650" cy="58" r="13" fill="none" stroke="#3A4252" stroke-width="1.5"/>
+            <circle cx="650" cy="58" r="4.5" fill="#4A5462"/>
+            <text x="650" y="100" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="17" font-weight="600" fill="var(--ink)">ZUMBADOR</text>
+          </g>
+          </g>
+          <g id="obstacle" opacity="0">
+            <g id="handG"><circle r="30" fill="var(--ink)" opacity=".8"/></g>
+            <g id="thief">
+              <g id="legL"><rect x="-15" y="36" width="12" height="32" rx="5" fill="#1D2433"/><ellipse cx="-10" cy="70" rx="9" ry="5" fill="#0B0F17"/></g>
+              <g id="legR"><rect x="3" y="36" width="12" height="32" rx="5" fill="#1D2433"/><ellipse cx="10" cy="70" rx="9" ry="5" fill="#0B0F17"/></g>
+              <rect x="-24" y="-26" width="48" height="66" rx="16" fill="#F4F4F4" stroke="#16212E" stroke-width="2.5"/>
+              <rect x="-22" y="-14" width="44" height="6" fill="#16212E"/><rect x="-23" y="-1" width="46" height="6" fill="#16212E"/><rect x="-23" y="12" width="46" height="6" fill="#16212E"/><rect x="-22" y="25" width="44" height="6" fill="#16212E"/>
+              <rect x="-33" y="-20" width="11" height="34" rx="5" fill="#F4F4F4" stroke="#16212E" stroke-width="2.5" transform="rotate(14 -27 -18)"/>
+              <g transform="translate(27 -20)"><path d="M-14 -4 q-4 -16 4 -18" fill="none" stroke="#16212E" stroke-width="3" stroke-linecap="round"/><circle r="17" fill="#C8A26B" stroke="#16212E" stroke-width="2.5"/><path d="M-7 -15 l7 5 l7 -5" fill="none" stroke="#16212E" stroke-width="2.5" stroke-linejoin="round"/><text y="7" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="17" font-weight="800" fill="#16212E">$</text></g>
+              <circle cx="0" cy="-46" r="20" fill="#F2C9A0" stroke="#16212E" stroke-width="2.5"/>
+              <path d="M-20 -50 a20 20 0 0 1 40 0 z" fill="#2B2F3A"/><rect x="-21" y="-54" width="42" height="7" rx="3.5" fill="#3A4252"/><circle cx="0" cy="-68" r="4.5" fill="#E3262E"/>
+              <rect x="-19" y="-47" width="38" height="11" rx="5.5" fill="#0B0F17"/>
+              <g id="eyes"><circle cx="-8" cy="-41.5" r="3.6" fill="#fff"/><circle cx="8" cy="-41.5" r="3.6" fill="#fff"/><circle class="pupil" cx="-6.8" cy="-41.5" r="1.7" fill="#0B0F17"/><circle class="pupil" cx="9.2" cy="-41.5" r="1.7" fill="#0B0F17"/></g>
+              <path id="faceCalm" d="M-7 -31 q7 5 13 -2" fill="none" stroke="#16212E" stroke-width="2.5" stroke-linecap="round"/>
+              <g id="faceCaught" opacity="0"><ellipse cx="0" cy="-30" rx="4.5" ry="5.5" fill="#16212E"/><path d="M22 -58 q4 7 0 10 q-4 -3 0 -10z" fill="#7FC8FF"/></g>
+              <g id="bang" opacity="0"><rect x="-17" y="-112" width="34" height="30" rx="10" fill="#FFFFFF" stroke="#E3262E" stroke-width="3"/><path d="M-4 -82 l4 8 l4 -8z" fill="#FFFFFF" stroke="#E3262E" stroke-width="3" stroke-linejoin="round"/><rect x="-5" y="-82.5" width="10" height="3" fill="#FFFFFF"/><text x="0" y="-89" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="24" font-weight="800" fill="#E3262E">¡!</text></g>
+            </g>
+          </g>
+        </svg>
+        <span class="hint" id="hint">Mantén presionado y cruza el haz</span>
+      </div>
+
+      <div class="mission" id="retos" aria-label="Retos">
+        <div class="avatar" data-lumi></div>
+        <div class="mbody">
+          <div class="mhead"><span class="eyebrow">Reto <span id="mNum">1</span> de 3</span>
+            <span class="mdots" id="mDots"><button type="button" aria-label="Reto 1">1</button><button type="button" aria-label="Reto 2">2</button><button type="button" aria-label="Reto 3">3</button></span></div>
+          <h3 id="mTitle" aria-live="polite"></h3>
+          <p class="goal" id="mGoal"></p>
+          <p class="mlive" id="mLive"></p>
+          <div class="mdone" id="mDone" hidden><p id="mLesson"></p><button type="button" class="primary" id="mNext">Siguiente reto</button></div>
+        </div>
+      </div>
+
+      <div class="simgrid">
+        <div class="side">
+          <div class="status">
+            <span class="pill ok" id="pill" role="status" aria-live="polite"><span class="dot"></span><span id="pillText">Haz libre · Estado normal</span></span>
+            <div class="reading">
+              <div class="lbl"><span>Lectura del sensor</span><b><span id="val">0</span> / 1023</b></div>
+              <div class="meter"><div class="fill" id="fill"></div><div class="thr" id="thr"></div></div>
+            </div>
+          </div>
+          <div class="buttons">
+            <button class="primary" id="walk" type="button">Que pase alguien</button>
+            <button id="sound" type="button" aria-pressed="true">🔊 Silenciar</button>
+            <button id="lampBtn" type="button" aria-pressed="false">Encender lámpara</button>
+            <button id="bugBtn" type="button" aria-pressed="false" hidden>Ver la falla del informe</button>
+          </div>
+          <div class="ctl">
+            <label for="servo">Ángulo del servo <output id="servoOut">90°</output></label>
+            <input type="range" id="servo" min="70" max="110" value="90">
+            <small>El SG90 apunta el láser. Si se mueve unos grados, el haz ya no llega al sensor.</small>
+          </div>
+          <div class="ctl" id="umbralCtl">
+            <label for="umbral">Umbral del programa <output id="umbralOut">500</output></label>
+            <input type="range" id="umbral" min="100" max="1000" step="10" value="500">
+            <small>Por debajo de este número, el Arduino decide que el haz se cortó.</small>
+          </div>
+        </div>
+        <div class="side">
+          <div class="codehead"><span>Lo que piensa el Arduino</span><span>versión simplificada · en vivo</span></div>
+          <div class="code" id="code" aria-label="Código de Arduino simplificado">
+            <div data-l="d4"><span class="k">int</span> umbral = <span class="v" id="cUmbral">500</span>; <span class="c">// ≈: el Arduino real lo calcula solo al encender</span></div>
+            <div data-l="b"> </div>
+            <div data-l="l0"><span class="k">void</span> loop() {</div>
+            <div data-l="l1">  <span class="k">int</span> luz = analogRead(A0); <span class="c">// </span><span class="v" id="cLuz">0</span></div>
+            <div data-l="l2">  <span class="k">if</span> (luz <span id="cOp">&lt;</span> umbral) {  <span class="c">// ¿se cortó?</span></div>
+            <div data-l="a1">    digitalWrite(LED, HIGH);</div>
+            <div data-l="a2">    tone(BUZZER, 1000);</div>
+            <div data-l="a3">    <span class="c">// en el real: suena al menos 1 segundo</span></div>
+            <div data-l="e0">  } <span class="k">else</span> {</div>
+            <div data-l="e1">    digitalWrite(LED, LOW);</div>
+            <div data-l="e2">    noTone(BUZZER);</div>
+            <div data-l="l3">  }</div>
+            <div data-l="l4">}</div>
+          </div>
+          <small style="color:var(--muted)">La línea resaltada es la que se ejecuta ahora. En el Arduino real, <code>loop()</code> se repite miles de veces por segundo y escribe el número en el Monitor Serie 5 veces por segundo.</small>
+          <div class="serial" aria-live="off">
+            <div class="codehead"><span>Monitor Serie (simulado) · valores aproximados</span></div>
+            <pre id="serial" aria-label="Monitor Serie simulado: la lectura del sensor cada 200 milisegundos"><b>Sin haz medido: ≈150  Con haz: ≈900  Umbral: ≈525</b></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+  <section>
+    <p class="eyebrow">Compártelo</p>
+    <div class="panel share">
+      <img src="../assets/image-c619152bfbeee98c.png" alt="Código QR que abre este simulador">
+      <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+        <h2>Escanea y corta el haz</h2>
+        <p class="lead">Ábrelo en tu celular y prueba los tres retos.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="safety" role="note">
+    <span class="ico">!</span>
+    <p><b>Seguridad:</b> nunca mires el láser directo ni lo apuntes a ojos, espejos o pantallas. Apúntalo siempre al sensor o a la mesa. <span style="color:var(--muted)">(Láser clase 3R, hasta 5 mW aprox.)</span></p>
+  </div>
+
+  <nav class="support-links" aria-label="Módulos de apoyo"><a class="btn" href="../especificaciones/">04 · Especificaciones del SG90 →</a> <a class="btn" href="../montaje/">05 · Cómo se conecta el montaje →</a></nav>
+  <footer>Simulador educativo. Los valores de lectura son aproximados y sirven para explicar la idea, no para medir. Narración e ilustraciones generadas con IA.</footer>
+</main>
+<div class="toast" id="toast" role="status" hidden></div>
+<div class="tour-spot" id="tourSpot" hidden></div>
+<div class="lumi" id="lumi" hidden aria-hidden="true"><div class="bob" data-lumi></div></div>
+<div class="tour-bar" id="tourBar" role="region" aria-label="Recorrido de la parte 03" hidden>
+  <button type="button" class="play" id="tourPlay" aria-label="Pausar"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="none" stroke="#2A3B52" stroke-width="4"/><circle id="tourRing" cx="32" cy="32" r="29" fill="none" stroke="#E3262E" stroke-width="4" stroke-linecap="round" stroke-dasharray="182.2" stroke-dashoffset="182.2"/></svg><span id="tourPlayIcon">❚❚</span></button>
+  <div class="txt"><span class="who"><span id="tourWho">Lumi</span> · <span id="tourStep"></span></span><p class="say" id="tourSay" aria-live="polite"></p></div>
+  <div class="ctrls">
+    <button type="button" id="tourPrev" aria-label="Paso anterior">◀</button>
+    <button type="button" class="next" id="tourNext">Siguiente ▶</button>
+    <button type="button" id="tourVoice" aria-label="Silenciar a Lumi y avanzar paso a paso" aria-pressed="true">🔊</button>
+    <button type="button" id="tourAgain" aria-label="Repetir desde el inicio">↺</button>
+    <button type="button" id="tourClose" aria-label="Salir del recorrido">✕</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const svg = $('scene'), beam = $('beam'), glow = $('beamGlow'), spot = $('spot');
+  const ob = $('obstacle'), laserBody = $('laserBody'), led = $('led'), ledHalo = $('ledHalo'), ldr = $('ldr'), lamp = $('lamp');
+  const servo = $('servo'), umbral = $('umbral');
+  const OX = 118, OY = 150, SY = 150;
+  let R = 30;
+  let SX = 720, MID = 420, TILT = 0.6;
+  // En celular se acerca el sensor al láser: el dibujo se ve ~40 % más grande.
+  // TILT compensa el haz más corto para que el servo se comporte igual en cualquier pantalla.
+  function layoutStage(){
+    const narrow = svg.parentElement.clientWidth < 560, dx = narrow ? -290 : 0;
+    SX = 720 + dx; MID = Math.round((118 + SX) / 2); TILT = 0.6 * 602 / (SX - 118);
+    svg.setAttribute('viewBox', narrow ? '36 12 446 296' : '0 0 800 300');
+    R = narrow ? 44 : 30; $('handG').firstElementChild.setAttribute('r', R); // dedo: zona de toque más grande en celular
+    $('rightSide').setAttribute('transform', `translate(${dx} 0)`);
+    $('lampWrap').setAttribute('transform', `translate(${MID - 400} 0)`);
+    $('beamLabel').setAttribute('x', Math.round((118 + MID) / 2)); // a un lado, para que quien pasa no lo tape
+    $('falseTxt').setAttribute('x', MID);
+  }
+  layoutStage();
+  addEventListener('resize', layoutStage);
+  const st = { obs: null, walking: null, lamp: false, bug: false, sound: !matchMedia('(pointer: coarse)').matches, read: 900, tour: false,
+    lastCut: -1e9, laserOff: false, cal: 0, thrShow: null, beepUntil: 0, serial: [], serialAt: 0 };
+  // Calibración del paso 1 (como en sketch.ino): 1 = láser apagado, 2 = láser encendido, 3 = umbral listo con bip
+  const beep = () => { st.beepUntil = performance.now() + 160; };
+
+  function toSvg(e){
+    const p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY;
+    const q = p.matrixTransform(svg.getScreenCTM().inverse());
+    if (e.pointerType !== 'mouse' && Math.abs(q.y - OY) < 90 && q.x > OX + 20 && q.x < SX - 10) q.y = OY; // imán al haz con el dedo
+    return q;
+  }
+  let dragging = false;
+  svg.addEventListener('pointerdown', e => { if (st.tour) return; dragging = true; st.walking = null; svg.setPointerCapture(e.pointerId); const p = toSvg(e); st.obs = {x:p.x, y:p.y, hand:true, user:true}; $('hint').hidden = true; });
+  svg.addEventListener('pointermove', e => { if (!dragging) return; const p = toSvg(e); st.obs = {x:p.x, y:p.y, hand:true, user:true}; });
+  const endDrag = () => { dragging = false; if (st.obs && st.obs.user) st.obs = null; };
+  svg.addEventListener('pointerup', endDrag); svg.addEventListener('pointercancel', endDrag);
+
+  function setPressed(btn, on, onTxt, offTxt){ btn.setAttribute('aria-pressed', on); btn.textContent = on ? onTxt : offTxt; }
+  function setLamp(on){ st.lamp = on; setPressed($('lampBtn'), on, 'Apagar lámpara', 'Encender lámpara'); }
+  function setBug(on){ st.bug = on; setPressed($('bugBtn'), on, 'Corregir la falla', 'Ver la falla del informe'); const op = $('cOp'); op.textContent = on ? '>' : '<'; op.className = on ? 'bad' : ''; lastKey = ''; }
+  function setServo(v){ servo.value = v; $('servoOut').textContent = v + '°'; }
+  function setUmbral(v){ umbral.value = v; $('umbralOut').textContent = v; $('cUmbral').textContent = v; }
+  $('walk').addEventListener('click', () => { st.walking = performance.now(); });
+  $('lampBtn').addEventListener('click', () => setLamp(!st.lamp));
+  $('bugBtn').addEventListener('click', () => setBug(!st.bug));
+  servo.addEventListener('input', () => setServo(servo.value));
+  umbral.addEventListener('input', () => setUmbral(umbral.value));
+
+  // Zumbador con Web Audio
+  let ac, gain, osc;
+  function ensureAudio(){
+    try {
+      if (!ac) { ac = new (window.AudioContext || window.webkitAudioContext)(); osc = ac.createOscillator(); gain = ac.createGain(); osc.type = 'sawtooth'; osc.frequency.value = 960; gain.gain.value = 0; const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2500; osc.connect(lp).connect(gain).connect(ac.destination); osc.start(); }
+      if (ac.state === 'suspended') ac.resume();
+    } catch (_) {}
+  }
+  setPressed($('sound'), st.sound, '🔊 Silenciar', '🔇 Activar sonido'); // en celulares empieza en silencio
+  $('sound').addEventListener('click', () => { st.sound = !st.sound; setPressed($('sound'), st.sound, '🔊 Silenciar', '🔇 Activar sonido'); ensureAudio(); });
+  // El sonido viene activado: el navegador solo deja sonar después del primer toque en la página
+  addEventListener('pointerdown', ensureAudio, { once: true, capture: true });
+  addEventListener('keydown', ensureAudio, { once: true, capture: true });
+
+  function beamEnd(angle){
+    const a = angle * Math.PI / 180, dx = Math.cos(a), dy = Math.sin(a);
+    const OX = 80 + 38 * dx, OY = 150 + 38 * dy;
+    let t = (SX - OX) / dx, blocked = false;
+    const o = st.obs;
+    if (o) {
+      const r = o.hand ? R : 28;
+      const fx = OX - o.x, fy = OY - o.y, b = fx*dx + fy*dy, c = fx*fx + fy*fy - r*r, disc = b*b - c;
+      if (disc >= 0) { const t1 = -b - Math.sqrt(disc); if (t1 > 0 && t1 < t) { t = t1; blocked = true; } }
+      if (!o.hand && !blocked) { const tx = (o.x - 26 - OX) / dx, yy = OY + dy*tx; if (tx > 0 && tx < t && yy > o.y - 66 && yy < o.y + 74) { t = tx; blocked = true; } }
+    }
+    const x = OX + dx*t, y = OY + dy*t;
+    return { x, y, ox: OX, oy: OY, hits: !blocked && Math.abs(y - SY) < 15, blocked };
+  }
+
+  // Retos guiados: uno activo a la vez, dentro del simulador, con guía en vivo y lo que se aprendió
+  const RETOS = [
+    { title: 'Espía atrapado', goal: 'Corta el haz con el dedo y haz sonar la alarma.',
+      lesson: 'Al tapar el haz, el sensor recibe menos luz: el número baja del umbral y el Arduino prende el LED y el zumbador.' },
+    { title: 'Láser chueco', goal: 'Desalinea el láser con el servo hasta provocar una falsa alarma, y luego arréglalo.',
+      lesson: 'Si el láser se mueve, la alarma suena sin que nadie pase: es una falsa alarma. Por eso se alinea con cuidado antes de encender el Arduino.' },
+    { title: 'Día soleado', goal: 'Con la lámpara encendida, ajusta el umbral para que la alarma suene al cortar el haz y calle con el haz libre.',
+      lesson: 'La luz del salón sube todos los números. El umbral tiene que quedar entre "haz interrumpido" y "haz libre". Nuestro programa lo calcula solo al encender.' },
+  ];
+  const M = { i: 0, phase: 0, solved: false, cutThr: null, all: false, live: '' };
+  const mEl = { card: $('retos'), num: $('mNum'), title: $('mTitle'), goal: $('mGoal'), live: $('mLive'), done: $('mDone'), lesson: $('mLesson'), next: $('mNext'), dots: [...document.querySelectorAll('#mDots button')] };
+  function showReto(i){
+    M.i = i; M.phase = 0; M.solved = false; M.cutThr = null; M.all = false; M.live = ''; mEl.live.textContent = '';
+    const r = RETOS[i];
+    mEl.num.textContent = i + 1; mEl.title.textContent = r.title; mEl.goal.textContent = r.goal;
+    mEl.done.hidden = true; mEl.live.hidden = false; mEl.card.classList.remove('solved', 'all'); mEl.num.parentElement.hidden = false;
+    mEl.dots.forEach((d, k) => d.setAttribute('aria-current', k === i ? 'step' : 'false'));
+  }
+  function solveReto(){
+    M.solved = true; mEl.dots[M.i].classList.add('ok');
+    mEl.lesson.textContent = RETOS[M.i].lesson; mEl.live.hidden = true; mEl.done.hidden = false; mEl.card.classList.add('solved');
+    const left = mEl.dots.filter(d => !d.classList.contains('ok')).length;
+    mEl.next.textContent = left ? 'Siguiente reto' : 'Ver resultado';
+    toast('¡Reto cumplido: ' + RETOS[M.i].title.toLowerCase() + '!');
+  }
+  function nextReto(){
+    const pending = mEl.dots.map((d, k) => d.classList.contains('ok') ? -1 : k).filter(k => k >= 0);
+    if (!pending.length) {
+      M.all = true; mEl.card.classList.add('all'); mEl.num.parentElement.hidden = true;
+      mEl.num.textContent = '3'; mEl.title.textContent = '¡Los tres retos cumplidos!';
+      mEl.goal.textContent = 'Detectaste un intruso, arreglaste una falsa alarma y calibraste el umbral: lo mismo que hace el equipo con el Arduino real.';
+      mEl.lesson.textContent = ''; mEl.next.textContent = 'Repetir los retos';
+      return;
+    }
+    showReto(pending.find(k => k > M.i) ?? pending[0]);
+  }
+  mEl.next.addEventListener('click', () => {
+    if (M.all) { mEl.dots.forEach(d => d.classList.remove('ok')); resetSim(); showReto(0); return; }
+    nextReto();
+  });
+  mEl.dots.forEach((d, k) => d.addEventListener('click', () => showReto(k)));
+
+  function retoTick(alarm, end, read, thr){
+    // el recorrido de Lumi mueve el simulador: lo que pase ahí no cuenta para los retos
+    if (st.tour) { if (!M.solved && !M.all) { M.phase = 0; M.cutThr = null; } return; }
+    if (M.solved || M.all) return;
+    const cutting = !!(st.obs && st.obs.user && end.blocked);
+    const aligned = Math.abs(+servo.value - 90) <= 2, r10 = Math.round(read / 10) * 10;
+    const thrOk = thr >= 170 && thr <= 880; // entre "haz interrumpido" (~150) y "haz libre" (~900)
+    let live;
+    if (st.bug) live = 'La falla está activada y la alarma funciona al revés. Pulsa «Corregir la falla» para seguir.';
+    else if (M.i === 0) {
+      if (st.lamp) live = 'Para este reto, apaga la lámpara.';
+      else if (!aligned) live = 'El láser no llega al sensor. Pon el servo en 90° para este reto.';
+      else if (thr > 880) live = `El umbral (${thr}) está por encima de la lectura con el haz libre (~900): la alarma nunca calla. Bájalo.`;
+      else if (thr < 170) live = `El umbral (${thr}) está por debajo de la lectura con el haz cortado (~150): nunca sonará. Súbelo.`;
+      else if (!cutting) live = 'Mantén el dedo sobre el haz rojo del simulador.';
+      else if (alarm) return solveReto();
+      else live = `Lectura: ${r10}. Si baja del umbral (${thr}), suena la alarma.`;
+    } else if (M.i === 1) {
+      if (st.lamp) { M.phase = 0; live = 'Para este reto, apaga la lámpara.'; }
+      else if (!thrOk) { M.phase = 0; live = 'Deja el umbral cerca de 500 para este reto.'; }
+      else {
+        if (M.phase === 0) {
+          live = `Mueve «Ángulo del servo» (ahora ${servo.value}°) hasta que suene la alarma sin que nadie cruce.`;
+          if (!st.obs && !end.hits && alarm) M.phase = 1;
+        }
+        if (M.phase === 1) {
+          live = '¡Falsa alarma! Nadie cruzó, pero el haz ya no llega al sensor. Ahora vuelve a apuntarlo al sensor para apagarla.';
+          if (end.hits && !alarm && !st.obs) return solveReto();
+        }
+      }
+    } else {
+      if (!st.lamp) { M.phase = 0; live = 'Primero pulsa «Encender lámpara»: así se simula un salón con mucha luz.'; }
+      else if (!aligned) live = 'El láser no llega al sensor. Pon el servo en 90° para este reto.';
+      else {
+        if (M.phase === 0) M.phase = 1;
+        if (M.phase === 2 && thr !== M.cutThr) M.phase = 1;
+        if (M.phase === 1) {
+          if (cutting && alarm) { M.phase = 2; M.cutThr = thr; }
+          else if (cutting) live = `Con la lámpara, el haz cortado da ${r10} y el umbral es ${thr}: no suena. Súbelo a ${Math.ceil((read + 30) / 10) * 10} o más.`;
+          else live = 'Corta el haz con el dedo: ¿suena la alarma?';
+        }
+        if (M.phase === 2) {
+          live = cutting ? '¡Suena! Ahora suelta el haz: con el haz libre debe quedar en silencio.' : '';
+          if (!st.obs && end.hits && !alarm) return solveReto();
+        }
+      }
+    }
+    if (live && live !== M.live) { M.live = live; mEl.live.textContent = live; }
+  }
+  showReto(0);
+
+  let toastT;
+  function toast(msg){ const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2200); }
+
+  const codeLines = [...document.querySelectorAll('#code div')];
+  const serialEl = $('serial'), serialHead = serialEl.firstElementChild;
+  let lastKey = '';
+  function frame(now){
+    if (st.walking !== null) {
+      const k = (now - st.walking) / 2600;
+      if (k >= 1) { st.walking = null; if (!(st.obs && st.obs.user)) st.obs = null; }
+      else st.obs = { x: MID, y: -90 + k * 480, hand: false };
+    }
+    const angle = (+servo.value - 90) * TILT;
+    laserBody.setAttribute('transform', `rotate(${angle} 80 150)`);
+    const end = beamEnd(angle);
+    for (const l of [beam, glow]) { l.setAttribute('x1', end.ox); l.setAttribute('y1', end.oy); l.setAttribute('x2', end.x); l.setAttribute('y2', end.y); }
+    spot.setAttribute('cx', end.x); spot.setAttribute('cy', end.y);
+
+    if (st.obs) {
+      ob.setAttribute('opacity', 1);
+      ob.setAttribute('transform', `translate(${st.obs.x} ${st.obs.y})`);
+      $('handG').setAttribute('opacity', st.obs.hand ? 1 : 0);
+      $('thief').setAttribute('opacity', st.obs.hand ? 0 : 1);
+      if (!st.obs.hand) { // el intruso camina de puntitas: piernas alternadas
+        const ph = Math.sin(now / 85) * 4;
+        $('legL').setAttribute('transform', `translate(0 ${ph.toFixed(1)})`);
+        $('legR').setAttribute('transform', `translate(0 ${(-ph).toFixed(1)})`);
+      }
+    } else ob.setAttribute('opacity', 0);
+    lamp.setAttribute('opacity', st.lamp ? 1 : 0);
+
+    // lectura: oscuridad 150, láser +750, lámpara +420
+    const target = 150 + (end.hits && !st.laserOff ? 750 : 0) + (st.lamp ? 420 : 0);
+    const dt = Math.min(0.5, (now - (st.lastNow || now)) / 1000); st.lastNow = now;
+    st.read += (target - st.read) * (1 - Math.exp(-dt / 0.07)); // suavizado por tiempo real, igual en cualquier pantalla
+    const read = Math.max(0, Math.min(1023, Math.round(st.read + (Math.random() - .5) * 12)));
+    const thr = +umbral.value;
+    // Como en sketch.ino: se anota el último corte y la alarma dura al menos 1 s después.
+    // Un corte cuenta si la lectura cruza el umbral o si el haz queda tapado en este cuadro
+    // (así una pasada rápida de la mano dispara aunque el suavizado no haya bajado el número).
+    const calibrating = st.cal === 1 || st.cal === 2; // mientras calibra, el Arduino todavía no vigila
+    const cut = st.bug ? read > thr : (read < thr || (end.blocked && target < thr));
+    if (cut && !calibrating) st.lastCut = now;
+    const alarm = now - st.lastCut < 1000;
+    for (const el of [beam, glow, spot]) el.setAttribute('visibility', st.laserOff ? 'hidden' : 'visible');
+
+    const caught = !!(st.obs && !st.obs.hand && end.blocked && alarm);
+    $('faceCalm').setAttribute('opacity', caught ? 0 : 1);
+    $('faceCaught').setAttribute('opacity', caught ? 1 : 0);
+    $('bang').setAttribute('opacity', caught ? 1 : 0);
+    if (st.obs && !st.obs.hand) $('thief').setAttribute('transform', caught ? `translate(${(Math.sin(now / 30) * 2).toFixed(1)} 0)` : '');
+    $('val').textContent = read; $('cLuz').textContent = read; $('stageVal').textContent = read;
+    $('fill').style.width = (read / 1023 * 100) + '%';
+    // marca del umbral: oculta mientras calibra; al terminar se desliza hasta ≈525
+    if (st.cal === 3 && st.thrShow !== null) st.thrShow = calm() ? 525 : st.thrShow + (525 - st.thrShow) * (1 - Math.exp(-dt / 0.18));
+    const thrPos = st.cal === 3 && st.thrShow !== null ? st.thrShow : thr;
+    $('thr').style.left = `calc(${thrPos / 1023 * 100}% - 1.5px)`;
+    $('thr').style.visibility = calibrating ? 'hidden' : '';
+    ldr.setAttribute('opacity', 0.35 + 0.65 * read / 1023);
+    // destellos ≤ 3 por segundo; con movimiento reducido, luces fijas
+    const hi = Math.floor(now / 400) % 2 === 0;
+    led.setAttribute('fill', alarm ? 'var(--laser)' : 'var(--line)');
+    ledHalo.setAttribute('opacity', alarm ? (calm() ? .35 : (hi ? .45 : .15)) : 0);
+    $('buzzWaves').setAttribute('opacity', alarm ? 1 : 0);
+    $('buzzOuter').setAttribute('opacity', alarm && !calm() && !hi ? .35 : 1);
+    $('flash').setAttribute('opacity', alarm && !calm() ? (hi ? .08 : .03) : 0);
+    $('falseTxt').setAttribute('opacity', alarm && !st.obs && !end.hits && !end.blocked && !st.bug && !st.laserOff ? 1 : 0);
+
+    const key = alarm + '|' + st.bug + '|' + st.cal;
+    if (key !== lastKey) {
+      lastKey = key;
+      $('pill').className = 'pill ' + (alarm ? 'alarm' : 'ok');
+      $('pillText').textContent = st.cal === 1 ? 'Calibrando: sin haz ≈150' : st.cal === 2 ? 'Calibrando: con haz ≈900' : st.cal === 3 ? 'Umbral ≈525 · listo (bip)'
+        : alarm ? 'Haz interrumpido · Alerta' : 'Haz libre · Estado normal';
+      const on = new Set(calibrating ? ['d4'] : ['l1','l2', ...(alarm ? ['a1','a2','a3'] : ['e0','e1','e2'])]);
+      codeLines.forEach(d => d.classList.toggle('on', on.has(d.dataset.l)));
+    }
+    // Monitor Serie simulado: una línea cada 200 ms, como Serial.println(lectura)
+    if (now - st.serialAt >= 200) {
+      st.serialAt = now; st.serial.push(String(read)); if (st.serial.length > 6) st.serial.shift();
+      serialEl.replaceChildren(serialHead.cloneNode(true), document.createTextNode('\n' + st.serial.join('\n')));
+    }
+    retoTick(alarm, end, read, thr);
+    if (gain && ac) {
+      const beeping = now < st.beepUntil; // bip corto de 1500 Hz: calibración lista
+      gain.gain.setTargetAtTime((st.sound || st.tour) && (alarm || beeping) ? (st.tour ? 0.025 : 0.05) : 0, ac.currentTime, 0.02);
+      if (osc) osc.frequency.setTargetAtTime(beeping ? 1500 : (hi ? 960 : 770), ac.currentTime, 0.015);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // Lumi: robot con el uniforme del colegio (SVG); la boca se mueve con el volumen real de la voz
+  const LUMI_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" aria-hidden="true">
+<ellipse cx="60" cy="154" rx="30" ry="4.5" fill="#000" opacity=".2"/>
+<line x1="60" y1="19" x2="60" y2="9" stroke="#16212E" stroke-width="3" stroke-linecap="round"/>
+<circle cx="60" cy="7" r="5" fill="#E3262E" stroke="#16212E" stroke-width="2"/><circle cx="58.4" cy="5.4" r="1.4" fill="#fff" opacity=".85"/>
+<rect x="44" y="134" width="9" height="14" rx="3" fill="#B9C6D3" stroke="#16212E" stroke-width="2"/>
+<rect x="67" y="134" width="9" height="14" rx="3" fill="#B9C6D3" stroke="#16212E" stroke-width="2"/>
+<path d="M41 152 Q41 144 48.5 144 Q56 144 56 152 Z M64 152 Q64 144 71.5 144 Q79 144 79 152 Z" fill="#24365A" stroke="#16212E" stroke-width="2" stroke-linejoin="round"/>
+<rect x="29" y="90" width="8" height="20" rx="4" fill="#DCE4EC" stroke="#16212E" stroke-width="2"/><circle cx="33" cy="112" r="5" fill="#EEF3F8" stroke="#16212E" stroke-width="2"/>
+<g class="arm-r"><rect x="82" y="86" width="23" height="8" rx="4" fill="#DCE4EC" stroke="#16212E" stroke-width="2"/><circle cx="106" cy="90" r="5" fill="#EEF3F8" stroke="#16212E" stroke-width="2"/></g>
+<path d="M45 80 Q60 77 75 80 L81 85 L80 111 L40 111 L39 85 Z" fill="#FFFFFF" stroke="#16212E" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M41 82 Q31 83 28 94 L39 97 Z M79 82 Q89 83 92 94 L81 97 Z" fill="#FFFFFF" stroke="#16212E" stroke-width="2" stroke-linejoin="round"/>
+<path d="M40 109 L80 109 L89 136 Q60 139 31 136 Z" fill="#5C7196"/>
+<line x1="38.6" y1="114" x2="81.4" y2="114" stroke="#24365A" stroke-width="4"/><line x1="34.6" y1="126" x2="85.4" y2="126" stroke="#24365A" stroke-width="4"/><line x1="36.8" y1="119.5" x2="83.2" y2="119.5" stroke="#FFFFFF" stroke-width="0.7" opacity="0.8"/><line x1="33" y1="131" x2="87" y2="131" stroke="#FFFFFF" stroke-width="0.7" opacity="0.8"/><line x1="39.8" y1="110.5" x2="80.2" y2="110.5" stroke="#FFFFFF" stroke-width="0.6" opacity="0.6"/><line x1="45.6" y1="109" x2="39.1" y2="135.7" stroke="#24365A" stroke-width="4"/><line x1="60" y1="109" x2="60" y2="135.7" stroke="#24365A" stroke-width="4"/><line x1="74.4" y1="109" x2="80.9" y2="135.7" stroke="#24365A" stroke-width="4"/><line x1="52.8" y1="109" x2="49.6" y2="135.7" stroke="#FFFFFF" stroke-width="0.7" opacity="0.8"/><line x1="67.2" y1="109" x2="70.4" y2="135.7" stroke="#FFFFFF" stroke-width="0.7" opacity="0.8"/><line x1="50" y1="114" x2="45.5" y2="136" stroke="#16212E" stroke-width="0.9" opacity="0.55"/><line x1="56.8" y1="114" x2="55.4" y2="136" stroke="#16212E" stroke-width="0.9" opacity="0.55"/><line x1="63.2" y1="114" x2="64.6" y2="136" stroke="#16212E" stroke-width="0.9" opacity="0.55"/><line x1="70" y1="114" x2="74.5" y2="136" stroke="#16212E" stroke-width="0.9" opacity="0.55"/>
+<path d="M40 109 L80 109 L89 136 Q60 139 31 136 Z" fill="none" stroke="#16212E" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="39" y="106.5" width="42" height="4.5" rx="1.5" fill="#24365A" stroke="#16212E" stroke-width="1.6"/>
+<path d="M52 86 L57 97 M68 86 L63 97" stroke="#8A96A3" stroke-width="2" stroke-linecap="round"/>
+<path d="M48 79.5 Q54 82 60 85.5 L51.5 92 Q48.5 86 48 79.5 Z M72 79.5 Q66 82 60 85.5 L68.5 92 Q71.5 86 72 79.5 Z" fill="#FFFFFF" stroke="#16212E" stroke-width="1.8" stroke-linejoin="round"/>
+<rect x="53" y="96" width="14" height="11" rx="1.6" fill="#FFFFFF" stroke="#16212E" stroke-width="1.6"/>
+<rect x="53.8" y="96.8" width="12.4" height="2.6" fill="#24365A"/>
+<text x="60" y="104.6" font-family="Arial,Helvetica,sans-serif" font-size="4" font-weight="700" text-anchor="middle" fill="#16212E">LUMI</text>
+<circle cx="45" cy="95" r="4" fill="#F4C542" stroke="#16212E" stroke-width="1.5"/><circle class="core" cx="45" cy="95" r="2" fill="#E3262E"/>
+<circle cx="15" cy="47" r="5.5" fill="#B9C6D3" stroke="#16212E" stroke-width="2"/><circle cx="105" cy="47" r="5.5" fill="#B9C6D3" stroke="#16212E" stroke-width="2"/>
+<rect x="17" y="18" width="86" height="60" rx="27" fill="#EEF3F8" stroke="#16212E" stroke-width="3"/>
+<path d="M30 26 Q40 21 52 21" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none"/>
+<rect x="26" y="28" width="68" height="42" rx="18" fill="#16212E"/>
+<g class="eye"><ellipse cx="46" cy="46" rx="7.5" ry="9" fill="#7FE3FF"/><circle cx="43.5" cy="42.5" r="2.6" fill="#FFFFFF"/><circle cx="48.5" cy="49.5" r="1.2" fill="#FFFFFF" opacity=".8"/></g>
+<g class="eye"><ellipse cx="74" cy="46" rx="7.5" ry="9" fill="#7FE3FF"/><circle cx="71.5" cy="42.5" r="2.6" fill="#FFFFFF"/><circle cx="76.5" cy="49.5" r="1.2" fill="#FFFFFF" opacity=".8"/></g>
+<path d="M38.5 40 l-3.5 -2.5 M40.5 37.5 l-2 -3.5 M81.5 40 l3.5 -2.5 M79.5 37.5 l2 -3.5" stroke="#7FE3FF" stroke-width="1.8" stroke-linecap="round"/>
+<ellipse cx="36" cy="59" rx="4.5" ry="3" fill="#FF8FA3" opacity=".85"/><ellipse cx="84" cy="59" rx="4.5" ry="3" fill="#FF8FA3" opacity=".85"/>
+<rect class="mouth" data-cy="60" x="53.5" y="58.5" width="13" height="3" rx="1.5" fill="#FF7F7F"/>
+<g transform="rotate(-14 90 21)"><path d="M90 21 Q80 10 78 16 Q76 24 80 28 Q84 30 90 21 Z M90 21 Q100 10 102 16 Q104 24 100 28 Q96 30 90 21 Z" fill="#E3262E" stroke="#16212E" stroke-width="1.8" stroke-linejoin="round"/><path d="M80.5 18 Q82 22 85 23 M99.5 18 Q98 22 95 23" stroke="#FF8A8F" stroke-width="1.4" stroke-linecap="round" fill="none"/><rect x="87.5" y="18.5" width="5" height="5" rx="1.6" fill="#C81E26" stroke="#16212E" stroke-width="1.6"/></g>
+</svg>`;
+  document.querySelectorAll('[data-lumi]').forEach(el => el.innerHTML = LUMI_SVG);
+  const lumi = $('lumi'), spotEl = $('tourSpot'), bar = $('tourBar');
+  const mouth = lumi.querySelector('.mouth'), core = lumi.querySelector('.core');
+  const MOUTH_CY = +(mouth.dataset.cy || 60);
+
+  // Recorrido de la parte 03: un audio por paso. Dos modos:
+  //  - automático: Lumi narra; el reloj es audio.currentTime (pausar o repetir no se desincroniza)
+  //  - paso a paso: sin voz; quien presenta avanza con Siguiente, flechas o un control de presentaciones
+  const AUDIO = ["../assets/audio-e93040f99337bf6a.mp3", "../assets/audio-071ab0d9fe727211.mp3", "../assets/audio-5047b01c88c31449.mp3", "../assets/audio-ac717e2702e62beb.mp3", "../assets/audio-e2a02b74ddd708cb.mp3"];
+  const DUR = [5.7, 9.27, 10.11, 10.45, 7.52];
+  const TOTAL = DUR.reduce((a, b) => a + b, 0);
+  const walk = () => { st.walking = performance.now(); };
+  const STEPS = [
+    { tag: 'Inicio', text: '¡Hola! Soy Lumi. Les voy a mostrar cómo se activa la misión del láser espía, en cuatro pasos.',
+      look: [[0, '.hero figure'], [2.6, '#comoFunciona']], at: [] },
+    { tag: 'Paso 1 · Activar', text: 'Paso uno: activar. El circuito recibe energía y el Arduino empieza a ejecutar el programa. Lo primero que hace es medir la luz.',
+      look: [[0, '#paso1'], [5.6, '.status']],
+      // calibración automática dentro del momento de .status (≈3,6 s): sin haz → con haz → umbral listo con bip
+      at: [[5.6, () => { st.laserOff = true; st.cal = 1; }], [6.8, () => { st.laserOff = false; st.cal = 2; }], [7.8, () => { st.cal = 3; st.thrShow = 150; beep(); }]] },
+    { tag: 'Paso 2 · Alinear', text: 'Paso dos: alinear. El servo apunta el haz justo al sensor. Si se mueve un poquito, el haz ya no llega y suena una falsa alarma.',
+      look: [[0, '#paso2'], [2.2, '.stage']], at: [[5.2, () => setServo(104)], [8.6, () => setServo(90)]] },
+    { tag: 'Paso 3 · Detectar', text: 'Paso tres: detectar. Con el haz libre, el sensor marca unos novecientos. Pero si alguien interrumpe el haz… el número baja a unos ciento cincuenta.',
+      look: [[0, '#paso3'], [2, '.stage']], at: [[5.6, walk]] },
+    { tag: 'Paso 4 · Avisar', text: 'Paso cuatro: avisar. Si el número baja del umbral, el Arduino enciende el LED y suena la alarma. ¡Así se activa la misión!',
+      look: [[0, '#paso4'], [1.8, '#code'], [3.8, '.stage']],
+      // mientras Lumi dice «enciende el LED», alguien tapa el haz: se resaltan HIGH y tone
+      at: [[1.9, () => { st.obs = { x: MID, y: 150, hand: true }; }], [3.6, () => { st.obs = null; }], [3.9, walk]] },
+  ];
+  const calm = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const tour = { i: -1, fired: 0, target: null, paused: false, fake: null, level: 0, advancing: false, pendingNext: false, manual: false, beat: 0 };
+  let audio = null, analyser = null, buf = null;
+  // En iPhone/iPad la voz va directo al <audio>: si pasa por Web Audio, el interruptor de silencio la apaga
+  const IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const wake = () => { if (ac && ac.state !== 'running') ac.resume().catch(() => {}); };
+
+  function resetSim(){ setBug(false); setLamp(false); setServo(90); setUmbral(500); st.obs = null; st.walking = null; st.lastCut = -1e9; st.laserOff = false; st.cal = 0; st.thrShow = null; st.beepUntil = 0; lastKey = ''; }
+  const TOUR_BODY_CLASS = false;
+  function hookAudio(){
+    if (audio) return;
+    audio = new Audio(); // un solo reproductor, creado dentro del toque (iPhone)
+    try {
+      if (ac && !IOS) { const src = ac.createMediaElementSource(audio); analyser = ac.createAnalyser(); analyser.fftSize = 512; buf = new Uint8Array(analyser.fftSize); src.connect(analyser); analyser.connect(ac.destination); }
+    } catch (_) { analyser = null; }
+    audio.addEventListener('ended', () => { if (st.tour && !tour.fake && !tour.manual) nextStep(); });
+    audio.addEventListener('error', () => { if (st.tour && !tour.manual && audio.getAttribute('src')) useFakeClock(); });
+  }
+  // Reloj propio: en modo paso a paso, o si el audio no se puede reproducir (o aún no existe)
+  function useFakeClock(from){
+    if (st.tour && !tour.fake) tour.fake = { t0: performance.now() - (from ?? (audio && audio.currentTime) ?? 0) * 1000, pausedAt: tour.paused ? performance.now() : null };
+  }
+  // Vigía de red: si la voz no empieza en 6 s (descarga colgada sin error), seguir con el reloj propio
+  function watchAudio(i){ clearTimeout(tour.watch); tour.watch = setTimeout(() => { if (st.tour && tour.i === i && !tour.manual && !tour.fake && !tour.paused && audio.currentTime === 0 && audio.readyState < 3) { audio.pause(); useFakeClock(0); } }, 6000); }
+  function now(){
+    if (tour.fake) { const f = tour.fake; return ((f.pausedAt ?? performance.now()) - f.t0) / 1000; }
+    return audio ? audio.currentTime : 0;
+  }
+  function paintBar(){
+    const i = tour.i, n = STEPS.length;
+    $('tourStep').textContent = `${STEPS[i].tag} · ${i + 1} de ${n}`;
+    $('tourWho').textContent = tour.manual ? 'Paso a paso' : 'Lumi';
+    $('tourVoice').textContent = tour.manual ? '🔇' : '🔊';
+    $('tourVoice').setAttribute('aria-label', tour.manual ? 'Activar la voz de Lumi' : 'Silenciar a Lumi y avanzar paso a paso');
+    $('tourVoice').setAttribute('aria-pressed', String(!tour.manual));
+    $('tourPlay').hidden = tour.manual;
+    const lastBeat = !tour.manual || tour.beat >= STEPS[i].look.length - 1;
+    $('tourPrev').disabled = i === 0 && (!tour.manual || tour.beat === 0);
+    $('tourNext').textContent = i === n - 1 && lastBeat ? 'Terminar ✓' : 'Siguiente ▶';
+    setPlayIcon();
+  }
+  function playStep(i, beat){
+    tour.advancing = false; tour.pendingNext = false; tour.beat = beat || 0;
+    if (i < 0) i = 0;
+    if (i >= STEPS.length) return finishTour();
+    resetSim(); // cada paso empieza limpio, así se puede ir y volver
+    tour.i = i; tour.fired = 0; tour.fake = null; tour.paused = false;
+    $('tourSay').textContent = STEPS[i].text;
+    lumi.classList.toggle('wave', i === 0);
+    paintBar();
+    if (tour.manual) { if (audio) audio.pause(); useFakeClock(0); return; }
+    if (!AUDIO[i]) { audio.pause(); audio.removeAttribute('src'); useFakeClock(0); return; } // sin audio: reloj propio
+    audio.src = AUDIO[i];
+    wake();
+    audio.play().catch(e => { if (e && e.name === 'AbortError') return; if (tour.i === i) useFakeClock(); });
+    watchAudio(i);
+  }
+  function nextStep(){
+    if (tour.advancing) return;
+    tour.advancing = true;
+    const i = tour.i;
+    setTimeout(() => {
+      if (!(st.tour && tour.i === i && tour.advancing)) return;
+      if (tour.paused) tour.pendingNext = true; else playStep(i + 1);
+    }, 450);
+  }
+  // Paso a paso: cada paso tiene varios momentos (lo que se señala); nada avanza hasta que se pulsa Siguiente
+  function setBeat(b){ resetSim(); tour.beat = b; tour.fired = 0; tour.fake = null; tour.target = null; useFakeClock(0); paintBar(); }
+  const goNext = () => {
+    if (!st.tour) return;
+    if (tour.manual && tour.beat < STEPS[tour.i].look.length - 1) setBeat(tour.beat + 1);
+    else playStep(tour.i + 1);
+  };
+  const goPrev = () => {
+    if (!st.tour) return;
+    if (tour.manual && tour.beat > 0) setBeat(tour.beat - 1);
+    else if (tour.i > 0) playStep(tour.i - 1, tour.manual ? STEPS[tour.i - 1].look.length - 1 : 0);
+  };
+  function setPlayIcon(){ $('tourPlayIcon').textContent = tour.paused ? '▶' : '❚❚'; $('tourPlay').setAttribute('aria-label', tour.paused ? 'Seguir' : 'Pausar'); }
+  function togglePause(){
+    if (!st.tour || tour.manual) return;
+    tour.paused = !tour.paused;
+    if (!tour.paused && tour.pendingNext) { tour.pendingNext = false; playStep(tour.i + 1); return; }
+    if (!tour.paused && tour.advancing) { setPlayIcon(); return; }
+    if (tour.fake) {
+      if (tour.paused) tour.fake.pausedAt = performance.now();
+      else { tour.fake.t0 += performance.now() - tour.fake.pausedAt; tour.fake.pausedAt = null; }
+    } else if (tour.paused) audio.pause();
+    else { wake(); audio.play().catch(e => { if (!e || e.name !== 'AbortError') useFakeClock(); }); }
+    if (!tour.paused && !tour.fake) watchAudio(tour.i);
+    setPlayIcon();
+  }
+  // 🔊/🔇: silenciar a Lumi convierte el recorrido en paso a paso; activar la voz retoma el paso actual narrado
+  function toggleVoice(){
+    if (!st.tour) return;
+    tour.manual = !tour.manual;
+    if (tour.manual) {
+      const t = now(); if (audio) audio.pause();
+      tour.paused = false; tour.advancing = false;
+      let b = 0; STEPS[tour.i].look.forEach(([s0], k) => { if (t >= s0) b = k; });
+      setBeat(b);
+    } else playStep(tour.i);
+  }
+  function startTour(manual){
+    if (st.tour) return;
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {}
+    ensureAudio(); hookAudio();
+    tour.manual = manual;
+    st.tour = true; $('hint').hidden = true;
+    document.querySelector('.sim').classList.add('touring');
+    if (TOUR_BODY_CLASS) document.body.classList.add('touring');
+    $('tourBtn').disabled = $('tourManualBtn').disabled = true;
+    spotEl.hidden = lumi.hidden = bar.hidden = false;
+    tour.target = null;
+    playStep(0);
+    (manual ? $('tourNext') : $('tourPlay')).focus({ preventScroll: true });
+  }
+  function stopTour(){
+    if (!st.tour) return;
+    st.tour = false; tour.i = -1; tour.fake = null; tour.advancing = false; tour.target = null;
+    zoomOff();
+    if (audio) audio.pause();
+    document.querySelector('.sim').classList.remove('touring');
+    if (TOUR_BODY_CLASS) document.body.classList.remove('touring');
+    spotEl.hidden = lumi.hidden = bar.hidden = true;
+    resetSim(); $('tourBtn').disabled = $('tourManualBtn').disabled = false; $('tourBtn').focus({ preventScroll: true });
+  }
+  function finishTour(){ stopTour(); toast('¡Ahora pruébalo tú: corta el haz!'); }
+
+  // Zoom de presentación: el objetivo REAL (no una copia, así lo que se anima sigue vivo) se agranda y se centra
+  // en el espacio libre para que se lea desde el fondo del salón. Se anima cuadro a cuadro con el tiempo real
+  // (no con transiciones CSS) y se deshace al cambiar de objetivo o al cerrar el recorrido.
+  const zoom = { el: null, s: 1, tx: 0, ty: 0, cx: 0, cy: 0, last: 0, keep: null, bg: null, ring: '', fresh: false };
+  const ZPROPS = ['transform', 'transformOrigin', 'backgroundColor', 'borderRadius', 'boxShadow'];
+  const clear = c => !c || c === 'transparent' || /rgba\(.*,\s*0\)$/.test(c);
+  function zoomOff(){
+    const el = zoom.el; if (!el) return;
+    el.classList.remove('tz', 'tzp');
+    ZPROPS.forEach(p => { el.style[p] = zoom.keep[p]; });
+    spotEl.style.transition = ''; // el aro vuelve a deslizarse suave sin zoom
+    zoom.el = null; zoom.s = 1; zoom.tx = zoom.ty = 0;
+  }
+  function zoomOn(el){
+    zoomOff();
+    const cs = getComputedStyle(el);
+    zoom.el = el; zoom.s = 1; zoom.tx = zoom.ty = 0; zoom.fresh = true; zoom.last = performance.now();
+    zoom.keep = {}; ZPROPS.forEach(p => { zoom.keep[p] = el.style[p]; });
+    zoom.pos = cs.position !== 'static';
+    // fondo opaco: el propio si lo tiene; si no, el del contenedor más cercano que lo tenga (tarjeta o papel)
+    let bg = cs.backgroundColor;
+    for (let p = el.parentElement; clear(bg) && p; p = p.parentElement) bg = getComputedStyle(p).backgroundColor;
+    zoom.ring = clear(bg) ? getComputedStyle(document.body).backgroundColor : bg;
+    zoom.bg = clear(cs.backgroundColor) ? zoom.ring : null;
+    zoom.round = parseFloat(cs.borderTopLeftRadius) > 0;
+  }
+  // n: rectángulo natural (sin zoom) del objetivo; aplica el zoom de este cuadro y devuelve el rectángulo en pantalla
+  function zoomFrame(el, n){
+    if (zoom.el !== el) zoomOn(el);
+    if (zoom.fresh) { zoom.fresh = false; zoom.cx = n.l + n.w / 2; zoom.cy = n.t + n.h / 2; }
+    const tNow = performance.now(), dt = Math.min(0.6, Math.max(0, (tNow - zoom.last) / 1000)); zoom.last = tNow;
+    const k = calm() ? 1 : 1 - Math.exp(-dt / 0.12);
+    // espacio libre: pantalla menos márgenes, menos la barra de subtítulos y, en pantallas anchas, una columna para Lumi
+    const vw = document.documentElement.clientWidth, M = 24, wide = vw >= 900, MAXS = wide ? 2 : 1.35;
+    const fl = M, fr = vw - M - (wide ? lumi.offsetWidth + 16 : 0), ft = M;
+    const fb = (bar.hidden ? innerHeight : bar.getBoundingClientRect().top) - 16;
+    let s1 = Math.max(1, Math.min(MAXS, (fr - fl) / n.w, (fb - ft) / n.h));
+    if (s1 < 1.08) s1 = 1;
+    // más ancho que el hueco junto a Lumi (p. ej. en modo exposición): achicar un poco para que quepa entero
+    if (wide && n.w > fr - fl) s1 = Math.max(0.75, (fr - fl) / n.w);
+    if (s1 !== 1) {
+      // se anima en coordenadas de pantalla: aunque la página se desplace, el objetivo se queda en el centro
+      zoom.s += (s1 - zoom.s) * k;
+      zoom.cx += ((fl + fr) / 2 - zoom.cx) * k; zoom.cy += ((ft + fb) / 2 - zoom.cy) * k;
+      zoom.tx = zoom.cx - (n.l + n.w * zoom.s / 2); zoom.ty = zoom.cy - (n.t + n.h * zoom.s / 2);
+    } else {
+      zoom.s += (1 - zoom.s) * k; zoom.tx *= 1 - k; zoom.ty *= 1 - k;
+      if (Math.abs(zoom.s - 1) < 0.002 && Math.abs(zoom.tx) < 0.5 && Math.abs(zoom.ty) < 0.5) { zoom.s = 1; zoom.tx = zoom.ty = 0; }
+      zoom.cx = n.l + zoom.tx + n.w * zoom.s / 2; zoom.cy = n.t + zoom.ty + n.h * zoom.s / 2;
+    }
+    const on = Math.abs(zoom.s - 1) > 0.001 || zoom.tx || zoom.ty;
+    if (on) {
+      spotEl.style.transition = 'none'; // con zoom el aro sigue al objetivo cuadro a cuadro
+      if (!el.classList.contains('tz')) {
+        el.classList.add('tz'); el.classList.toggle('tzp', zoom.pos);
+        el.style.transformOrigin = '0 0';
+        if (zoom.bg) el.style.backgroundColor = zoom.bg;
+        if (!zoom.round) el.style.borderRadius = '12px';
+      }
+      el.style.transform = `translate(${zoom.tx.toFixed(2)}px, ${zoom.ty.toFixed(2)}px) scale(${zoom.s.toFixed(4)})`;
+      // el aro del foco (10 px) se rellena con el fondo, para que no asomen trozos de la página sin agrandar
+      el.style.boxShadow = `0 0 0 ${(10 / zoom.s).toFixed(2)}px ${zoom.ring}`;
+    } else if (el.classList.contains('tz')) {
+      el.classList.remove('tz', 'tzp'); ZPROPS.forEach(p => { el.style[p] = zoom.keep[p]; });
+    }
+    return { el, l: n.l + zoom.tx, t: n.t + zoom.ty, w: n.w * zoom.s, h: n.h * zoom.s };
+  }
+  function rectOf(sel){
+    const el = document.querySelector(sel); if (!el) return null;
+    const r = el.getBoundingClientRect(); return { el, l: r.left, t: r.top, w: r.width, h: r.height };
+  }
+  function tourFrame(){
+    if (st.tour && tour.i >= 0 && !tour.advancing) {
+      const step = STEPS[tour.i];
+      let t, sel;
+      if (tour.manual) {
+        const L = step.look, b0 = L[tour.beat][0], b1 = tour.beat + 1 < L.length ? L[tour.beat + 1][0] : DUR[tour.i];
+        const acts = step.at.filter(a => a[0] >= b0 && a[0] < b1);
+        t = b0 + now();
+        while (tour.fired < acts.length && acts[tour.fired][0] <= t) acts[tour.fired++][1]();
+        // la demostración de este momento se repite sola mientras quien presenta sigue hablando
+        if (acts.length && tour.fired === acts.length && t >= b1 + 2) { resetSim(); tour.fired = 0; tour.fake = null; useFakeClock(0); }
+        sel = L[tour.beat][1];
+      } else {
+        t = now();
+        while (tour.fired < step.at.length && step.at[tour.fired][0] <= t) step.at[tour.fired++][1]();
+        if (tour.fake && !tour.paused && t >= Math.max(DUR[tour.i], step.text.length * 0.065)) nextStep();
+        sel = step.look[0][1]; for (const [s0, sl] of step.look) if (t >= s0) sel = sl;
+      }
+      let r = rectOf(sel);
+      // otro objetivo: el anterior vuelve a su tamaño (y se mide de nuevo, por si estaba dentro del agrandado)
+      if (r && zoom.el && r.el !== zoom.el) { zoomOff(); r = rectOf(sel); }
+      if (r) {
+        // rectángulo natural, sin el zoom de presentación que ya tenga
+        const z = r.el === zoom.el ? zoom : { s: 1, tx: 0, ty: 0 };
+        const n = { l: r.l - z.tx, t: r.t - z.ty, w: r.w / z.s, h: r.h / z.s };
+        if (sel !== tour.target) {
+          // centra el objetivo en el espacio libre que deja la barra de subtítulos
+          tour.target = sel;
+          // deja ≥64 px arriba (si cabe) para que el título de la sección no quede cortado, sobre todo en iPhone
+          const room = innerHeight - bar.offsetHeight - 24, want = n.h >= room ? 64 : Math.max(Math.min(64, room - n.h), (room - n.h) / 2);
+          window.scrollBy({ top: n.t - want, behavior: calm() ? 'auto' : 'smooth' });
+        }
+        r = zoomFrame(r.el, n);
+        const pad = 10;
+        Object.assign(spotEl.style, { left: r.l - pad + 'px', top: r.t - pad + 'px', width: r.w + pad * 2 + 'px', height: r.h + pad * 2 + 'px' });
+        // Lumi se pone al lado del objetivo, sin salirse de la pantalla ni tapar la barra
+        const vw = document.documentElement.clientWidth, vh = innerHeight, lw = lumi.offsetWidth, lh = lw * 1.33, bottom = vh - bar.offsetHeight - 24;
+        let x = r.l + r.w + 16, y = r.t + Math.min(24, r.h / 3);
+        if (x + lw > vw - 8) x = r.l - lw - 16;
+        if (x < 8) { x = Math.min(vw - lw - 8, r.l + r.w - lw); y = r.t - lh * 0.9; }
+        y = Math.max(8, Math.min(y, bottom - lh));
+        lumi.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+      }
+      const done = tour.manual ? (tour.i + 1) / STEPS.length
+        : (DUR.slice(0, tour.i).reduce((a, b) => a + b, 0) + Math.min(t, DUR[tour.i])) / TOTAL;
+      $('tourRing').setAttribute('stroke-dashoffset', (182.2 * (1 - done)).toFixed(1));
+    }
+    // boca: volumen real de la voz (o un vaivén si el navegador no deja medirlo); en paso a paso, callada
+    let lv = 0;
+    if (st.tour && !tour.manual && !tour.paused && !tour.advancing) {
+      if (analyser && audio && !audio.paused && !tour.fake) { analyser.getByteTimeDomainData(buf); let sum = 0; for (const v of buf) sum += (v - 128) ** 2; lv = Math.min(1, Math.sqrt(sum / buf.length) / 28); }
+      else lv = 0.35 + 0.35 * Math.sin(performance.now() / 85);
+    }
+    tour.level += (lv - tour.level) * 0.45;
+    const mh = 3 + tour.level * 11;
+    mouth.setAttribute('height', mh.toFixed(1)); mouth.setAttribute('y', (MOUTH_CY - mh / 2).toFixed(1));
+    core.setAttribute('opacity', (0.55 + tour.level * 0.45).toFixed(2));
+    requestAnimationFrame(tourFrame);
+  }
+  requestAnimationFrame(tourFrame);
+
+  $('tourBtn').addEventListener('click', () => startTour(false));
+  $('tourManualBtn').addEventListener('click', () => startTour(true));
+  $('tourClose').addEventListener('click', stopTour);
+  $('tourPlay').addEventListener('click', togglePause);
+  $('tourPrev').addEventListener('click', goPrev);
+  $('tourNext').addEventListener('click', goNext);
+  $('tourVoice').addEventListener('click', toggleVoice);
+  $('tourAgain').addEventListener('click', () => { if (st.tour) { tour.target = null; playStep(0); } });
+  // Teclado y controles de presentación (envían flechas o Av Pág / Re Pág)
+  document.addEventListener('keydown', e => {
+    if (!st.tour || e.repeat) return;
+    const onControl = e.target && /^(BUTTON|INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName);
+    if (e.key === 'Escape' && !tour.manual) { e.preventDefault(); stopTour(); }
+    else if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && !onControl)) { e.preventDefault(); goNext(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goPrev(); }
+  }, true);
+  document.addEventListener('visibilitychange', () => { if (document.hidden && st.tour && !tour.paused && !tour.manual) togglePause(); });
+
+  // Copiar código
+  document.querySelectorAll('button.copy').forEach(b => b.addEventListener('click', () => {
+    const src = $(b.dataset.target), txt = src.textContent;
+    if (!b.dataset.label) b.dataset.label = b.textContent; const label = b.dataset.label;
+    const ok = () => { b.textContent = 'Copiado'; setTimeout(() => b.textContent = label, 1600); };
+    const fallback = () => { src.hidden = false; const r = document.createRange(); r.selectNodeContents(src); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecciona el texto y cópialo'; };
+    try { navigator.clipboard.writeText(txt).then(ok, fallback); } catch (_) { fallback(); }
+  }));
+
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<script>(() => {
+  const root=document.documentElement;
+  root.dataset.support=String(!!document.querySelector('main[data-module]'));
+  const mode=document.getElementById('presentationMode');
+  const full=document.getElementById('presentationFullscreen');
+  const status=document.getElementById('presentationStatus');
+  const theme=document.getElementById('themeToggle');
+  if(theme){
+    // Automático sigue al dispositivo; claro u oscuro fijan html[data-theme] y se recuerdan entre partes.
+    const themeKey='laser-espia-theme';
+    const order=['auto','light','dark'];
+    const names={auto:'automático',light:'claro',dark:'oscuro'};
+    const icons={auto:'◐',light:'☀',dark:'☾'};
+    const valid=value=>value==='light'||value==='dark'?value:'auto';
+    function showTheme(choice){
+      if(choice==='auto') delete root.dataset.theme; else root.dataset.theme=choice;
+      const next=order[(order.indexOf(choice)+1)%order.length];
+      theme.dataset.themeChoice=choice;
+      theme.innerHTML='<span aria-hidden="true">'+icons[choice]+'</span> Tema: '+names[choice];
+      theme.setAttribute('aria-label','Tema: '+names[choice]+(choice==='auto'?' (sigue al dispositivo)':'')+'. Pulsa para cambiar a '+names[next]+'.');
+    }
+    let savedTheme='auto';
+    try{savedTheme=valid(localStorage.getItem(themeKey));}catch(_){}
+    showTheme(savedTheme);
+    theme.addEventListener('click',()=>{
+      const choice=order[(order.indexOf(theme.dataset.themeChoice)+1)%order.length];
+      showTheme(choice);
+      try{
+        if(choice==='auto') localStorage.removeItem(themeKey); else localStorage.setItem(themeKey,choice);
+      }catch(_){}
+      if(status) status.textContent='Tema '+names[choice]+'.';
+    });
+    // Otra pestaña del sitio cambió el tema: seguirla.
+    window.addEventListener('storage',event=>{if(event.key===themeKey) showTheme(valid(event.newValue));});
+  }
+  if(!mode || !full) return;
+  const key='laser-espia-presentation-mode';
+  function setMode(on){
+    root.dataset.presentation=String(on);
+    mode.setAttribute('aria-pressed',String(on));
+    mode.textContent=on?'🖥 Salir de exposición':'🖥 Modo exposición';
+    try{localStorage.setItem(key,String(on));}catch(_){}
+  }
+  let saved=false;
+  try{saved=localStorage.getItem(key)==='true';}catch(_){}
+  setMode(saved);
+  mode.addEventListener('click',()=>setMode(root.dataset.presentation!=='true'));
+  // Safari (iPad) solo conoce la versión webkit; en iPhone no hay pantalla completa para páginas: el botón se oculta.
+  const fsElement=()=>document.fullscreenElement||document.webkitFullscreenElement||null;
+  const canFullscreen=!!(document.fullscreenEnabled||document.webkitFullscreenEnabled);
+  const touch=!!(window.matchMedia&&matchMedia('(pointer:coarse)').matches);
+  if(!canFullscreen) full.hidden=true;
+  function fullscreenState(){
+    const on=!!fsElement();
+    full.setAttribute('aria-pressed',String(on));
+    full.textContent=on?'⛶ Salir de pantalla completa':'⛶ Pantalla completa';
+  }
+  full.addEventListener('click',async()=>{
+    try{
+      if(fsElement()){
+        if(document.exitFullscreen) await document.exitFullscreen();
+        else if(document.webkitExitFullscreen) await Promise.resolve(document.webkitExitFullscreen());
+      }
+      else if(root.requestFullscreen) await root.requestFullscreen();
+      else if(root.webkitRequestFullscreen) await Promise.resolve(root.webkitRequestFullscreen());
+      else throw new Error('Fullscreen unavailable');
+      status.textContent='';
+    }catch(_){status.textContent=touch?'':'Usa F11 para pantalla completa en este navegador.';}
+    fullscreenState();
+  });
+  document.addEventListener('fullscreenchange',fullscreenState);
+  document.addEventListener('webkitfullscreenchange',fullscreenState);
+  fullscreenState();
+})();
+</script></body>
+</html>

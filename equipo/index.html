@@ -1,0 +1,1379 @@
+<!doctype html>
+<html lang="es">
+<head><script>try{var t=localStorage.getItem('laser-espia-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Nuestro equipo: cinco integrantes, un mismo proyecto. Bitácora de aprendizajes, logros, dificultades y próximas mejoras del láser espía. Proyecto de robótica de 7.º grado.">
+<meta property="og:title" content="Láser espía · 06 Equipo">
+<meta property="og:description" content="Cinco integrantes. Un mismo proyecto. Tecnología que se aprende haciendo.">
+<meta property="og:image" content="https://laser-espia.github.io/assets/hero06_web.jpg">
+<meta property="og:url" content="https://laser-espia.github.io/equipo/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316212E'/%3E%3Crect x='4' y='13' width='9' height='6' rx='1.5' fill='%23EEF3F8'/%3E%3Cline x1='13' y1='16' x2='28' y2='16' stroke='%23E3262E' stroke-width='2.5'/%3E%3C/svg%3E">
+<style>
+/* Local Google Fonts: OFL notices and full licenses in *-OFL.txt beside this stylesheet. */
+/* latin-ext */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/atkinson-hyperlegible-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../assets/fonts/atkinson-hyperlegible-700-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../assets/fonts/atkinson-hyperlegible-700-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../assets/fonts/bricolage-grotesque-600-800-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../assets/fonts/bricolage-grotesque-600-800-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../assets/fonts/bricolage-grotesque-600-800-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../assets/fonts/bricolage-grotesque-600-800-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/jetbrains-mono-400-600-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/jetbrains-mono-400-600-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../assets/fonts/jetbrains-mono-400-600-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../assets/fonts/jetbrains-mono-400-600-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Láser espía · 06 Equipo</title>
+<style>
+/* Mismo sistema que las partes 01, 02 y 03: cuaderno de laboratorio en papel cuadriculado, una sola columna, la escena manda */
+:root{
+  --paper:#EEF2F6; --grid:#DCE3EB; --card:#FFFFFF; --ink:#16212E; --muted:#56657A; --line:#C9D3DE;
+  --laser:#C91D28; --laser-glow:rgba(227,38,46,.35); --ok:#176D3B; --ok-bg:#E2F4EA; --alarm-bg:#FDE4E5;
+  --amber:#F2B53A; --focus:#8A5A00; --on-laser:#FFFFFF; --room:#FFFFFF; --floor:#C9D3DE; --wall:#7C8BA0; --warn-bg:#FFF3D6; --warn:#8A5A00;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0F1722; --grid:#18222F; --card:#152030; --ink:#E6ECF3; --muted:#93A2B6; --line:#26354A;
+  --laser:#FF4048; --laser-glow:rgba(255,64,72,.45); --ok:#4CC383; --ok-bg:#12301F; --alarm-bg:#3A1418;
+  --amber:#F2B53A; --focus:#F2B53A; --on-laser:#FFFFFF; --room:#1A2738; --floor:#2A3A50; --wall:#53647C; --warn-bg:#33270F; --warn:#F2B53A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0F1722; --grid:#18222F; --card:#152030; --ink:#E6ECF3; --muted:#93A2B6; --line:#26354A;
+  --laser:#FF4048; --laser-glow:rgba(255,64,72,.45); --ok:#4CC383; --ok-bg:#12301F; --alarm-bg:#3A1418;
+  --amber:#F2B53A; --focus:#F2B53A; --on-laser:#FFFFFF; --room:#1A2738; --floor:#2A3A50; --wall:#53647C; --warn-bg:#33270F; --warn:#F2B53A; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 56px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+h1{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:800;letter-spacing:-.02em}
+h1 span{color:var(--laser)}
+h2{font-size:clamp(1.4rem,3.4vw,1.85rem);font-weight:800}
+h3{font-size:1.1rem;font-weight:600}
+p{margin:0}
+code{font-family:var(--mono);font-size:.9em}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{color:var(--muted);max-width:60ch;font-size:1.08rem}
+section{display:flex;flex-direction:column;gap:14px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+
+/* Navegación entre partes */
+.crumbs{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;font-family:var(--mono);font-size:.85rem}
+.crumbs a{color:var(--muted);text-decoration:none;padding:6px 0}
+.crumbs a:hover{color:var(--laser);text-decoration:underline}
+.crumbs a:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+
+/* Portada */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:center}
+.hero .txt{display:flex;flex-direction:column;gap:14px;min-width:0}
+.hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;max-width:100%;background:var(--card)}
+.hero figure img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero figure{order:-1}}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+
+button,.btn{font:inherit;font-weight:700;border-radius:10px;padding:10px 16px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+button.primary,.btn.primary{background:#C91D28;border-color:#C91D28;color:#FFFFFF}
+button.big{font-size:1.08rem;padding:13px 20px}
+button[aria-pressed="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* Mesa de trabajo */
+.sim{display:flex;flex-direction:column;gap:16px;padding:16px}
+@media (min-width:861px){
+  .sim{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);align-items:start}
+  .sim>.stage{grid-column:1;grid-row:1}
+  .sim>.info{grid-column:2;grid-row:1 / span 3}
+  .sim>.status{grid-column:1;grid-row:2}
+  .sim>.controls{grid-column:1;grid-row:3}
+  .sim>.mission{grid-column:1 / -1;grid-row:4}
+}
+.stage{position:relative;border-radius:10px;overflow:hidden;background:var(--paper);border:1px solid var(--line)}
+@media (max-width:820px){.stage{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;box-shadow:0 8px 18px rgba(0,0,0,.35)}.sim.touring .stage{position:relative;box-shadow:none}}
+.stage svg{display:block;width:100%;height:auto;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.gonetag-out{display:none;font-family:var(--mono);font-size:13px;font-weight:600;fill:var(--muted);pointer-events:none;paint-order:stroke;stroke:var(--room);stroke-width:4px;stroke-linejoin:round}
+.hint{position:absolute;left:12px;top:8px;font-size:.92rem;color:var(--muted);font-family:var(--mono);pointer-events:none}
+@media (max-width:600px){.hint{display:none!important}}
+.scene-msg{position:absolute;left:12px;top:6px;transform:none;max-width:min(70%,calc(100% - 20px));width:max-content;text-align:center;
+  font-family:var(--display);font-weight:800;font-size:clamp(.88rem,2.6vw,1.2rem);line-height:1.25;padding:6px 12px;border-radius:12px;
+  background:var(--card);color:var(--ink);border:2px solid var(--line);box-shadow:0 6px 18px rgba(0,0,0,.18);pointer-events:none}
+.scene-msg.alert{border-color:var(--laser);color:var(--laser);background:var(--alarm-bg)}
+.scene-msg.ok{border-color:var(--ok);color:var(--ok);background:var(--ok-bg)}
+.scene-msg.none{border-color:var(--muted)}
+@media (max-width:600px){.scene-msg{position:static;transform:none;max-width:none;width:auto;margin:0;border-radius:0;border-width:2px 0 0;box-shadow:none;font-size:.95rem}}
+.status{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.pill{font-family:var(--display);font-weight:800;font-size:1.1rem;padding:8px 16px;border-radius:999px;display:inline-flex;gap:10px;align-items:center}
+.pill .dot{width:12px;height:12px;border-radius:50%;background:currentColor;flex:none}
+.pill.idle{background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.alarm{background:var(--alarm-bg);color:var(--laser);animation:blink .35s steps(2) infinite}
+@keyframes blink{50%{opacity:.55}}
+.missing{font-family:var(--mono);font-size:.82rem;color:var(--muted)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.controls button{min-height:48px}
+@media (max-width:600px){.controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.controls .primary{grid-column:1/-1;justify-content:center}.controls button{justify-content:center;min-width:0;font-size:1rem;padding-inline:10px}}
+
+/* Ficha de la pieza */
+.info{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:12px;border:2px solid var(--line);background:var(--paper);min-width:0}
+.info h3{font-family:var(--display);font-weight:800;font-size:1.4rem}
+.info .cat{color:var(--laser);font-weight:600}
+.info dl{margin:0;display:flex;flex-direction:column;gap:8px}
+.info dt{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.info dd{margin:0;font-size:.98rem;line-height:1.45}
+.info dd.analog{border-left:3px solid var(--amber);padding-left:10px}
+.info .empty{color:var(--muted)}
+.info .falta{border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.info .falta button{min-height:46px}
+.info .falta button.removed{border-color:var(--ok);color:var(--ok)}
+.info .gonenote{font-size:.9rem;color:var(--muted)}
+
+/* Retos */
+.mission{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--paper);transition:border-color .3s,background .3s}
+.mission .avatar{width:64px;flex:none}
+.mission .avatar svg{display:block;width:100%;height:auto}
+.mission .eye{transform-box:fill-box;transform-origin:center;animation:blinkEye 4.2s infinite}
+.mbody{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.mhead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.mdots{display:flex;gap:6px}
+.mdots button{width:30px;height:30px;padding:0;border-radius:50%;justify-content:center;font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--muted)}
+.mdots button[aria-current="step"]{border-color:var(--laser);color:var(--ink);border-width:2px}
+.mdots button.ok{background:var(--ok);border-color:var(--ok);color:var(--on-laser)}
+.mission h3{font-size:1.2rem}
+.mission .goal{margin:0}
+.mlive{margin:0;font-family:var(--mono);font-size:.84rem;line-height:1.5;color:var(--ink);border-left:3px solid var(--amber);padding:4px 0 4px 10px;min-height:2.6em}
+.quizzes{display:flex;flex-direction:column;gap:10px}
+.qrow{display:flex;flex-direction:column;gap:6px}
+.qrow .qt{font-family:var(--display);font-weight:800;font-size:1.05rem}
+.qrow.done .qt::after{content:" ✓";color:var(--ok)}
+.quiz{display:flex;flex-wrap:wrap;gap:8px}
+.quiz button{min-height:44px}
+.quiz button.wrong{border-color:var(--laser);color:var(--laser);text-decoration:line-through}
+.quiz button.right{background:var(--ok);border-color:var(--ok);color:var(--on-laser)}
+.mdone{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.mdone p{margin:0;flex:1 1 260px;color:var(--ink)}
+.mdone p:empty{display:none}
+.mission.solved,.mission.all{border-color:var(--ok);background:var(--ok-bg)}
+.mission.solved .mdone p::before{content:"Lo que aprendiste: ";font-weight:700}
+@media (max-width:600px){.mission .avatar{display:none}.mission{padding:12px}}
+
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.two>*{min-width:0}
+ul.bul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.bugs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.bug{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.bug .tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--laser);font-weight:600;margin-top:6px}
+.bug .tag.cause{color:#5B9BE0}
+.bug .tag.test{color:var(--ok)}
+
+ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+ol.steps li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}
+ol.steps .who{font-family:var(--mono);font-size:.75rem;color:var(--laser);letter-spacing:.06em;text-transform:uppercase}
+ol.steps .say{font-size:.95rem}
+ol.steps .do{font-size:.85rem;color:var(--muted)}
+.qa{display:flex;flex-direction:column;gap:8px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+summary{cursor:pointer;font-weight:700}
+details p{margin-top:8px;color:var(--muted)}
+.share{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center}
+.share img{width:220px;max-width:100%;border-radius:12px;border:1px solid var(--line);background:#fff;padding:8px}
+@media (max-width:600px){.share{grid-template-columns:1fr}.share img{margin:0 auto}}
+.safety{display:flex;gap:14px;align-items:flex-start;border:2px solid var(--amber);border-radius:12px;padding:14px 16px;background:var(--card)}
+.safety .ico{font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--amber);line-height:1}
+footer{color:var(--muted);font-size:.85rem}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ok);color:var(--on-laser);font-weight:700;padding:10px 18px;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.2);z-index:20;max-width:calc(100% - 32px);text-align:center}
+.sim.touring .controls button:not(#sound),.sim.touring .mission button,.sim.touring .info button,.touring .bcard{pointer-events:none}
+.sim.touring .controls button:not(#sound),.sim.touring .mission button,.sim.touring .info button{opacity:.55}
+/* Recorrido guiado por Lumi: foco con sombra gigante, robot que viaja y barra de subtítulos */
+.lumi-card{display:flex;align-items:center;gap:12px;margin-top:6px}
+.lumi-card .avatar{width:58px;flex:none}
+.lumi-card p{font-size:.92rem;color:var(--muted);margin:0}
+.lumi-card b{color:var(--ink)}
+.tour-spot{position:fixed;left:0;top:0;width:0;height:0;z-index:1000;border-radius:16px;pointer-events:none;
+  box-shadow:0 0 0 3px #F2B53A,0 0 28px 8px rgba(242,181,58,.45),0 0 0 200vmax rgba(5,9,15,.74);
+  transition:left .45s ease,top .45s ease,width .45s ease,height .45s ease}
+.lumi{position:fixed;left:0;top:0;z-index:1002;width:118px;pointer-events:none;transition:transform .8s cubic-bezier(.3,1.25,.5,1);will-change:transform}
+.lumi .bob{animation:bob 2.4s ease-in-out infinite}
+.lumi svg,.lumi-card svg{display:block;width:100%;height:auto;overflow:visible}
+@keyframes bob{50%{transform:translateY(-7px)}}
+.lumi .eye,.lumi-card .eye{transform-box:fill-box;transform-origin:center;animation:blinkEye 4.2s infinite}
+@keyframes blinkEye{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.lumi .arm-r{transform-box:fill-box;transform-origin:0% 50%}
+.lumi.wave .arm-r{animation:wave .5s ease-in-out 4 alternate}
+@keyframes wave{from{transform:rotate(10deg)}to{transform:rotate(-40deg)}}
+.tour-bar{position:fixed;z-index:1003;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  width:min(680px,calc(100% - 24px));background:#0F1722;color:#F3F6FA;border:1px solid #2A3B52;border-radius:18px;
+  padding:12px 12px 12px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 12px 40px rgba(0,0,0,.45)}
+.tour-bar .who{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F2B53A}
+.tour-bar .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.tour-bar .say{font-size:clamp(.92rem,2.4vw,1.08rem);line-height:1.4;margin:0}
+.tour-bar button{background:#1C2A3C;color:#F3F6FA;border-color:#2A3B52;padding:0;width:46px;height:46px;justify-content:center;border-radius:50%;flex:none;font-size:1.05rem}
+.tour-bar button:focus-visible{outline-color:#F2B53A}
+.tour-bar .play{position:relative;width:56px;height:56px;background:#F3F6FA;color:#0F1722}
+.tour-bar .play svg{position:absolute;inset:-4px;width:64px;height:64px;transform:rotate(-90deg);pointer-events:none}
+.tour-bar .ctrls{display:flex;gap:8px;flex:none;align-items:center}
+.tour-bar .next{width:auto;padding:0 18px;border-radius:999px;background:#E3262E;border-color:#E3262E;color:#fff;font-weight:800;font-size:1rem}
+.tour-bar button:disabled{opacity:.35}
+@media (max-width:760px){.tour-bar{flex-wrap:wrap}.tour-bar .txt{flex-basis:calc(100% - 70px)}.tour-bar .ctrls{margin-left:auto}}
+@media (max-width:600px){.lumi{width:76px}.tour-bar{flex-wrap:wrap}.tour-bar .txt{flex-basis:calc(100% - 70px)}.tour-bar .ctrls{margin-left:auto}}
+/* zoom de presentación: el objetivo del recorrido se agranda por encima de sus vecinos (fondo y borde los pone el motor) */
+.tz{z-index:999}.tz:not(.tzp){position:relative}
+@media (prefers-reduced-motion: reduce){.pill.alarm{animation:none}.tour-spot,.lumi{transition:none}.lumi .bob,.lumi .eye,.lumi-card .eye,.mission .eye,.lumi.wave .arm-r{animation:none}.piece .art{transition:none}}
+
+/* Parte 06 · Equipo */
+.team{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;list-style:none;margin:0;padding:0}
+.member{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;min-width:0}
+.member .ava{width:92px;height:92px;flex:none}
+.member .ava svg{display:block;width:100%;height:100%}
+.member .nm{font-family:var(--display);font-weight:800;font-size:1.35rem;line-height:1.1;overflow-wrap:anywhere}
+.member .gr{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--muted)}
+.member.pop{animation:pop 1s ease-out}
+@keyframes pop{25%{transform:translateY(-10px) scale(1.05);border-color:var(--amber);box-shadow:0 0 0 4px rgba(242,181,58,.35)}}
+@media (max-width:700px){.team{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.member:last-child:nth-child(odd){grid-column:1/-1}.member .ava{width:74px;height:74px}.member .nm{font-size:1.2rem}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.chips li{font-family:var(--mono);font-size:.82rem;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);display:inline-flex;align-items:center;gap:8px}
+.chips li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--laser);flex:none}
+.sub{font-family:var(--display);font-weight:800;font-size:1.05rem;margin-top:6px}
+
+/* Bitácora: tarjetas que se dan vuelta */
+.log{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.log{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.log{grid-template-columns:1fr}}
+.bcard{font:inherit;color:inherit;text-align:left;background:none;border:0;padding:0;display:grid;cursor:pointer;perspective:1000px;min-width:0;border-radius:16px;font-weight:400}
+.bcard[aria-expanded]{background:none;color:inherit;border:0}
+.bcard:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.bcard .face{grid-area:1 / 1;display:flex;flex-direction:column;gap:8px;padding:18px;border-radius:16px;border:2px solid var(--line);background:var(--card);color:var(--ink);
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .55s cubic-bezier(.3,1.2,.5,1);min-height:200px;min-width:0}
+.bcard .back{transform:rotateY(180deg);border-color:var(--amber);background:var(--card)}
+.bcard[aria-expanded="true"] .front{transform:rotateY(-180deg)}
+.bcard[aria-expanded="true"] .back{transform:rotateY(0deg)}
+.bcard .ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;background:var(--paper);border:1px solid var(--line)}
+.bcard .k{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--laser);font-weight:600}
+.bcard .t{font-family:var(--display);font-weight:800;font-size:1.3rem;line-height:1.1}
+.bcard .tap{margin-top:auto;font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.bcard .txt{font-size:1.02rem;line-height:1.5}
+.bcard.seen .front .k::after{content:" ✓";color:var(--ok)}
+
+/* La mejora: estructura floja / reforzada */
+.info .cmp{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.info .cmp li{border:2px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.95rem;line-height:1.4;background:var(--card);transition:border-color .3s,opacity .3s}
+.info .cmp li b{display:block;font-family:var(--display);font-size:1.02rem}
+.info .cmp li.on{border-color:var(--amber);box-shadow:0 0 0 3px rgba(242,181,58,.25)}
+.info .cmp li:not(.on){border-style:dashed}
+.count{font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+.count b{color:var(--laser);font-size:1.05rem}
+@media (max-width:600px){.controls #estructuraBtn{grid-column:1/-1}}
+#brackets,#looseScrew,#shakeMarks{transition:opacity .35s,transform .35s cubic-bezier(.3,1.5,.5,1)}
+#brackets{opacity:0;transform:translateY(-10px)}
+#scene.ref #brackets{opacity:1;transform:none}
+#scene.ref #looseScrew{opacity:0}
+
+/* Cierre */
+.closing{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;padding:28px}
+.closing .big{font-size:clamp(2rem,5.6vw,3.4rem);font-weight:800;letter-spacing:-.02em}
+.closing .big span{color:var(--laser)}
+.closing .thanks{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--ok)}
+.closing figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+.closing figure img{width:240px;max-width:100%;border-radius:12px;border:1px solid var(--line);background:#fff;padding:8px;image-rendering:pixelated}
+.closing figcaption{font-family:var(--display);font-weight:800;text-align:center}
+.parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.parts a{font-family:var(--mono);font-size:.82rem;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 12px;background:var(--paper)}
+.parts a:hover{border-color:var(--laser);color:var(--laser)}
+.parts a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.parts a[aria-current]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+@media (max-width:700px){.closing{grid-template-columns:1fr;padding:20px}.closing figure img{width:200px}}
+@media (prefers-reduced-motion: reduce){.bcard .face,#brackets,#looseScrew,#shakeMarks{transition:none}.member.pop{animation:none}}
+</style>
+
+<style>.presentation-tools{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:10px}
+.presentation-tools button{font:inherit;font-size:16px;font-weight:700;padding:10px 16px;border-radius:10px;border:2px solid var(--line,#C9D3DE);background:var(--card,#fff);color:var(--ink,#16212E);cursor:pointer;min-height:44px;min-width:44px}
+.presentation-tools button:focus-visible{outline:3px solid var(--focus,#806000);outline-offset:3px}
+.presentation-tools button[aria-pressed="true"]{background:#C91D28;border-color:#C91D28;color:#fff}
+.presentation-hint,.presentation-tools [role="status"]{font-size:15px;color:var(--muted,#56657A)}
+@media(min-width:1000px){
+  /* los tamaños de las páginas van en rem: crecer la raíz agranda todo, no solo el texto suelto */
+  html[data-presentation="true"]:not([data-support="true"]){font-size:21px}
+  html[data-presentation="true"]:not([data-support="true"]) body{font-size:1.3rem}
+  html[data-presentation="true"] .wrap:not([data-module]){max-width:1500px}
+  html[data-presentation="true"] .tour-bar{width:calc(100% - 48px);max-width:1400px;padding:18px 22px}
+  html[data-presentation="true"] .tour-bar .say{font-size:24px;line-height:1.35}
+  html[data-presentation="true"] .tour-bar .who{font-size:18px;letter-spacing:.04em}
+  html[data-presentation="true"] .tour-bar button{min-width:52px;min-height:52px;font-size:20px}
+  html[data-presentation="true"] .tour-bar .next{font-size:20px}
+  html[data-presentation="true"] .lumi-card p{font-size:22px}
+}
+@media(max-width:600px){.presentation-tools{justify-content:flex-start}.presentation-tools button{font-size:14px;padding:9px 11px;min-height:44px}.presentation-hint{width:100%}}
+/* Objetivos táctiles de al menos 44 px en todas las partes (iPad, celular) */
+.presentation-tools button[hidden]{display:none}
+.mdots button{width:44px;height:44px}
+.crumbs a,main[data-module] .topline a,main[data-module] .pager a,main[data-module] details.legend>summary,nav.parts a{min-height:44px;display:inline-flex;align-items:center}
+input#servo,input#umbral,input#servoAngle{height:44px}
+#walk,#sound,#lampBtn{min-height:44px}
+nav.parts a{white-space:nowrap}
+</style></head>
+<body>
+<main class="wrap" id="contenido"><div class="presentation-tools" role="group" aria-label="Preparar el monitor">
+<button type="button" id="presentationMode" aria-pressed="false">🖥 Modo exposición</button>
+<button type="button" id="presentationFullscreen" aria-pressed="false">⛶ Pantalla completa</button>
+<button type="button" id="themeToggle" data-theme-choice="auto" aria-label="Tema: automático (sigue al dispositivo). Pulsa para cambiar a claro."><span aria-hidden="true">◐</span> Tema: automático</button>
+<span class="presentation-hint">Letras más grandes para proyectar.</span>
+<span id="presentationStatus" role="status"></span></div>
+  <nav class="crumbs" aria-label="Navegación superior"><a href="../">← Volver al inicio</a><a href="../montaje/">← Parte 05 · Montaje</a></nav>
+
+  <header class="hero">
+    <div class="txt">
+      <p class="eyebrow">Láser espía · Parte 06 · Equipo</p>
+      <h1>Cinco integrantes. <span>Un mismo proyecto.</span></h1>
+      <p class="lead">Proyecto grupal de 7.º grado. Aportamos el montaje del circuito, la integración de Arduino, el láser, el sensor, el servomotor y los componentes de conexión y señalización.</p>
+      <div class="cta">
+        <button class="primary big" id="tourBtn" type="button">▶ Lumi lo presenta</button>
+        <button class="big" id="tourManualBtn" type="button">⏭ Paso a paso</button>
+      </div>
+      <div class="lumi-card"><div class="avatar" data-lumi></div><p><b>Lumi</b> te presenta al equipo con su voz en menos de un minuto. En <b>Paso a paso</b> avanzas tú, a tu ritmo: con el botón <b>Siguiente</b>, las flechas del teclado o un control de presentaciones.</p></div>
+    </div>
+    <figure><img src="../assets/image-f010b381098c035f.jpg" alt="Ilustración del trabajo en equipo: manos de estudiantes junto a una placa Arduino, protoboard, cables, sensor, zumbador, servomotor y módulo láser con un haz rojo visible. No es una fotografía del montaje real"></figure>
+  </header>
+
+  <section id="equipo">
+    <p class="eyebrow">06 · Nuestro equipo</p>
+    <h2>El equipo</h2>
+    <ul class="team" aria-label="Integrantes">
+      <li class="member" id="m1"><div class="ava"><svg viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="41" fill="#1F8A4C" stroke="var(--ink)" stroke-width="2.5"/><circle cx="46" cy="46" r="34" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity=".35"/><text x="44" y="61" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="42" font-weight="800" fill="#FFFFFF">B</text><circle cx="73" cy="73" r="14" fill="#16212E" stroke="var(--card)" stroke-width="3"/><rect x="64" y="69" width="9" height="8" rx="1.6" fill="#EEF3F8"/><line x1="73" y1="73" x2="83" y2="73" stroke="#FF4048" stroke-width="2.6" stroke-linecap="round"/></svg></div><span class="nm">Britany</span><span class="gr">7.º grado</span></li>
+      <li class="member" id="m2"><div class="ava"><svg viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="41" fill="#2F6FDB" stroke="var(--ink)" stroke-width="2.5"/><circle cx="46" cy="46" r="34" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity=".35"/><text x="44" y="61" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="42" font-weight="800" fill="#FFFFFF">F</text><circle cx="73" cy="73" r="14" fill="#16212E" stroke="var(--card)" stroke-width="3"/><rect x="64" y="69" width="9" height="8" rx="1.6" fill="#EEF3F8"/><line x1="73" y1="73" x2="83" y2="73" stroke="#FF4048" stroke-width="2.6" stroke-linecap="round"/></svg></div><span class="nm">Fernanda</span><span class="gr">7.º grado</span></li>
+      <li class="member" id="m3"><div class="ava"><svg viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="41" fill="#7A4FD6" stroke="var(--ink)" stroke-width="2.5"/><circle cx="46" cy="46" r="34" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity=".35"/><text x="44" y="61" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="42" font-weight="800" fill="#FFFFFF">G</text><circle cx="73" cy="73" r="14" fill="#16212E" stroke="var(--card)" stroke-width="3"/><rect x="64" y="69" width="9" height="8" rx="1.6" fill="#EEF3F8"/><line x1="73" y1="73" x2="83" y2="73" stroke="#FF4048" stroke-width="2.6" stroke-linecap="round"/></svg></div><span class="nm">Gabriela</span><span class="gr">7.º grado</span></li>
+      <li class="member" id="m4"><div class="ava"><svg viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="41" fill="#F2B53A" stroke="var(--ink)" stroke-width="2.5"/><circle cx="46" cy="46" r="34" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity=".35"/><text x="44" y="61" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="42" font-weight="800" fill="#16212E">G</text><circle cx="73" cy="73" r="14" fill="#16212E" stroke="var(--card)" stroke-width="3"/><rect x="64" y="69" width="9" height="8" rx="1.6" fill="#EEF3F8"/><line x1="73" y1="73" x2="83" y2="73" stroke="#FF4048" stroke-width="2.6" stroke-linecap="round"/></svg></div><span class="nm">Génesis</span><span class="gr">7.º grado</span></li>
+      <li class="member" id="m5"><div class="ava"><svg viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="41" fill="#E3262E" stroke="var(--ink)" stroke-width="2.5"/><circle cx="46" cy="46" r="34" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity=".35"/><text x="44" y="61" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="42" font-weight="800" fill="#FFFFFF">P</text><circle cx="73" cy="73" r="14" fill="#16212E" stroke="var(--card)" stroke-width="3"/><rect x="64" y="69" width="9" height="8" rx="1.6" fill="#EEF3F8"/><line x1="73" y1="73" x2="83" y2="73" stroke="#FF4048" stroke-width="2.6" stroke-linecap="round"/></svg></div><span class="nm">Patricia</span><span class="gr">7.º grado</span></li>
+    </ul>
+    <p class="sub">Lo que aportamos juntas</p>
+    <ul class="chips">
+      <li>Montaje del circuito</li><li>Integración de Arduino</li><li>Láser</li><li>Sensor</li><li>Servomotor</li><li>Conexión y señalización</li>
+    </ul>
+  </section>
+
+  <section id="bitacora">
+    <p class="eyebrow">Bitácora del equipo</p>
+    <h2>Nuestra bitácora</h2>
+    <p class="lead">Lo que aprendimos, lo que logramos, lo que nos costó y lo que vamos a mejorar. Toca una tarjeta para darle la vuelta.</p>
+    <div class="log">
+      <button type="button" class="bcard" id="b-aprendizajes" aria-expanded="false">
+        <span class="face front"><span class="ico" aria-hidden="true">💡</span><span class="k">Bitácora · 1</span><span class="t">Aprendizajes</span><span class="tap">Toca para leer ↻</span></span>
+        <span class="face back"><span class="k">Aprendizajes</span><span class="txt">Aprendimos a conectar y programar un Arduino, además de controlar un servomotor.</span><span class="tap">↺ Toca para volver</span></span>
+      </button>
+      <button type="button" class="bcard" id="b-logros" aria-expanded="false">
+        <span class="face front"><span class="ico" aria-hidden="true">🏆</span><span class="k">Bitácora · 2</span><span class="t">Logros</span><span class="tap">Toca para leer ↻</span></span>
+        <span class="face back"><span class="k">Logros</span><span class="txt">Según el informe del equipo, logramos hacer funcionar el circuito y controlar el movimiento del láser.</span><span class="tap">↺ Toca para volver</span></span>
+      </button>
+      <button type="button" class="bcard" id="b-dificultades" aria-expanded="false">
+        <span class="face front"><span class="ico" aria-hidden="true">🧩</span><span class="k">Bitácora · 3</span><span class="t">Dificultades</span><span class="tap">Toca para leer ↻</span></span>
+        <span class="face back"><span class="k">Dificultades</span><span class="txt">Las conexiones y la programación del servomotor fueron los principales retos durante el desarrollo.</span><span class="tap">↺ Toca para volver</span></span>
+      </button>
+      <button type="button" class="bcard" id="b-mejoras" aria-expanded="false">
+        <span class="face front"><span class="ico" aria-hidden="true">🔧</span><span class="k">Bitácora · 4</span><span class="t">Próximas mejoras</span><span class="tap">Toca para leer ↻</span></span>
+        <span class="face back"><span class="k">Próximas mejoras</span><span class="txt">Mejorar las conexiones, ajustar la programación y reforzar la estructura para que el sistema funcione con mayor precisión.</span><span class="tap">La demostración está abajo ↓</span></span>
+      </button>
+    </div>
+  </section>
+
+  <section id="mejora">
+    <p class="eyebrow">Próximas mejoras · demostración</p>
+    <h2>La mejora: reforzar la estructura</h2>
+    <p class="lead">Reforzar la estructura es una de nuestras <b>próximas mejoras</b>: si el soporte del láser está flojo, el haz tiembla, deja de llegar al sensor y la alarma suena sin que pase nadie.</p>
+    <div class="panel sim" id="escena">
+      <div class="stage">
+        <svg id="scene" viewBox="0 0 800 300" role="img" aria-label="Láser sobre un servomotor apuntando a un sensor de luz. Con la estructura floja el láser tiembla; con la estructura reforzada queda fijo.">
+          <defs><filter id="glow" filterUnits="userSpaceOnUse" x="-100" y="-100" width="1000" height="500"><feGaussianBlur stdDeviation="4"/></filter></defs>
+          <rect x="-100" y="-100" width="1000" height="500" fill="var(--room)"/>
+          <rect x="-100" y="222" width="1000" height="200" fill="var(--floor)" opacity=".6"/>
+          <line x1="-100" y1="222" x2="900" y2="222" stroke="var(--ink)" stroke-width="2" opacity=".45"/>
+          <rect id="flash" x="-100" y="-100" width="1000" height="500" fill="#E3262E" opacity="0" pointer-events="none"/>
+          <!-- servo SG90 (base del soporte) -->
+          <rect x="72" y="160" width="16" height="22" fill="var(--muted)" stroke="#16212E" stroke-width="1.2"/>
+          <rect x="42" y="195" width="76" height="8" rx="2.5" fill="#3F7FE6" stroke="#16212E" stroke-width="1.4"/>
+          <circle cx="47" cy="199" r="2.2" fill="#0E2A5C"/><circle cx="113" cy="199" r="2.2" fill="#0E2A5C"/>
+          <rect x="52" y="185" width="56" height="34" rx="4" fill="#2F6FDB" stroke="#16212E" stroke-width="2"/>
+          <rect x="55" y="188" width="50" height="28" rx="2.5" fill="#5C93F0" opacity=".5"/>
+          <path d="M55.5 189v25" stroke="#BFD6FF" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+          <text x="80" y="207" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#FFFFFF">SG90</text>
+          <rect x="106" y="203" width="6" height="12" rx="1.5" fill="#24408A" stroke="#16212E" stroke-width="1"/>
+          <path d="M112 206h9" stroke="#8A5A1F" stroke-width="2"/><path d="M112 209h9" stroke="#E3262E" stroke-width="2"/><path d="M112 212h9" stroke="#F28C28" stroke-width="2"/>
+          <path d="M60 179.5h40a2.5 2.5 0 0 1 0 5h-40a2.5 2.5 0 0 1 0 -5z" fill="#F4F4F4" stroke="#16212E" stroke-width="1.3"/>
+          <circle cx="80" cy="182" r="2.2" fill="#C9CED6" stroke="#16212E" stroke-width=".8"/>
+          <!-- tornillo suelto (estructura floja) -->
+          <g id="looseScrew"><g transform="translate(150 217) rotate(-70)"><rect x="-2" y="-9" width="4" height="13" rx="1" fill="#9AA6B5" stroke="#16212E" stroke-width="1"/><path d="M-2 -6l4 -1.5M-2 -2.5l4 -1.5M-2 1l4 -1.5" stroke="#16212E" stroke-width=".7"/><rect x="-5.5" y="3" width="11" height="4" rx="1.5" fill="#C9CED6" stroke="#16212E" stroke-width="1.1"/></g></g>
+          <!-- láser con sirena, sobre el soporte -->
+          <g id="laserBody" transform="rotate(0 80 150)">
+            <rect x="43" y="143" width="8" height="15" rx="1" fill="#0B0F17"/>
+            <path d="M39 145.5h5M39 150.5h5M39 155.5h5" stroke="#E2C25A" stroke-width="1.6"/>
+            <rect x="49" y="138" width="46" height="24" rx="2.5" fill="#D8352E" stroke="#16212E" stroke-width="1.8"/>
+            <circle cx="55" cy="143" r="2.3" fill="#7A1A16" stroke="#F2C9A0" stroke-width=".9"/><circle cx="55" cy="157" r="2.3" fill="#7A1A16" stroke="#F2C9A0" stroke-width=".9"/>
+            <rect x="63" y="146" width="7" height="4" fill="#2B2F3A"/><rect x="63" y="153" width="5" height="3" fill="#E9C98F"/><rect x="73" y="147" width="9" height="8" rx="1" fill="#22262E"/>
+            <rect x="86" y="140" width="24" height="20" rx="2" fill="#C99A2E" stroke="#16212E" stroke-width="1.6"/>
+            <rect x="87.5" y="141.5" width="21" height="4" rx="1.5" fill="#F3D27A"/>
+            <path d="M93 140.8v18.4M101 140.8v18.4" stroke="#8A6414" stroke-width="1.2"/>
+            <rect id="aperture" x="108" y="143" width="10" height="14" rx="2" fill="var(--laser)" stroke="#8A6414" stroke-width="1.4"/>
+            <g id="siren" transform="translate(80 0)">
+              <g id="sirenRays" opacity="0"><path d="M0 118 L-78 96 L-78 140 Z" fill="#FF3B3B" opacity=".45"/><path d="M0 118 L78 96 L78 140 Z" fill="#3B7BFF" opacity=".45"/></g>
+              <circle id="sirenGlow" cx="0" cy="119" r="24" fill="#FF3B3B" opacity="0"/>
+              <rect x="-15" y="128" width="30" height="10" rx="3" fill="#3A4252" stroke="#16212E" stroke-width="1.5"/>
+              <path id="sirenDome" d="M-11 128 v-9 a11 11 0 0 1 22 0 v9 z" fill="#7A2A30" stroke="#16212E" stroke-width="2"/>
+              <path d="M-5 117 a6 6 0 0 1 5 -5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+            </g>
+          </g>
+          <!-- soportes y tornillos (estructura reforzada) -->
+          <g id="brackets">
+            <path d="M52 162h6v24h-10v-4h4z" fill="#B9C6D3" stroke="#16212E" stroke-width="1.4" stroke-linejoin="round"/>
+            <path d="M108 162h-6v24h10v-4h-4z" fill="#B9C6D3" stroke="#16212E" stroke-width="1.4" stroke-linejoin="round"/>
+            <rect x="46" y="130" width="68" height="7" rx="2" fill="#B9C6D3" stroke="#16212E" stroke-width="1.4"/>
+            <path d="M48 137v25M112 137v25" stroke="#B9C6D3" stroke-width="4"/><path d="M48 137v25M112 137v25" stroke="#16212E" stroke-width="1" opacity=".5"/>
+            <g fill="#8A93A0" stroke="#16212E" stroke-width="1"><circle cx="55" cy="168" r="3"/><circle cx="55" cy="180" r="3"/><circle cx="105" cy="168" r="3"/><circle cx="105" cy="180" r="3"/><circle cx="56" cy="133.5" r="2.4"/><circle cx="104" cy="133.5" r="2.4"/></g>
+            <path d="M53.3 168h3.4M53.3 180h3.4M103.3 168h3.4M103.3 180h3.4" stroke="#16212E" stroke-width="1"/>
+            <rect x="34" y="216" width="92" height="7" rx="2" fill="#8A93A0" stroke="#16212E" stroke-width="1.4"/>
+            <g fill="#C9CED6" stroke="#16212E" stroke-width="1"><circle cx="40" cy="219.5" r="2.4"/><circle cx="120" cy="219.5" r="2.4"/></g>
+          </g>
+          <!-- marcas de temblor (estructura floja) -->
+          <g id="shakeMarks" fill="none" stroke="var(--amber)" stroke-width="3" stroke-linecap="round" opacity="0">
+            <path d="M24 136 q-6 14 0 28"/><path d="M14 130 q-9 20 0 40"/><path d="M128 122 l6 -6M128 178 l6 6"/>
+          </g>
+          <text x="80" y="246" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" font-weight="600" fill="var(--ink)">LÁSER EN EL SERVO</text>
+          <line id="beamGlow" x1="118" y1="150" x2="727" y2="150" stroke="var(--laser-glow)" stroke-width="10" filter="url(#glow)"/>
+          <line id="beam" x1="118" y1="150" x2="727" y2="150" stroke="var(--laser)" stroke-width="3" stroke-linecap="round"/>
+          <circle id="spot" cx="727" cy="150" r="6" fill="var(--laser)"/>
+          <text id="beamLabel" x="560" y="132" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" font-weight="600" fill="var(--laser)" opacity=".9">HAZ DE LUZ</text>
+          <!-- sensor y LED -->
+          <g id="rightSide">
+            <rect x="726" y="176" width="24" height="6" rx="1" fill="#0B0F17"/>
+            <path d="M731 181v5M738 181v5M745 181v5" stroke="#E2C25A" stroke-width="1.6"/>
+            <rect x="733" y="186" width="10" height="36" fill="#3A4252"/>
+            <rect x="720" y="124" width="36" height="53" rx="3" fill="#1F5FB0" stroke="#16212E" stroke-width="2"/>
+            <circle cx="724.5" cy="128.5" r="1.8" fill="#0E2A5C" stroke="#C9CED6" stroke-width=".7"/><circle cx="751.5" cy="128.5" r="1.8" fill="#0E2A5C" stroke="#C9CED6" stroke-width=".7"/>
+            <circle id="ldr" cx="738" cy="150" r="11" fill="#E9B44C" stroke="#16212E" stroke-width="1.5"/>
+            <path d="M731 144h14v2.4h-14v2.4h14v2.4h-14v2.4h14v2.4h-14" fill="none" stroke="#B4322C" stroke-width="1.2" stroke-linejoin="round"/>
+            <rect x="741" y="164" width="9" height="9" rx="1.4" fill="#3B8DE6" stroke="#16212E" stroke-width="1"/>
+            <circle cx="745.5" cy="168.5" r="2.7" fill="#F4F4F4"/><path d="M743.6 168.5h3.8M745.5 166.6v3.8" stroke="#16212E" stroke-width=".9"/>
+            <circle cx="729" cy="168.5" r="2.4" fill="#4CC383" stroke="#16212E" stroke-width=".6"/>
+            <text x="738" y="246" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" font-weight="600" fill="var(--ink)">SENSOR</text>
+            <circle id="ledHalo" cx="738" cy="58" r="30" fill="var(--laser)" opacity="0"/>
+            <circle id="led" cx="738" cy="58" r="16" fill="#7A2A30" stroke="#16212E" stroke-width="2"/>
+            <text x="738" y="100" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" font-weight="600" fill="var(--ink)">LED</text>
+          </g>
+
+          <!-- quien pasa (la sorpresa): camina de arriba hacia abajo y cruza el haz -->
+          <g id="walker" opacity="0">
+            <g id="thief">
+              <g id="legL"><rect x="-15" y="36" width="12" height="32" rx="5" fill="#1D2433"/><ellipse cx="-10" cy="70" rx="9" ry="5" fill="#0B0F17"/></g>
+              <g id="legR"><rect x="3" y="36" width="12" height="32" rx="5" fill="#1D2433"/><ellipse cx="10" cy="70" rx="9" ry="5" fill="#0B0F17"/></g>
+              <rect x="-24" y="-26" width="48" height="66" rx="16" fill="#F4F4F4" stroke="#16212E" stroke-width="2.5"/>
+              <rect x="-22" y="-14" width="44" height="6" fill="#16212E"/><rect x="-23" y="-1" width="46" height="6" fill="#16212E"/><rect x="-23" y="12" width="46" height="6" fill="#16212E"/><rect x="-22" y="25" width="44" height="6" fill="#16212E"/>
+              <rect x="-33" y="-20" width="11" height="34" rx="5" fill="#F4F4F4" stroke="#16212E" stroke-width="2.5" transform="rotate(14 -27 -18)"/>
+              <g transform="translate(27 -20)"><path d="M-14 -4 q-4 -16 4 -18" fill="none" stroke="#16212E" stroke-width="3" stroke-linecap="round"/><circle r="17" fill="#C8A26B" stroke="#16212E" stroke-width="2.5"/><path d="M-7 -15 l7 5 l7 -5" fill="none" stroke="#16212E" stroke-width="2.5" stroke-linejoin="round"/><text y="7" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="17" font-weight="800" fill="#16212E">$</text></g>
+              <circle cx="0" cy="-46" r="20" fill="#F2C9A0" stroke="#16212E" stroke-width="2.5"/>
+              <path d="M-20 -50 a20 20 0 0 1 40 0 z" fill="#2B2F3A"/><rect x="-21" y="-54" width="42" height="7" rx="3.5" fill="#3A4252"/><circle cx="0" cy="-68" r="4.5" fill="#E3262E"/>
+              <rect x="-19" y="-47" width="38" height="11" rx="5.5" fill="#0B0F17"/>
+              <g id="eyes"><circle cx="-8" cy="-41.5" r="3.6" fill="#fff"/><circle cx="8" cy="-41.5" r="3.6" fill="#fff"/><circle class="pupil" cx="-6.8" cy="-40.5" r="1.7" fill="#0B0F17"/><circle class="pupil" cx="9.2" cy="-40.5" r="1.7" fill="#0B0F17"/></g>
+              <path id="faceCalm" d="M-7 -31 q7 5 13 -2" fill="none" stroke="#16212E" stroke-width="2.5" stroke-linecap="round"/>
+              <g id="faceCaught" opacity="0"><ellipse cx="0" cy="-30" rx="4.5" ry="5.5" fill="#16212E"/><path d="M22 -58 q4 7 0 10 q-4 -3 0 -10z" fill="#7FC8FF"/></g>
+            </g>
+            <g id="bang" opacity="0"><rect x="-17" y="-112" width="34" height="30" rx="10" fill="#FFFFFF" stroke="#E3262E" stroke-width="3"/><path d="M-4 -82 l4 8 l4 -8z" fill="#FFFFFF" stroke="#E3262E" stroke-width="3" stroke-linejoin="round"/><rect x="-5" y="-82.5" width="10" height="3" fill="#FFFFFF"/><text x="0" y="-89" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="24" font-weight="800" fill="#E3262E">¡!</text></g>
+          </g>
+        </svg>
+        <p class="scene-msg" id="sceneMsg" role="status" aria-live="polite" hidden></p>
+        <span class="hint" id="hint">La estructura está floja: pulsa «Que pase alguien» y mira el láser</span>
+      </div>
+
+      <aside class="info" id="estInfo" aria-label="Qué cambia con la estructura">
+        <p class="eyebrow cat">Estructura del láser</p>
+        <h3 id="sName" aria-live="polite">Floja</h3>
+        <ul class="cmp">
+          <li id="cmpFloja" class="on"><b>🪛 Floja</b>El soporte no está bien sujeto: con cualquier vibración el láser tiembla, el haz se sale del sensor y el Arduino cree que alguien pasó.</li>
+          <li id="cmpRef"><b>🔩 Reforzada</b>Con soportes y tornillos el láser queda fijo: el haz siempre llega al sensor y la alarma solo suena cuando alguien lo corta.</li>
+        </ul>
+        <p class="count">Falsas alarmas: <b id="falseN">0</b></p>
+      </aside>
+
+      <div class="status">
+        <span class="pill warn" id="pill" role="status" aria-live="polite"><span class="dot"></span><span id="pillText">Vigilando · el láser tiembla</span></span>
+      </div>
+      <div class="controls">
+        <button type="button" class="big" id="estructuraBtn" aria-pressed="false">🔩 Reforzar estructura</button>
+        <button type="button" class="primary big" id="walk06">🚶 Que pase alguien</button>
+        <button type="button" id="sound" aria-pressed="true">🔊 Silenciar</button>
+      </div>
+
+      <div class="mission" id="retos" aria-label="Retos">
+        <div class="avatar" data-lumi></div>
+        <div class="mbody">
+          <div class="mhead"><span class="eyebrow">Reto <span id="mNum">1</span> de 3</span>
+            <span class="mdots" id="mDots"><button type="button" aria-label="Reto 1">1</button><button type="button" aria-label="Reto 2">2</button><button type="button" aria-label="Reto 3">3</button></span></div>
+          <h3 id="mTitle" aria-live="polite"></h3>
+          <p class="goal" id="mGoal"></p>
+          <div class="quizzes" id="quiz" hidden></div>
+          <p class="mlive" id="mLive"></p>
+          <div class="mdone" id="mDone" hidden><p id="mLesson"></p><button type="button" class="primary" id="mNext">Siguiente reto</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <section id="cierre" class="panel closing">
+    <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+      <p class="eyebrow">Cierre</p>
+      <h2 class="big">Tecnología que se aprende <span>haciendo.</span></h2>
+      <p class="thanks">¡Gracias!</p>
+      <p class="lead">Gracias por acompañarnos en la misión del láser espía. Prueba todas las partes desde tu celular.</p>
+      <nav class="parts" aria-label="Todas las partes"><a href="../proyecto/">01 · Proyecto</a><a href="../materiales/">02 · Materiales</a><a href="../desarrollo/">03 · Desarrollo</a><a href="../especificaciones/">04 · Especificaciones</a><a href="../montaje/">05 · Montaje</a><a href="#equipo" aria-current="page">06 · Equipo</a></nav>
+    </div>
+    <figure><img src="../assets/image-3ab4a6f10027b65f.png" alt="Código QR que abre esta parte, 06 · Equipo"><figcaption>Escanea para abrir esta parte en tu celular; desde ahí llegas a todas</figcaption></figure>
+  </section>
+
+  <div class="safety" role="note">
+    <span class="ico">!</span>
+    <p><b>Seguridad:</b> nunca mires el láser directo ni lo apuntes a ojos, espejos o pantallas, y desconecta la batería antes de cambiar piezas o cables. <span style="color:var(--muted)">(Láser clase 3R, hasta 5 mW aprox.)</span></p>
+  </div>
+
+  <nav class="crumbs" aria-label="Navegación al final"><a href="../">← Volver al inicio</a><a href="../montaje/">← Parte 05 · Montaje</a></nav>
+  <footer>Escena educativa: la estructura floja o reforzada es una simulación para explicar una de nuestras próximas mejoras. Narración e ilustraciones generadas con IA.</footer>
+</main>
+<div class="toast" id="toast" role="status" hidden></div>
+<div class="tour-spot" id="tourSpot" hidden></div>
+<div class="lumi" id="lumi" hidden aria-hidden="true"><div class="bob" data-lumi></div></div>
+<div class="tour-bar" id="tourBar" role="region" aria-label="Recorrido de la parte 06" hidden>
+  <button type="button" class="play" id="tourPlay" aria-label="Pausar"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="none" stroke="#2A3B52" stroke-width="4"/><circle id="tourRing" cx="32" cy="32" r="29" fill="none" stroke="#E3262E" stroke-width="4" stroke-linecap="round" stroke-dasharray="182.2" stroke-dashoffset="182.2"/></svg><span id="tourPlayIcon">❚❚</span></button>
+  <div class="txt"><span class="who"><span id="tourWho">Lumi</span> · <span id="tourStep"></span></span><p class="say" id="tourSay" aria-live="polite"></p></div>
+  <div class="ctrls">
+    <button type="button" id="tourPrev" aria-label="Paso anterior">◀</button>
+    <button type="button" class="next" id="tourNext">Siguiente ▶</button>
+    <button type="button" id="tourVoice" aria-label="Silenciar a Lumi y avanzar paso a paso" aria-pressed="true">🔊</button>
+    <button type="button" id="tourAgain" aria-label="Repetir desde el inicio">↺</button>
+    <button type="button" id="tourClose" aria-label="Salir del recorrido">✕</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const svg = $('scene');
+  const calm = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Geometría (unidades del SVG): el láser gira sobre (80,150); el sensor (LDR) está en x=738 con radio 11.
+  // Quien pasa baja por x=420, de Y0=-110 a Y1=400, a V unidades por segundo.
+  const PX = 80, PY = 150, BY = 150, SX = 738, LDR_R = 10, BOARD = 26, MID = 420, V = 230, Y0 = -110, Y1 = 400;
+  const st = { ref: false, w: null, wt: 0, vis: true, hold: true, alarmUntil: 0, alarmKind: '', falseN: 0, refSince: 0, last: 0,
+               sound: !matchMedia('(pointer: coarse)').matches, tour: false };
+
+  // ---------- Bitácora: cuatro tarjetas que se dan vuelta ----------
+  const LOG = ['aprendizajes', 'logros', 'dificultades', 'mejoras'];
+  const LOGNAME = { aprendizajes: 'Aprendizajes', logros: 'Logros', dificultades: 'Dificultades', mejoras: 'Próximas mejoras' };
+  const opened = new Set(); // las que abrió quien visita (el recorrido de Lumi no cuenta)
+  function setCard(k, open){
+    const b = $('b-' + k);
+    b.setAttribute('aria-expanded', String(open));
+    b.querySelector('.front').setAttribute('aria-hidden', String(open));
+    b.querySelector('.back').setAttribute('aria-hidden', String(!open));
+  }
+  function closeCards(){ LOG.forEach(k => setCard(k, false)); }
+  LOG.forEach(k => {
+    setCard(k, false);
+    $('b-' + k).addEventListener('click', () => {
+      if (st.tour) return;
+      const open = $('b-' + k).getAttribute('aria-expanded') !== 'true';
+      setCard(k, open);
+      if (open) { opened.add(k); $('b-' + k).classList.add('seen'); }
+    });
+  });
+
+  // ---------- Integrantes: un saltito cuando Lumi los nombra ----------
+  function hi(n){ const el = $('m' + n); el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+  function calmMembers(){ for (let n = 1; n <= 5; n++) $('m' + n).classList.remove('pop'); }
+
+  // ---------- Escena: estructura floja / reforzada ----------
+  const MSG = {
+    floja: ['🪛 Estructura floja: el láser tiembla y da falsas alarmas.', 'alert'],
+    ref: ['🔩 Estructura reforzada: el haz ya no se mueve.', 'ok'],
+    caughtRef: ['✅ Estructura reforzada: solo suena cuando alguien pasa.', 'ok'],
+    caughtFloja: ['🚨 Detectó a alguien… pero con la estructura floja también suena sola.', 'alert'],
+  };
+  function setMsg(k){
+    const m = $('sceneMsg');
+    if (!k) { m.hidden = true; return; }
+    m.className = 'scene-msg ' + MSG[k][1]; m.textContent = MSG[k][0]; m.hidden = false;
+  }
+  function paintStruct(){
+    const b = $('estructuraBtn');
+    b.setAttribute('aria-pressed', String(st.ref));
+    b.textContent = st.ref ? '🪛 Aflojar estructura' : '🔩 Reforzar estructura'; // el botón dice lo que hace
+    b.title = st.ref ? 'Toca para aflojar la estructura' : 'Toca para reforzar la estructura';
+    svg.classList.toggle('ref', st.ref);
+    $('sName').textContent = st.ref ? 'Reforzada' : 'Floja';
+    $('cmpFloja').classList.toggle('on', !st.ref); $('cmpRef').classList.toggle('on', st.ref);
+  }
+  function setStruct(ref){
+    st.ref = ref; st.wt = 0; st.alarmUntil = 0; st.alarmKind = ''; st.refSince = performance.now();
+    setMsg(ref ? 'ref' : ''); paintStruct();
+  }
+  function walk(){ st.w = { phase: 'in', t0: performance.now(), cur: Y0, y: Y0 }; $('hint').hidden = true; }
+  // durante el recorrido, el láser no tiembla hasta que Lumi muestra la demostración (así no suena en otros pasos)
+  function resetSim(){ closeCards(); calmMembers(); st.w = null; setStruct(false); setMsg(''); st.hold = st.tour || !(M.i === 1 && !M.solved && !M.all); } // quieta, salvo que el reto de la falsa alarma esté activo
+  // la escena empieza quieta (sin sirena cada pocos segundos); se activa al usar sus controles
+  $('estructuraBtn').addEventListener('click', () => { setStruct(!st.ref); st.hold = false; $('hint').hidden = true; });
+  $('walk06').addEventListener('click', () => { st.hold = false; walk(); });
+
+  // El láser solo tiembla mientras la escena está a la vista (así no suena mientras lees otra parte de la página)
+  const stageEl = document.querySelector('#escena .stage');
+  if ('IntersectionObserver' in window) new IntersectionObserver(es => { st.vis = es[es.length - 1].isIntersecting; }, { threshold: 0.3 }).observe(stageEl);
+
+  // Temblor del soporte flojo: vibra un poco siempre (el haz sigue en el sensor) y cada 4,5 s da una sacudida
+  // fuerte de 0,6 a 1,6 s del ciclo (el haz se sale del sensor varias veces). Todo depende del tiempo, no de los cuadros.
+  const CYC = 4.5, S0 = 0.6, S1 = 1.6, D0 = 0.7, D1 = 1.5;
+  function wobble(w){
+    const small = 0.35 * Math.sin(2 * Math.PI * w / 0.45);
+    const ph = w % CYC;
+    const big = ph >= S0 && ph < S1 ? 3.3 * Math.sin(Math.PI * (ph - S0) / (S1 - S0)) * Math.sin(2 * Math.PI * (ph - S0) / 0.42) : 0;
+    return small + big;
+  }
+  // ¿entre a y b hubo un momento de la sacudida en que el haz no llegó al sensor? (aunque el navegador salte cuadros)
+  function shookBetween(a, b){
+    for (let k = Math.floor(a / CYC); k <= Math.floor(b / CYC); k++) if (b >= k * CYC + D0 && a <= k * CYC + D1) return true;
+    return false;
+  }
+
+  function setPressed(btn, on, onTxt, offTxt){ btn.setAttribute('aria-pressed', on); btn.textContent = on ? onTxt : offTxt; }
+  // Sirena con Web Audio (igual que las partes 01, 02 y 03): diente de sierra con filtro, dos tonos
+  let ac, gain, osc;
+  function ensureAudio(){
+    try {
+      if (!ac) { ac = new (window.AudioContext || window.webkitAudioContext)(); osc = ac.createOscillator(); gain = ac.createGain(); osc.type = 'sawtooth'; osc.frequency.value = 960; gain.gain.value = 0; const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2500; osc.connect(lp).connect(gain).connect(ac.destination); osc.start(); }
+      if (ac.state === 'suspended') ac.resume();
+    } catch (_) {}
+  }
+  setPressed($('sound'), st.sound, '🔊 Silenciar', '🔇 Activar sonido'); // en celulares empieza en silencio
+  $('sound').addEventListener('click', () => { st.sound = !st.sound; setPressed($('sound'), st.sound, '🔊 Silenciar', '🔇 Activar sonido'); ensureAudio(); });
+  addEventListener('pointerdown', ensureAudio, { once: true, capture: true });
+  addEventListener('keydown', ensureAudio, { once: true, capture: true });
+
+  // ---------- Retos ----------
+  const RETOS = [
+    { title: 'Conoce al equipo', goal: 'Abre las 4 tarjetas de la bitácora: aprendizajes, logros, dificultades y próximas mejoras.',
+      lesson: 'Un proyecto no es solo que funcione: también es lo que aprendimos, lo que nos costó y lo que vamos a mejorar.' },
+    { title: 'Falsa alarma', goal: 'Con la estructura floja, no hagas pasar a nadie: espera a que suene y responde por qué sonó.',
+      lesson: 'Una falsa alarma pasa cuando el sensor deja de recibir luz sin que nadie cruce. Si el soporte está flojo, el haz se mueve y engaña al Arduino.' },
+    { title: 'Mejora aplicada', goal: 'Refuerza la estructura, mira que ya no suena sola y luego haz que pase alguien.',
+      lesson: 'Con la estructura reforzada el haz no se mueve: la alarma solo suena cuando alguien corta el haz. Por eso es una de nuestras próximas mejoras.' },
+  ];
+  const QUIZ = { q: '¿Por qué sonó si nadie pasó?', ok: 1, opts: [
+    ['Alguien pasó muy rápido', 'No pasó nadie: el camino estaba vacío. Prueba otra.'],
+    ['El láser tembló y el haz dejó de llegar al sensor'],
+    ['El sensor se rompió', 'El sensor funciona: cuando el haz vuelve a llegar, deja de sonar. Prueba otra.'] ] };
+  const M = { i: 0, solved: false, all: false, live: '', sawFalse: false, qok: false };
+  const mEl = { card: $('retos'), num: $('mNum'), title: $('mTitle'), goal: $('mGoal'), live: $('mLive'), done: $('mDone'), lesson: $('mLesson'), next: $('mNext'), quiz: $('quiz'), dots: [...document.querySelectorAll('#mDots button')] };
+  {
+    const row = document.createElement('div'); row.className = 'qrow';
+    row.innerHTML = `<p class="qt">${QUIZ.q}</p><div class="quiz" role="group" aria-label="${QUIZ.q}"></div>`;
+    const box = row.querySelector('.quiz');
+    QUIZ.opts.forEach(([label, no], k) => {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = label;
+      b.addEventListener('click', () => {
+        if (st.tour || M.i !== 1 || M.solved || M.qok || !M.sawFalse) return;
+        if (k === QUIZ.ok) {
+          b.className = 'right'; M.qok = true; row.classList.add('done');
+          box.querySelectorAll('button').forEach(o => o.disabled = true);
+          solveReto();
+        } else { b.className = 'wrong'; M.live = no; mEl.live.textContent = no; }
+      });
+      box.appendChild(b);
+    });
+    mEl.quiz.appendChild(row);
+  }
+  function resetQuiz(){
+    M.qok = false;
+    mEl.quiz.querySelectorAll('.qrow').forEach(r => r.classList.remove('done'));
+    mEl.quiz.querySelectorAll('button').forEach(b => { b.className = ''; b.disabled = false; });
+  }
+  function showReto(i){
+    M.i = i; M.solved = false; M.all = false; M.live = ''; M.sawFalse = false; mEl.live.textContent = '';
+    if (i === 1 && !st.tour) st.hold = false; // el reto de la falsa alarma necesita el láser temblando
+    const r = RETOS[i];
+    mEl.num.textContent = i + 1; mEl.title.textContent = r.title; mEl.goal.textContent = r.goal;
+    mEl.done.hidden = true; mEl.live.hidden = false; mEl.card.classList.remove('solved', 'all'); mEl.num.parentElement.hidden = false;
+    mEl.quiz.hidden = true; resetQuiz();
+    if (i === 0) { opened.clear(); LOG.forEach(k => $('b-' + k).classList.remove('seen')); }
+    mEl.dots.forEach((d, k) => d.setAttribute('aria-current', k === i ? 'step' : 'false'));
+  }
+  function solveReto(){
+    M.solved = true; mEl.dots[M.i].classList.add('ok');
+    mEl.lesson.textContent = RETOS[M.i].lesson; mEl.live.hidden = true; mEl.done.hidden = false; mEl.card.classList.add('solved');
+    const left = mEl.dots.filter(d => !d.classList.contains('ok')).length;
+    mEl.next.textContent = left ? 'Siguiente reto' : 'Ver resultado';
+    toast('¡Reto cumplido: ' + RETOS[M.i].title.toLowerCase() + '!');
+  }
+  function nextReto(){
+    const pending = mEl.dots.map((d, k) => d.classList.contains('ok') ? -1 : k).filter(k => k >= 0);
+    if (!pending.length) {
+      M.all = true; mEl.card.classList.add('all'); mEl.num.parentElement.hidden = true; mEl.quiz.hidden = true;
+      mEl.title.textContent = '¡Los tres retos cumplidos!';
+      mEl.goal.textContent = 'Conoces al equipo, viste una falsa alarma y cómo la evita una estructura firme: así se mejora un proyecto.';
+      mEl.lesson.textContent = ''; mEl.next.textContent = 'Repetir los retos';
+      return;
+    }
+    showReto(pending.find(k => k > M.i) ?? pending[0]);
+  }
+  mEl.next.addEventListener('click', () => {
+    if (M.all) { mEl.dots.forEach(d => d.classList.remove('ok')); resetSim(); showReto(0); return; }
+    nextReto();
+  });
+  mEl.dots.forEach((d, k) => d.addEventListener('click', () => showReto(k)));
+  // lo que pase durante el recorrido de Lumi no cuenta para los retos
+  function retoEvent(ev, alone){
+    if (st.tour || M.solved || M.all) return;
+    if (M.i === 1 && ev === 'false' && alone && !st.ref) { M.sawFalse = true; mEl.quiz.hidden = false; }
+    if (M.i === 2 && ev === 'caught' && st.ref) solveReto();
+  }
+  function retoTick(){
+    if (st.tour || M.solved || M.all) return;
+    let live;
+    if (M.i === 0) {
+      const n = LOG.filter(k => opened.has(k)).length;
+      if (n >= LOG.length) { solveReto(); return; }
+      const rest = LOG.filter(k => !opened.has(k)).map(k => LOGNAME[k]);
+      live = n ? `Llevas ${n} de 4 tarjetas. Te faltan: ${rest.join(', ')}.` : 'Llevas 0 de 4 tarjetas. Están arriba, en «Nuestra bitácora».';
+    } else if (M.i === 1) {
+      if (M.sawFalse) live = M.live || '¡Sonó sin que pasara nadie! Responde: ¿por qué sonó?';
+      else if (st.ref) live = 'Para este reto, pulsa «🪛 Aflojar estructura».';
+      else if (st.w) live = 'Así no vale: espera a que no haya nadie en el camino.';
+      else if (!st.vis) live = 'Mira la escena del láser: el reto avanza mientras la ves.';
+      else live = 'Observa el láser y espera unos segundos, sin pulsar «Que pase alguien»…';
+    } else {
+      if (!st.ref) live = 'Primero pulsa «🔩 Reforzar estructura».';
+      else if (st.w) live = 'Mira: ¿suena cuando cruza el haz?';
+      else live = performance.now() - st.refSince < 2500 ? 'Reforzada: mira el haz, ya no se mueve ni suena solo…' : 'El haz está quieto y no suena solo. Ahora pulsa «Que pase alguien».';
+    }
+    if (live !== mEl.live.textContent) mEl.live.textContent = live;
+  }
+
+  let toastT;
+  function toast(msg){ const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2200); }
+
+  // ---------- Cuadro a cuadro (todo depende del tiempo real) ----------
+  const walker = $('walker'), thief = $('thief');
+  let lastKey = '';
+  function frame(now){
+    const dt = st.last ? Math.min(2, Math.max(0, (now - st.last) / 1000)) : 0; st.last = now;
+    const w0 = st.wt;
+    if (!st.ref && st.vis && !st.hold) st.wt += dt;
+    const a = st.ref ? 0 : wobble(st.wt);
+    const shaking = !st.ref && st.wt > w0 && shookBetween(w0, st.wt);
+
+    const w = st.w; let caught = false, moving = false, alpha = 1;
+    if (w) {
+      const e = (now - w.t0) / 1000;
+      if (w.phase === 'in') { w.cur = Y0 + V * e; moving = true; }
+      else if (w.phase === 'caught') { caught = true; if (e >= 0.9) { w.phase = 'flee'; w.t0 = now; } }
+      else { caught = true; moving = true; w.cur = w.y - V * 2 * e; }
+    }
+    // el haz: sale de la punta del láser con el ángulo del soporte
+    const rad = a * Math.PI / 180, ox = PX + 38 * Math.cos(rad), oy = PY + 38 * Math.sin(rad), tn = Math.tan(rad);
+    const yAt = x => oy + (x - ox) * tn;
+    const dyS = yAt(SX) - BY, yb = yAt(MID);
+    const blocked = !!(st.w && st.w.cur - 66 <= yb && st.w.cur + 72 >= yb);
+    const onLdr = !blocked && Math.abs(dyS) <= LDR_R && !shaking;
+    const dark = !onLdr; // el Arduino lee oscuridad: alguien tapa el haz o el haz se salió del sensor
+
+    if (w && w.phase === 'in') {
+      if (blocked) {
+        w.phase = 'caught'; w.t0 = now; w.y = w.cur; caught = true; moving = false;
+        st.alarmUntil = now + 3000; st.alarmKind = 'true';
+        setMsg(st.ref ? 'caughtRef' : 'caughtFloja'); retoEvent('caught');
+      } else if (w.cur >= Y1) st.w = null;
+    } else if (w && w.phase === 'flee' && w.cur < Y0) st.w = null;
+    if (dark) {
+      if (now >= st.alarmUntil) { // empieza una alarma nueva
+        st.alarmKind = blocked ? 'true' : 'false';
+        if (!blocked) { st.falseN++; $('falseN').textContent = st.falseN; setMsg('floja'); retoEvent('false', !st.w); }
+      }
+      st.alarmUntil = Math.max(st.alarmUntil, now + 1300); // la alarma dura al menos 1,3 s: nada parpadea más de 3 veces por segundo
+    }
+    const alarmOn = now < st.alarmUntil;
+
+    $('laserBody').setAttribute('transform', `rotate(${a.toFixed(2)} ${PX} ${PY})`);
+    let endX = blocked ? MID - 26 : Math.abs(dyS) <= LDR_R ? SX - 11 : Math.abs(dyS) <= BOARD ? 720 : 820;
+    for (const id of ['beam', 'beamGlow']) { const l = $(id); l.setAttribute('x1', ox.toFixed(1)); l.setAttribute('y1', oy.toFixed(1)); l.setAttribute('x2', endX); l.setAttribute('y2', yAt(endX).toFixed(1)); }
+    $('spot').setAttribute('cx', endX); $('spot').setAttribute('cy', yAt(endX).toFixed(1)); $('spot').setAttribute('opacity', endX < 800 ? 1 : 0);
+    $('ldr').setAttribute('opacity', onLdr ? 1 : 0.35);
+    $('beamLabel').setAttribute('opacity', Math.abs(a) < 1 ? .9 : .35);
+    $('shakeMarks').setAttribute('opacity', st.ref ? 0 : Math.abs(a) > 1 ? 1 : .45);
+
+    // quien pasa
+    const cw = st.w;
+    if (cw && cw.phase === 'in') alpha = Math.max(0, Math.min(1, (Y1 - cw.cur) / 140));
+    if (cw) {
+      walker.setAttribute('opacity', alpha.toFixed(2));
+      walker.setAttribute('transform', `translate(${MID} ${cw.cur.toFixed(1)})`);
+      const ph = moving ? Math.sin(now / (cw.phase === 'flee' ? 45 : 85)) * 4 : 0;
+      $('legL').setAttribute('transform', `translate(0 ${ph.toFixed(1)})`);
+      $('legR').setAttribute('transform', `translate(0 ${(-ph).toFixed(1)})`);
+      thief.setAttribute('transform', cw.phase === 'caught' ? `translate(${(Math.sin(now / 30) * 2).toFixed(1)} 0)` : '');
+      const look = cw.phase === 'flee' ? -2.5 : 1.2;
+      document.querySelectorAll('#eyes .pupil').forEach(e => e.setAttribute('transform', `translate(0 ${look - 1})`));
+    } else walker.setAttribute('opacity', 0);
+    $('faceCalm').setAttribute('opacity', caught ? 0 : 1);
+    $('faceCaught').setAttribute('opacity', caught ? 1 : 0);
+    $('bang').setAttribute('opacity', caught ? 1 : 0);
+
+    // alarma: LED, sirena roja/azul (cambia cada 0,4 s) y destello suave
+    $('led').setAttribute('fill', alarmOn ? 'var(--laser)' : '#7A2A30');
+    $('ledHalo').setAttribute('opacity', alarmOn ? (Math.sin(now / 60) > 0 ? .45 : .15) : 0);
+    const hiTone = Math.floor(now / 400) % 2 === 0, sirenColor = hiTone ? '#FF3B3B' : '#3B7BFF';
+    $('sirenDome').setAttribute('fill', alarmOn ? sirenColor : '#7A2A30');
+    $('sirenGlow').setAttribute('fill', sirenColor); $('sirenGlow').setAttribute('opacity', alarmOn ? .55 : 0);
+    $('sirenRays').setAttribute('opacity', alarmOn ? 1 : 0);
+    if (alarmOn && !calm()) $('sirenRays').setAttribute('transform', `rotate(${((now / 3) % 360).toFixed(0)} 0 118)`);
+    $('flash').setAttribute('fill', sirenColor); $('flash').setAttribute('opacity', alarmOn && !calm() ? .08 : 0);
+
+    const pillKind = alarmOn ? 'alarm' : st.ref ? 'ok' : 'warn';
+    const pillTxt = alarmOn ? (st.alarmKind === 'true' ? '¡Alerta! Alguien cruzó el haz' : '¡Falsa alarma! No pasó nadie') : st.ref ? 'Vigilando · haz firme' : 'Vigilando · el láser tiembla';
+    const key = pillKind + '|' + pillTxt;
+    if (key !== lastKey) { lastKey = key; $('pill').className = 'pill ' + pillKind; $('pillText').textContent = pillTxt; }
+    retoTick();
+    if (gain && ac) {
+      gain.gain.setTargetAtTime((st.sound || st.tour) && alarmOn ? (st.tour ? 0.025 : 0.05) : 0, ac.currentTime, 0.02);
+      if (osc) osc.frequency.setTargetAtTime(hiTone ? 960 : 770, ac.currentTime, 0.015);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // Lumi: robot con el uniforme del colegio (SVG); la boca se mueve con el volumen real de la voz
+  const LUMI_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" aria-hidden="true">
+<ellipse cx="60" cy="154" rx="30" ry="4.5" fill="#000" opacity=".2"/>
+<line x1="60" y1="19" x2="60" y2="9" stroke="#16212E" stroke-width="3" stroke-linecap="round"/>
+<circle cx="60" cy="7" r="5" fill="#E3262E" stroke="#16212E" stroke-width="2"/><circle cx="58.4" cy="5.4" r="1.4" fill="#fff" opacity=".85"/>
+<rect x="44" y="134" width="9" height="14" rx="3" fill="#B9C6D3" stroke="#16212E" stroke-width="2"/>
+<rect x="67" y="134" width="9" height="14" rx="3" fill="#B9C6D3" stroke="#16212E" stroke-width="2"/>
+<path d="M41 152 Q41 144 48.5 144 Q56 144 56 152 Z M64 152 Q64 144 71.5 144 Q79 144 79 152 Z" fill="#24365A" stroke="#16212E" stroke-width="2" stroke-linejoin="round"/>
+<rect x="29" y="90" width="8" height="20" rx="4" fill="#DCE4EC" stroke="#16212E" stroke-width="2"/><circle cx="33" cy="112" r="5" fill="#EEF3F8" stroke="#16212E" stroke-width="2"/>
+<g class="arm-r"><rect x="82" y="86" width="23" height="8" rx="4" fill="#DCE4EC" stroke="#16212E" stroke-width="2"/><circle cx="106" cy="90" r="5" fill="#EEF3F8" stroke="#16212E" stroke-width="2"/></g>
+<path d="M45 80 Q60 77 75 80 L81 85 L80 111 L40 111 L39 85 Z" fill="#FFFFFF" stroke="#16212E" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M41 82 Q31 83 28 94 L39 97 Z M79 82 Q89 83 92 94 L81 97 Z" fill="#FFFFFF" stroke="#16212E" stroke-width="2" stroke-linejoin="round"/>
+<path d="M40 109 L80 109 L89 136 Q60 139 31 136 Z" fill="#5C7196"/>
+<line x1="38.6" y1="114" x2="81.4" y2="114" stroke="#24365A" stroke-width="4"/><line x1="34.6" y1="126" x2="85.4" y2="126" stroke="#24365A" stroke-width="4"/><line x1="36.8" y1="119.5" x2="83.2" y2="119.5" stroke="#FFFFFF" stroke-width="0.7" opacity="0.8"/><line x1="33" y1="131" x2="87" y2="131" stroke="#FFFFFF" stroke-width="0.7" opacity="0.8"/><line x1="39.8" y1="110.5" x2="80.2" y2="110.5" stroke="#FFFFFF" stroke-width="0.6" opacity="0.6"/><line x1="45.6" y1="109" x2="39.1" y2="135.7" stroke="#24365A" stroke-width="4"/><line x1="60" y1="109" x2="60" y2="135.7" stroke="#24365A" stroke-width="4"/><line x1="74.4" y1="109" x2="80.9" y2="135.7" stroke="#24365A" stroke-width="4"/><line x1="52.8" y1="109" x2="49.6" y2="135.7" stroke="#FFFFFF" stroke-width="0.7" opacity="0.8"/><line x1="67.2" y1="109" x2="70.4" y2="135.7" stroke="#FFFFFF" stroke-width="0.7" opacity="0.8"/><line x1="50" y1="114" x2="45.5" y2="136" stroke="#16212E" stroke-width="0.9" opacity="0.55"/><line x1="56.8" y1="114" x2="55.4" y2="136" stroke="#16212E" stroke-width="0.9" opacity="0.55"/><line x1="63.2" y1="114" x2="64.6" y2="136" stroke="#16212E" stroke-width="0.9" opacity="0.55"/><line x1="70" y1="114" x2="74.5" y2="136" stroke="#16212E" stroke-width="0.9" opacity="0.55"/>
+<path d="M40 109 L80 109 L89 136 Q60 139 31 136 Z" fill="none" stroke="#16212E" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="39" y="106.5" width="42" height="4.5" rx="1.5" fill="#24365A" stroke="#16212E" stroke-width="1.6"/>
+<path d="M52 86 L57 97 M68 86 L63 97" stroke="#8A96A3" stroke-width="2" stroke-linecap="round"/>
+<path d="M48 79.5 Q54 82 60 85.5 L51.5 92 Q48.5 86 48 79.5 Z M72 79.5 Q66 82 60 85.5 L68.5 92 Q71.5 86 72 79.5 Z" fill="#FFFFFF" stroke="#16212E" stroke-width="1.8" stroke-linejoin="round"/>
+<rect x="53" y="96" width="14" height="11" rx="1.6" fill="#FFFFFF" stroke="#16212E" stroke-width="1.6"/>
+<rect x="53.8" y="96.8" width="12.4" height="2.6" fill="#24365A"/>
+<text x="60" y="104.6" font-family="Arial,Helvetica,sans-serif" font-size="4" font-weight="700" text-anchor="middle" fill="#16212E">LUMI</text>
+<circle cx="45" cy="95" r="4" fill="#F4C542" stroke="#16212E" stroke-width="1.5"/><circle class="core" cx="45" cy="95" r="2" fill="#E3262E"/>
+<circle cx="15" cy="47" r="5.5" fill="#B9C6D3" stroke="#16212E" stroke-width="2"/><circle cx="105" cy="47" r="5.5" fill="#B9C6D3" stroke="#16212E" stroke-width="2"/>
+<rect x="17" y="18" width="86" height="60" rx="27" fill="#EEF3F8" stroke="#16212E" stroke-width="3"/>
+<path d="M30 26 Q40 21 52 21" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none"/>
+<rect x="26" y="28" width="68" height="42" rx="18" fill="#16212E"/>
+<g class="eye"><ellipse cx="46" cy="46" rx="7.5" ry="9" fill="#7FE3FF"/><circle cx="43.5" cy="42.5" r="2.6" fill="#FFFFFF"/><circle cx="48.5" cy="49.5" r="1.2" fill="#FFFFFF" opacity=".8"/></g>
+<g class="eye"><ellipse cx="74" cy="46" rx="7.5" ry="9" fill="#7FE3FF"/><circle cx="71.5" cy="42.5" r="2.6" fill="#FFFFFF"/><circle cx="76.5" cy="49.5" r="1.2" fill="#FFFFFF" opacity=".8"/></g>
+<path d="M38.5 40 l-3.5 -2.5 M40.5 37.5 l-2 -3.5 M81.5 40 l3.5 -2.5 M79.5 37.5 l2 -3.5" stroke="#7FE3FF" stroke-width="1.8" stroke-linecap="round"/>
+<ellipse cx="36" cy="59" rx="4.5" ry="3" fill="#FF8FA3" opacity=".85"/><ellipse cx="84" cy="59" rx="4.5" ry="3" fill="#FF8FA3" opacity=".85"/>
+<rect class="mouth" data-cy="60" x="53.5" y="58.5" width="13" height="3" rx="1.5" fill="#FF7F7F"/>
+<g transform="rotate(-14 90 21)"><path d="M90 21 Q80 10 78 16 Q76 24 80 28 Q84 30 90 21 Z M90 21 Q100 10 102 16 Q104 24 100 28 Q96 30 90 21 Z" fill="#E3262E" stroke="#16212E" stroke-width="1.8" stroke-linejoin="round"/><path d="M80.5 18 Q82 22 85 23 M99.5 18 Q98 22 95 23" stroke="#FF8A8F" stroke-width="1.4" stroke-linecap="round" fill="none"/><rect x="87.5" y="18.5" width="5" height="5" rx="1.6" fill="#C81E26" stroke="#16212E" stroke-width="1.6"/></g>
+</svg>`;
+  document.querySelectorAll('[data-lumi]').forEach(el => el.innerHTML = LUMI_SVG);
+  const lumi = $('lumi'), spotEl = $('tourSpot'), bar = $('tourBar');
+  const mouth = lumi.querySelector('.mouth'), core = lumi.querySelector('.core');
+  const MOUTH_CY = +(mouth.dataset.cy || 60);
+
+  // Recorrido de la parte 06: un audio por paso. Dos modos:
+  //  - automático: Lumi narra; el reloj es audio.currentTime (pausar o repetir no se desincroniza)
+  //  - paso a paso: sin voz; quien presenta avanza con Siguiente, flechas o un control de presentaciones
+  const AUDIO = ["../assets/audio-8ae2fc86d1a3943f.mp3", "../assets/audio-8a13e69e51f4526f.mp3", "../assets/audio-cc1d31d2a3a53078.mp3", "../assets/audio-0e0eb3fd9ecbf2cf.mp3", "../assets/audio-e7c747b9662317b1.mp3", "../assets/audio-48c55eed976a5f0a.mp3"];
+  const DUR = [8.59, 4.31, 5.38, 4.41, 7.18, 5.38];
+  const TOTAL = DUR.reduce((a, b) => a + b, 0);
+  const openCard = k => () => setCard(k, true);
+  const floja = () => { setStruct(false); st.hold = false; };
+  const reforzar = () => { setStruct(true); st.hold = false; };
+  // demo: cuánto dura la demostración después de su última acción (para repetirla en paso a paso sin cortarla);
+  // puede ser una por momento. Las tarjetas abiertas no se repiten (demo muy larga).
+  const STEPS = [
+    { tag: 'El equipo', text: '¡Hola! Soy Lumi. Les presento al equipo: Britany, Fernanda, Gabriela, Génesis y Patricia. Cinco integrantes, un mismo proyecto.',
+      look: [[0, '.lumi-card'], [1.1, '#equipo']], at: [[2.8, () => hi(1)], [3.4, () => hi(2)], [4.1, () => hi(3)], [4.7, () => hi(4)], [5.4, () => hi(5)]], demo: 1.5 },
+    { tag: 'Aprendizajes', text: 'Aprendimos a conectar y programar un Arduino, y a controlar un servomotor.',
+      look: [[0, '#b-aprendizajes']], at: [[0.4, openCard('aprendizajes')]], demo: 600 },
+    { tag: 'Logros', text: 'Nuestro logro: hicimos funcionar el circuito y controlamos el movimiento del láser.',
+      look: [[0, '#b-logros']], at: [[0.4, openCard('logros')]], demo: 600 },
+    { tag: 'Dificultades', text: 'Lo más difícil fueron las conexiones y la programación del servomotor.',
+      look: [[0, '#b-dificultades']], at: [[0.4, openCard('dificultades')]], demo: 600 },
+    { tag: 'Próximas mejoras', text: 'Para mejorar: conexiones más firmes, ajustar la programación y reforzar la estructura, para que el láser no se mueva.',
+      look: [[0, '#b-mejoras'], [1.0, '#mejora'], [3.9, '#mejora']],
+      at: [[0.4, openCard('mejoras')], [1.0, floja], [3.9, reforzar], [4.4, walk]], demo: [600, 3.5, 3.5] },
+    { tag: 'Cierre', text: 'Tecnología que se aprende haciendo. ¡Gracias por acompañarnos en la misión del láser espía!',
+      look: [[0, '#cierre']], at: [] },
+  ];
+  const tour = { i: -1, fired: 0, target: null, paused: false, fake: null, level: 0, advancing: false, pendingNext: false, manual: false, beat: 0 };
+  let audio = null, analyser = null, buf = null;
+  // En iPhone/iPad la voz va directo al <audio>: si pasa por Web Audio, el interruptor de silencio la apaga
+  const IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const wake = () => { if (ac && ac.state !== 'running') ac.resume().catch(() => {}); };
+
+  const TOUR_BODY_CLASS = true;
+  function hookAudio(){
+    if (audio) return;
+    audio = new Audio(); // un solo reproductor, creado dentro del toque (iPhone)
+    try {
+      if (ac && !IOS) { const src = ac.createMediaElementSource(audio); analyser = ac.createAnalyser(); analyser.fftSize = 512; buf = new Uint8Array(analyser.fftSize); src.connect(analyser); analyser.connect(ac.destination); }
+    } catch (_) { analyser = null; }
+    audio.addEventListener('ended', () => { if (st.tour && !tour.fake && !tour.manual) nextStep(); });
+    audio.addEventListener('error', () => { if (st.tour && !tour.manual && audio.getAttribute('src')) useFakeClock(); });
+  }
+  // Reloj propio: en modo paso a paso, o si el audio no se puede reproducir (o aún no existe)
+  function useFakeClock(from){
+    if (st.tour && !tour.fake) tour.fake = { t0: performance.now() - (from ?? (audio && audio.currentTime) ?? 0) * 1000, pausedAt: tour.paused ? performance.now() : null };
+  }
+  // Vigía de red: si la voz no empieza en 6 s (descarga colgada sin error), seguir con el reloj propio
+  function watchAudio(i){ clearTimeout(tour.watch); tour.watch = setTimeout(() => { if (st.tour && tour.i === i && !tour.manual && !tour.fake && !tour.paused && audio.currentTime === 0 && audio.readyState < 3) { audio.pause(); useFakeClock(0); } }, 6000); }
+  function now(){
+    if (tour.fake) { const f = tour.fake; return ((f.pausedAt ?? performance.now()) - f.t0) / 1000; }
+    return audio ? audio.currentTime : 0;
+  }
+  function paintBar(){
+    const i = tour.i, n = STEPS.length;
+    $('tourStep').textContent = `${STEPS[i].tag} · ${i + 1} de ${n}`;
+    $('tourWho').textContent = tour.manual ? 'Paso a paso' : 'Lumi';
+    $('tourVoice').textContent = tour.manual ? '🔇' : '🔊';
+    $('tourVoice').setAttribute('aria-label', tour.manual ? 'Activar la voz de Lumi' : 'Silenciar a Lumi y avanzar paso a paso');
+    $('tourVoice').setAttribute('aria-pressed', String(!tour.manual));
+    $('tourPlay').hidden = tour.manual;
+    const lastBeat = !tour.manual || tour.beat >= STEPS[i].look.length - 1;
+    $('tourPrev').disabled = i === 0 && (!tour.manual || tour.beat === 0);
+    $('tourNext').textContent = i === n - 1 && lastBeat ? 'Terminar ✓' : 'Siguiente ▶';
+    setPlayIcon();
+  }
+  function playStep(i, beat){
+    tour.advancing = false; tour.pendingNext = false; tour.beat = beat || 0;
+    if (i < 0) i = 0;
+    if (i >= STEPS.length) return finishTour();
+    resetSim(); // cada paso empieza limpio, así se puede ir y volver
+    tour.i = i; tour.fired = 0; tour.fake = null; tour.paused = false;
+    $('tourSay').textContent = STEPS[i].text;
+    lumi.classList.toggle('wave', i === 0);
+    paintBar();
+    if (tour.manual) { if (audio) audio.pause(); useFakeClock(0); return; }
+    if (!AUDIO[i]) { audio.pause(); audio.removeAttribute('src'); useFakeClock(0); return; } // sin audio: reloj propio
+    audio.src = AUDIO[i];
+    wake();
+    audio.play().catch(e => { if (e && e.name === 'AbortError') return; if (tour.i === i) useFakeClock(); });
+    watchAudio(i);
+  }
+  function nextStep(){
+    if (tour.advancing) return;
+    tour.advancing = true;
+    const i = tour.i;
+    setTimeout(() => {
+      if (!(st.tour && tour.i === i && tour.advancing)) return;
+      if (tour.paused) tour.pendingNext = true; else playStep(i + 1);
+    }, 450);
+  }
+  // Paso a paso: cada paso tiene varios momentos (lo que se señala); nada avanza hasta que se pulsa Siguiente
+  function setBeat(b){ resetSim(); tour.beat = b; tour.fired = 0; tour.fake = null; tour.target = null; useFakeClock(0); paintBar(); }
+  const goNext = () => {
+    if (!st.tour) return;
+    if (tour.manual && tour.beat < STEPS[tour.i].look.length - 1) setBeat(tour.beat + 1);
+    else playStep(tour.i + 1);
+  };
+  const goPrev = () => {
+    if (!st.tour) return;
+    if (tour.manual && tour.beat > 0) setBeat(tour.beat - 1);
+    else if (tour.i > 0) playStep(tour.i - 1, tour.manual ? STEPS[tour.i - 1].look.length - 1 : 0);
+  };
+  function setPlayIcon(){ $('tourPlayIcon').textContent = tour.paused ? '▶' : '❚❚'; $('tourPlay').setAttribute('aria-label', tour.paused ? 'Seguir' : 'Pausar'); }
+  function togglePause(){
+    if (!st.tour || tour.manual) return;
+    tour.paused = !tour.paused;
+    if (!tour.paused && tour.pendingNext) { tour.pendingNext = false; playStep(tour.i + 1); return; }
+    if (!tour.paused && tour.advancing) { setPlayIcon(); return; }
+    if (tour.fake) {
+      if (tour.paused) tour.fake.pausedAt = performance.now();
+      else { tour.fake.t0 += performance.now() - tour.fake.pausedAt; tour.fake.pausedAt = null; }
+    } else if (tour.paused) audio.pause();
+    else { wake(); audio.play().catch(e => { if (!e || e.name !== 'AbortError') useFakeClock(); }); }
+    if (!tour.paused && !tour.fake) watchAudio(tour.i);
+    setPlayIcon();
+  }
+  // 🔊/🔇: silenciar a Lumi convierte el recorrido en paso a paso; activar la voz retoma el paso actual narrado
+  function toggleVoice(){
+    if (!st.tour) return;
+    tour.manual = !tour.manual;
+    if (tour.manual) {
+      const t = now(); if (audio) audio.pause();
+      tour.paused = false; tour.advancing = false;
+      let b = 0; STEPS[tour.i].look.forEach(([s0], k) => { if (t >= s0) b = k; });
+      setBeat(b);
+    } else playStep(tour.i);
+  }
+  function startTour(manual){
+    if (st.tour) return;
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {}
+    ensureAudio(); hookAudio();
+    tour.manual = manual;
+    st.tour = true; $('hint').hidden = true;
+    document.querySelector('.sim').classList.add('touring');
+    if (TOUR_BODY_CLASS) document.body.classList.add('touring');
+    $('tourBtn').disabled = $('tourManualBtn').disabled = true;
+    spotEl.hidden = lumi.hidden = bar.hidden = false;
+    tour.target = null;
+    playStep(0);
+    (manual ? $('tourNext') : $('tourPlay')).focus({ preventScroll: true });
+  }
+  function stopTour(){
+    if (!st.tour) return;
+    st.tour = false; tour.i = -1; tour.fake = null; tour.advancing = false; tour.target = null;
+    zoomOff();
+    if (audio) audio.pause();
+    document.querySelector('.sim').classList.remove('touring');
+    if (TOUR_BODY_CLASS) document.body.classList.remove('touring');
+    spotEl.hidden = lumi.hidden = bar.hidden = true;
+    resetSim(); $('tourBtn').disabled = $('tourManualBtn').disabled = false; $('tourBtn').focus({ preventScroll: true });
+  }
+  function finishTour(){ stopTour(); toast('¡Ahora pruébalo tú: abre la bitácora y cambia la estructura!'); }
+
+  // Zoom de presentación: el objetivo REAL (no una copia, así lo que se anima sigue vivo) se agranda y se centra
+  // en el espacio libre para que se lea desde el fondo del salón. Se anima cuadro a cuadro con el tiempo real
+  // (no con transiciones CSS) y se deshace al cambiar de objetivo o al cerrar el recorrido.
+  const zoom = { el: null, s: 1, tx: 0, ty: 0, cx: 0, cy: 0, last: 0, keep: null, bg: null, ring: '', fresh: false };
+  const ZPROPS = ['transform', 'transformOrigin', 'backgroundColor', 'borderRadius', 'boxShadow'];
+  const clear = c => !c || c === 'transparent' || /rgba\(.*,\s*0\)$/.test(c);
+  function zoomOff(){
+    const el = zoom.el; if (!el) return;
+    el.classList.remove('tz', 'tzp');
+    ZPROPS.forEach(p => { el.style[p] = zoom.keep[p]; });
+    spotEl.style.transition = ''; // el aro vuelve a deslizarse suave sin zoom
+    zoom.el = null; zoom.s = 1; zoom.tx = zoom.ty = 0;
+  }
+  function zoomOn(el){
+    zoomOff();
+    const cs = getComputedStyle(el);
+    zoom.el = el; zoom.s = 1; zoom.tx = zoom.ty = 0; zoom.fresh = true; zoom.last = performance.now();
+    zoom.keep = {}; ZPROPS.forEach(p => { zoom.keep[p] = el.style[p]; });
+    zoom.pos = cs.position !== 'static';
+    // fondo opaco: el propio si lo tiene; si no, el del contenedor más cercano que lo tenga (tarjeta o papel)
+    let bg = cs.backgroundColor;
+    for (let p = el.parentElement; clear(bg) && p; p = p.parentElement) bg = getComputedStyle(p).backgroundColor;
+    zoom.ring = clear(bg) ? getComputedStyle(document.body).backgroundColor : bg;
+    zoom.bg = clear(cs.backgroundColor) ? zoom.ring : null;
+    zoom.round = parseFloat(cs.borderTopLeftRadius) > 0;
+  }
+  // n: rectángulo natural (sin zoom) del objetivo; aplica el zoom de este cuadro y devuelve el rectángulo en pantalla
+  function zoomFrame(el, n){
+    if (zoom.el !== el) zoomOn(el);
+    if (zoom.fresh) { zoom.fresh = false; zoom.cx = n.l + n.w / 2; zoom.cy = n.t + n.h / 2; }
+    const tNow = performance.now(), dt = Math.min(0.6, Math.max(0, (tNow - zoom.last) / 1000)); zoom.last = tNow;
+    const k = calm() ? 1 : 1 - Math.exp(-dt / 0.12);
+    // espacio libre: pantalla menos márgenes, menos la barra de subtítulos y, en pantallas anchas, una columna para Lumi
+    const vw = document.documentElement.clientWidth, M = 24, wide = vw >= 900, MAXS = wide ? 2 : 1.35;
+    const fl = M, fr = vw - M - (wide ? lumi.offsetWidth + 16 : 0), ft = M;
+    const fb = (bar.hidden ? innerHeight : bar.getBoundingClientRect().top) - 16;
+    let s1 = Math.max(1, Math.min(MAXS, (fr - fl) / n.w, (fb - ft) / n.h));
+    if (s1 < 1.08) s1 = 1;
+    // más ancho que el hueco junto a Lumi (p. ej. en modo exposición): achicar un poco para que quepa entero
+    if (wide && n.w > fr - fl) s1 = Math.max(0.75, (fr - fl) / n.w);
+    if (s1 !== 1) {
+      // se anima en coordenadas de pantalla: aunque la página se desplace, el objetivo se queda en el centro
+      zoom.s += (s1 - zoom.s) * k;
+      zoom.cx += ((fl + fr) / 2 - zoom.cx) * k; zoom.cy += ((ft + fb) / 2 - zoom.cy) * k;
+      zoom.tx = zoom.cx - (n.l + n.w * zoom.s / 2); zoom.ty = zoom.cy - (n.t + n.h * zoom.s / 2);
+    } else {
+      zoom.s += (1 - zoom.s) * k; zoom.tx *= 1 - k; zoom.ty *= 1 - k;
+      if (Math.abs(zoom.s - 1) < 0.002 && Math.abs(zoom.tx) < 0.5 && Math.abs(zoom.ty) < 0.5) { zoom.s = 1; zoom.tx = zoom.ty = 0; }
+      zoom.cx = n.l + zoom.tx + n.w * zoom.s / 2; zoom.cy = n.t + zoom.ty + n.h * zoom.s / 2;
+    }
+    const on = Math.abs(zoom.s - 1) > 0.001 || zoom.tx || zoom.ty;
+    if (on) {
+      spotEl.style.transition = 'none'; // con zoom el aro sigue al objetivo cuadro a cuadro
+      if (!el.classList.contains('tz')) {
+        el.classList.add('tz'); el.classList.toggle('tzp', zoom.pos);
+        el.style.transformOrigin = '0 0';
+        if (zoom.bg) el.style.backgroundColor = zoom.bg;
+        if (!zoom.round) el.style.borderRadius = '12px';
+      }
+      el.style.transform = `translate(${zoom.tx.toFixed(2)}px, ${zoom.ty.toFixed(2)}px) scale(${zoom.s.toFixed(4)})`;
+      // el aro del foco (10 px) se rellena con el fondo, para que no asomen trozos de la página sin agrandar
+      el.style.boxShadow = `0 0 0 ${(10 / zoom.s).toFixed(2)}px ${zoom.ring}`;
+    } else if (el.classList.contains('tz')) {
+      el.classList.remove('tz', 'tzp'); ZPROPS.forEach(p => { el.style[p] = zoom.keep[p]; });
+    }
+    return { el, l: n.l + zoom.tx, t: n.t + zoom.ty, w: n.w * zoom.s, h: n.h * zoom.s };
+  }
+  function rectOf(sel){
+    const el = document.querySelector(sel); if (!el) return null;
+    const r = el.getBoundingClientRect(); return { el, l: r.left, t: r.top, w: r.width, h: r.height };
+  }
+  function tourFrame(){
+    if (st.tour && tour.i >= 0 && !tour.advancing) {
+      const step = STEPS[tour.i];
+      let t, sel;
+      if (tour.manual) {
+        const L = step.look, b0 = L[tour.beat][0], b1 = tour.beat + 1 < L.length ? L[tour.beat + 1][0] : DUR[tour.i];
+        const acts = step.at.filter(a => a[0] >= b0 && a[0] < b1);
+        t = b0 + now();
+        while (tour.fired < acts.length && acts[tour.fired][0] <= t) acts[tour.fired++][1]();
+        // la demostración de este momento se repite sola mientras quien presenta sigue hablando
+        const dm = Array.isArray(step.demo) ? step.demo[tour.beat] || 0 : step.demo || 0; // demo puede ser una por momento
+        const end = acts.length ? Math.max(b1, acts[acts.length - 1][0] + dm) : 0;
+        if (acts.length && tour.fired === acts.length && t >= end + 2) { resetSim(); tour.fired = 0; tour.fake = null; useFakeClock(0); }
+        sel = L[tour.beat][1];
+      } else {
+        t = now();
+        while (tour.fired < step.at.length && step.at[tour.fired][0] <= t) step.at[tour.fired++][1]();
+        if (tour.fake && !tour.paused && t >= Math.max(DUR[tour.i], step.text.length * 0.065)) nextStep();
+        sel = step.look[0][1]; for (const [s0, sl] of step.look) if (t >= s0) sel = sl;
+      }
+      let r = rectOf(sel);
+      // otro objetivo: el anterior vuelve a su tamaño (y se mide de nuevo, por si estaba dentro del agrandado)
+      if (r && zoom.el && r.el !== zoom.el) { zoomOff(); r = rectOf(sel); }
+      if (r) {
+        // rectángulo natural, sin el zoom de presentación que ya tenga
+        const z = r.el === zoom.el ? zoom : { s: 1, tx: 0, ty: 0 };
+        const n = { l: r.l - z.tx, t: r.t - z.ty, w: r.w / z.s, h: r.h / z.s };
+        if (sel !== tour.target) {
+          // centra el objetivo en el espacio libre que deja la barra de subtítulos
+          tour.target = sel;
+          // deja ≥64 px arriba (si cabe) para que el título de la sección no quede cortado, sobre todo en iPhone
+          const room = innerHeight - bar.offsetHeight - 24, want = n.h >= room ? 64 : Math.max(Math.min(64, room - n.h), (room - n.h) / 2);
+          window.scrollBy({ top: n.t - want, behavior: calm() ? 'auto' : 'smooth' });
+        }
+        r = zoomFrame(r.el, n);
+        const pad = 10;
+        Object.assign(spotEl.style, { left: r.l - pad + 'px', top: r.t - pad + 'px', width: r.w + pad * 2 + 'px', height: r.h + pad * 2 + 'px' });
+        // Lumi se pone al lado del objetivo, sin salirse de la pantalla ni tapar la barra
+        const vw = document.documentElement.clientWidth, vh = innerHeight, lw = lumi.offsetWidth, lh = lw * 1.33, bottom = vh - bar.offsetHeight - 24;
+        let x = r.l + r.w + 16, y = r.t + Math.min(24, r.h / 3);
+        if (x + lw > vw - 8) x = r.l - lw - 16;
+        if (x < 8) { x = Math.min(vw - lw - 8, r.l + r.w - lw); y = r.t - lh * 0.9; }
+        y = Math.max(8, Math.min(y, bottom - lh));
+        lumi.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+      }
+      const done = tour.manual ? (tour.i + 1) / STEPS.length
+        : (DUR.slice(0, tour.i).reduce((a, b) => a + b, 0) + Math.min(t, DUR[tour.i])) / TOTAL;
+      $('tourRing').setAttribute('stroke-dashoffset', (182.2 * (1 - done)).toFixed(1));
+    }
+    // boca: volumen real de la voz (o un vaivén si el navegador no deja medirlo); en paso a paso, callada
+    let lv = 0;
+    if (st.tour && !tour.manual && !tour.paused && !tour.advancing) {
+      if (analyser && audio && !audio.paused && !tour.fake) { analyser.getByteTimeDomainData(buf); let sum = 0; for (const v of buf) sum += (v - 128) ** 2; lv = Math.min(1, Math.sqrt(sum / buf.length) / 28); }
+      else lv = 0.35 + 0.35 * Math.sin(performance.now() / 85);
+    }
+    tour.level += (lv - tour.level) * 0.45;
+    const mh = 3 + tour.level * 11;
+    mouth.setAttribute('height', mh.toFixed(1)); mouth.setAttribute('y', (MOUTH_CY - mh / 2).toFixed(1));
+    core.setAttribute('opacity', (0.55 + tour.level * 0.45).toFixed(2));
+    requestAnimationFrame(tourFrame);
+  }
+  requestAnimationFrame(tourFrame);
+
+  $('tourBtn').addEventListener('click', () => startTour(false));
+  $('tourManualBtn').addEventListener('click', () => startTour(true));
+  $('tourClose').addEventListener('click', stopTour);
+  $('tourPlay').addEventListener('click', togglePause);
+  $('tourPrev').addEventListener('click', goPrev);
+  $('tourNext').addEventListener('click', goNext);
+  $('tourVoice').addEventListener('click', toggleVoice);
+  $('tourAgain').addEventListener('click', () => { if (st.tour) { tour.target = null; playStep(0); } });
+  // Teclado y controles de presentación (envían flechas o Av Pág / Re Pág)
+  document.addEventListener('keydown', e => {
+    if (!st.tour || e.repeat) return;
+    const onControl = e.target && /^(BUTTON|INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName);
+    if (e.key === 'Escape' && !tour.manual) { e.preventDefault(); stopTour(); }
+    else if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && !onControl)) { e.preventDefault(); goNext(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goPrev(); }
+  }, true);
+  document.addEventListener('visibilitychange', () => { if (document.hidden && st.tour && !tour.paused && !tour.manual) togglePause(); });
+
+  showReto(0);
+  paintStruct();
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<script>(() => {
+  const root=document.documentElement;
+  root.dataset.support=String(!!document.querySelector('main[data-module]'));
+  const mode=document.getElementById('presentationMode');
+  const full=document.getElementById('presentationFullscreen');
+  const status=document.getElementById('presentationStatus');
+  const theme=document.getElementById('themeToggle');
+  if(theme){
+    // Automático sigue al dispositivo; claro u oscuro fijan html[data-theme] y se recuerdan entre partes.
+    const themeKey='laser-espia-theme';
+    const order=['auto','light','dark'];
+    const names={auto:'automático',light:'claro',dark:'oscuro'};
+    const icons={auto:'◐',light:'☀',dark:'☾'};
+    const valid=value=>value==='light'||value==='dark'?value:'auto';
+    function showTheme(choice){
+      if(choice==='auto') delete root.dataset.theme; else root.dataset.theme=choice;
+      const next=order[(order.indexOf(choice)+1)%order.length];
+      theme.dataset.themeChoice=choice;
+      theme.innerHTML='<span aria-hidden="true">'+icons[choice]+'</span> Tema: '+names[choice];
+      theme.setAttribute('aria-label','Tema: '+names[choice]+(choice==='auto'?' (sigue al dispositivo)':'')+'. Pulsa para cambiar a '+names[next]+'.');
+    }
+    let savedTheme='auto';
+    try{savedTheme=valid(localStorage.getItem(themeKey));}catch(_){}
+    showTheme(savedTheme);
+    theme.addEventListener('click',()=>{
+      const choice=order[(order.indexOf(theme.dataset.themeChoice)+1)%order.length];
+      showTheme(choice);
+      try{
+        if(choice==='auto') localStorage.removeItem(themeKey); else localStorage.setItem(themeKey,choice);
+      }catch(_){}
+      if(status) status.textContent='Tema '+names[choice]+'.';
+    });
+    // Otra pestaña del sitio cambió el tema: seguirla.
+    window.addEventListener('storage',event=>{if(event.key===themeKey) showTheme(valid(event.newValue));});
+  }
+  if(!mode || !full) return;
+  const key='laser-espia-presentation-mode';
+  function setMode(on){
+    root.dataset.presentation=String(on);
+    mode.setAttribute('aria-pressed',String(on));
+    mode.textContent=on?'🖥 Salir de exposición':'🖥 Modo exposición';
+    try{localStorage.setItem(key,String(on));}catch(_){}
+  }
+  let saved=false;
+  try{saved=localStorage.getItem(key)==='true';}catch(_){}
+  setMode(saved);
+  mode.addEventListener('click',()=>setMode(root.dataset.presentation!=='true'));
+  // Safari (iPad) solo conoce la versión webkit; en iPhone no hay pantalla completa para páginas: el botón se oculta.
+  const fsElement=()=>document.fullscreenElement||document.webkitFullscreenElement||null;
+  const canFullscreen=!!(document.fullscreenEnabled||document.webkitFullscreenEnabled);
+  const touch=!!(window.matchMedia&&matchMedia('(pointer:coarse)').matches);
+  if(!canFullscreen) full.hidden=true;
+  function fullscreenState(){
+    const on=!!fsElement();
+    full.setAttribute('aria-pressed',String(on));
+    full.textContent=on?'⛶ Salir de pantalla completa':'⛶ Pantalla completa';
+  }
+  full.addEventListener('click',async()=>{
+    try{
+      if(fsElement()){
+        if(document.exitFullscreen) await document.exitFullscreen();
+        else if(document.webkitExitFullscreen) await Promise.resolve(document.webkitExitFullscreen());
+      }
+      else if(root.requestFullscreen) await root.requestFullscreen();
+      else if(root.webkitRequestFullscreen) await Promise.resolve(root.webkitRequestFullscreen());
+      else throw new Error('Fullscreen unavailable');
+      status.textContent='';
+    }catch(_){status.textContent=touch?'':'Usa F11 para pantalla completa en este navegador.';}
+    fullscreenState();
+  });
+  document.addEventListener('fullscreenchange',fullscreenState);
+  document.addEventListener('webkitfullscreenchange',fullscreenState);
+  fullscreenState();
+})();
+</script></body>
+</html>
