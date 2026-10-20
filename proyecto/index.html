@@ -351,6 +351,30 @@ footer{color:var(--muted);font-size:.85rem}
 input#servo,input#umbral,input#servoAngle{height:44px}
 #walk,#sound,#lampBtn{min-height:44px}
 nav.parts a{white-space:nowrap}
+/* Inglés ligero: el sitio sigue en español; el inglés va en estilo secundario */
+.en{font-style:italic;font-weight:400;color:var(--muted,#56657A);font-size:.82em;letter-spacing:0;text-transform:none}
+.en-summary{margin:0;max-width:62ch;border:1px solid var(--line,#C9D3DE);border-left:4px solid var(--laser,#C91D28);border-radius:12px;background:var(--card,#fff);color:var(--ink,#16212E);padding:0 16px;font-size:.92em;line-height:1.5}
+.en-summary>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;flex-wrap:wrap;column-gap:8px;font-weight:700;list-style:none}
+.en-summary>summary::-webkit-details-marker{display:none}
+.en-summary>summary::before{content:"▸";color:var(--ink,#16212E);font-size:.9em}
+.en-summary[open]>summary::before{content:"▾"}
+.en-summary>summary:focus-visible{outline:3px solid var(--focus,#806000);outline-offset:3px;border-radius:8px}
+.en-summary .en-hint{font-weight:400;color:var(--muted,#56657A);font-size:.85em}
+.en-summary p{margin:0 0 14px;max-width:none;color:var(--ink,#16212E)}
+.en-open{font-size:.88rem;line-height:1.4;margin:2px 0 0;padding:8px 12px;border-left:3px solid var(--line,#C9D3DE);color:var(--muted,#56657A)}
+.en-open q{font-style:italic;color:var(--ink,#16212E)}
+.en-open .tr{display:block;margin-top:4px;font-size:.95em}
+header>.en-summary{margin-top:16px}
+.glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px;align-items:start}
+.glossary-table{width:100%;border-collapse:separate;border-spacing:0;background:var(--card,#fff);border:1px solid var(--line,#C9D3DE);border-radius:14px;overflow:hidden;font-size:1.05rem}
+.glossary-table th,.glossary-table td{padding:10px 18px;text-align:left;border-bottom:1px solid var(--line,#C9D3DE);overflow-wrap:anywhere}
+.glossary-table tbody tr:last-child>*{border-bottom:0}
+.glossary-table thead th{font-family:var(--mono,monospace);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#56657A);font-weight:600}
+.glossary-table tbody th{font-weight:700;color:var(--ink,#16212E);width:50%}
+.glossary-table tbody th[lang="en"]{font-style:italic}
+.glossary-table td{color:var(--ink,#16212E)}
+@media(max-width:600px){.glossary-table th,.glossary-table td{padding:9px 12px}}
+.pin-table .en{display:block;font-size:.8em;line-height:1.25;margin-top:2px}
 </style></head>
 <body>
 <main class="wrap" id="contenido"><div class="presentation-tools" role="group" aria-label="Preparar el monitor">
@@ -366,6 +390,7 @@ nav.parts a{white-space:nowrap}
       <p class="eyebrow">Láser espía · Parte 01 · Proyecto</p>
       <h1>Una barrera de luz. <span>Una idea inteligente.</span></h1>
       <p class="lead">Construimos un <b>láser espía</b>: un circuito con Arduino que detecta la interrupción de un haz de luz y activa una alarma. Mira el antes y el después en la escena, y pruébalo tú.</p>
+      <details class="en-summary" lang="en"><summary>Project summary <span class="en-hint" lang="es">· parte 01 · resumen en inglés</span></summary><p>The problem: we want to know when someone enters a protected area, but without a warning nobody notices. Our solution is a light barrier: a laser points at a light sensor, and if someone breaks the beam, the Arduino sounds the alarm. The project is for students and teachers who want to learn robotics.</p></details>
       <div class="cta">
         <button class="primary big" id="tourBtn" type="button">▶ Lumi lo presenta</button>
         <button class="big" id="tourManualBtn" type="button">⏭ Paso a paso</button>

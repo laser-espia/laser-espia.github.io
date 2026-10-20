@@ -195,6 +195,7 @@ button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid 
 .kit .fn{font-size:.95rem;line-height:1.3;font-weight:400;color:var(--muted)}
 .kit .cat{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--laser);text-transform:uppercase;font-weight:600}
 .kit .nm{font-family:var(--display);font-weight:800;font-size:1.08rem;line-height:1.15}
+.kit .nm-en{display:block;font-size:.9rem;line-height:1.2;margin-top:-2px}
 .kit button > .seen{position:absolute;right:18px;top:18px;width:28px;height:28px;border-radius:50%;box-shadow:0 0 0 2px #fff;background:var(--ok);color:var(--on-laser);font-size:.8rem;display:none;align-items:center;justify-content:center}
 .kit button.seen > .seen{display:inline-flex}
 .kit button.gone{border-style:dashed}
@@ -400,6 +401,30 @@ footer{color:var(--muted);font-size:.85rem}
 input#servo,input#umbral,input#servoAngle{height:44px}
 #walk,#sound,#lampBtn{min-height:44px}
 nav.parts a{white-space:nowrap}
+/* Inglés ligero: el sitio sigue en español; el inglés va en estilo secundario */
+.en{font-style:italic;font-weight:400;color:var(--muted,#56657A);font-size:.82em;letter-spacing:0;text-transform:none}
+.en-summary{margin:0;max-width:62ch;border:1px solid var(--line,#C9D3DE);border-left:4px solid var(--laser,#C91D28);border-radius:12px;background:var(--card,#fff);color:var(--ink,#16212E);padding:0 16px;font-size:.92em;line-height:1.5}
+.en-summary>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;flex-wrap:wrap;column-gap:8px;font-weight:700;list-style:none}
+.en-summary>summary::-webkit-details-marker{display:none}
+.en-summary>summary::before{content:"▸";color:var(--ink,#16212E);font-size:.9em}
+.en-summary[open]>summary::before{content:"▾"}
+.en-summary>summary:focus-visible{outline:3px solid var(--focus,#806000);outline-offset:3px;border-radius:8px}
+.en-summary .en-hint{font-weight:400;color:var(--muted,#56657A);font-size:.85em}
+.en-summary p{margin:0 0 14px;max-width:none;color:var(--ink,#16212E)}
+.en-open{font-size:.88rem;line-height:1.4;margin:2px 0 0;padding:8px 12px;border-left:3px solid var(--line,#C9D3DE);color:var(--muted,#56657A)}
+.en-open q{font-style:italic;color:var(--ink,#16212E)}
+.en-open .tr{display:block;margin-top:4px;font-size:.95em}
+header>.en-summary{margin-top:16px}
+.glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px;align-items:start}
+.glossary-table{width:100%;border-collapse:separate;border-spacing:0;background:var(--card,#fff);border:1px solid var(--line,#C9D3DE);border-radius:14px;overflow:hidden;font-size:1.05rem}
+.glossary-table th,.glossary-table td{padding:10px 18px;text-align:left;border-bottom:1px solid var(--line,#C9D3DE);overflow-wrap:anywhere}
+.glossary-table tbody tr:last-child>*{border-bottom:0}
+.glossary-table thead th{font-family:var(--mono,monospace);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#56657A);font-weight:600}
+.glossary-table tbody th{font-weight:700;color:var(--ink,#16212E);width:50%}
+.glossary-table tbody th[lang="en"]{font-style:italic}
+.glossary-table td{color:var(--ink,#16212E)}
+@media(max-width:600px){.glossary-table th,.glossary-table td{padding:9px 12px}}
+.pin-table .en{display:block;font-size:.8em;line-height:1.25;margin-top:2px}
 </style></head>
 <body>
 <main class="wrap" id="contenido"><div class="presentation-tools" role="group" aria-label="Preparar el monitor">
@@ -415,6 +440,7 @@ nav.parts a{white-space:nowrap}
       <p class="eyebrow">Láser espía · Parte 02 · Materiales</p>
       <h1>Nuestro kit <span>de robótica.</span></h1>
       <p class="lead">Cada pieza cumple una función. Toca una pieza para conocerla, o quítala y mira qué pasa.</p>
+      <details class="en-summary" lang="en"><summary>Project summary <span class="en-hint" lang="es">· parte 02 · resumen en inglés</span></summary><p>Our robotics kit has eight parts: an Arduino board, a laser module, a light sensor, an SG90 servo motor, a breadboard with resistors, jumper wires, an LED and buzzer, and a 9 V battery. Each part has one job: some give power, others sense, decide, move or alert. If one part is missing, the mission does not work.</p></details>
       <div class="cta">
         <button class="primary big" id="tourBtn" type="button">▶ Lumi lo presenta</button>
         <button class="big" id="tourManualBtn" type="button">⏭ Paso a paso</button>
@@ -429,14 +455,14 @@ nav.parts a{white-space:nowrap}
     <h2>Las 8 piezas</h2>
     <p class="lead">Cada componente cumple una función: unos dan energía, otros sienten, deciden, mueven o avisan. Toca una tarjeta para verla en la mesa de trabajo.</p>
     <ul class="kit" id="kit">
-      <li><button type="button" id="p-arduino" data-p="arduino" aria-pressed="false"><img class="thumb" src="../assets/image-bb3bc2ea093a4b2b.jpg" alt="Foto de referencia de una placa Arduino Uno azul con su conector USB y su conector redondo de energía" width="480" height="360" loading="lazy"><span class="cat">Control</span><span class="nm">Placa Arduino</span><span class="fn">Decide y da las órdenes</span><span class="seen" aria-hidden="true">✓</span></button></li>
-      <li><button type="button" id="p-laser" data-p="laser" aria-pressed="false"><img class="thumb" src="../assets/image-41dfe99cd11fc99f.jpg" alt="Foto de referencia del módulo láser: un tubito dorado sobre una placa roja con tres patitas" width="480" height="360" loading="lazy"><span class="cat">Emisión</span><span class="nm">Módulo láser</span><span class="fn">Lanza el haz de luz</span><span class="seen" aria-hidden="true">✓</span></button></li>
-      <li><button type="button" id="p-sensor" data-p="sensor" aria-pressed="false"><img class="thumb" src="../assets/image-d949e15ea660c603.jpg" alt="Foto de referencia del sensor de luz: un disco naranja con un zigzag y dos patas largas" width="480" height="360" loading="lazy"><span class="cat">Detección</span><span class="nm">Sensor de luz</span><span class="fn">Nota si llega la luz</span><span class="seen" aria-hidden="true">✓</span></button></li>
-      <li><button type="button" id="p-servo" data-p="servo" aria-pressed="false"><img class="thumb" src="../assets/image-407e7ee8fad21306.jpg" alt="Foto de referencia del servomotor SG90: una cajita azul con un brazo blanco arriba y su cable" width="480" height="360" loading="lazy"><span class="cat">Movimiento</span><span class="nm">Servomotor SG90</span><span class="fn">Sostiene y apunta el láser</span><span class="seen" aria-hidden="true">✓</span></button></li>
-      <li><button type="button" id="p-protoboard" data-p="protoboard" aria-pressed="false"><img class="thumb" src="../assets/image-b2e967b83e4be303.jpg" alt="Foto de referencia de una protoboard blanca llena de agujeritos con dos resistencias puestas" width="480" height="360" loading="lazy"><span class="cat">Montaje</span><span class="nm">Protoboard y resistencias</span><span class="fn">Une piezas sin soldar</span><span class="seen" aria-hidden="true">✓</span></button></li>
-      <li><button type="button" id="p-cables" data-p="cables" aria-pressed="false"><img class="thumb" src="../assets/image-a01c543778ee47d3.jpg" alt="Foto de referencia de un manojo de cables de colores con puntas negras" width="480" height="360" loading="lazy"><span class="cat">Conexión</span><span class="nm">Cables de colores</span><span class="fn">Llevan energía y señales</span><span class="seen" aria-hidden="true">✓</span></button></li>
-      <li><button type="button" id="p-alerta" data-p="alerta" aria-pressed="false"><img class="thumb" src="../assets/image-c6c9a22eebfdeb84.jpg" alt="Foto de referencia de un LED rojo y un zumbador negro y redondo" width="480" height="360" loading="lazy"><span class="cat">Alerta</span><span class="nm">LED y zumbador</span><span class="fn">Avisan con luz y sonido</span><span class="seen" aria-hidden="true">✓</span></button></li>
-      <li><button type="button" id="p-bateria" data-p="bateria" aria-pressed="false"><img class="thumb" src="../assets/image-e53cdac42479e265.jpg" alt="Foto de referencia de una batería de 9 V con su broche y un cable que termina en un conector redondo" width="480" height="360" loading="lazy"><span class="cat">Energía</span><span class="nm">Batería de 9 V</span><span class="fn">Da la energía</span><span class="seen" aria-hidden="true">✓</span></button></li>
+      <li><button type="button" id="p-arduino" data-p="arduino" aria-pressed="false"><img class="thumb" src="../assets/image-bb3bc2ea093a4b2b.jpg" alt="Foto de referencia de una placa Arduino Uno azul con su conector USB y su conector redondo de energía" width="480" height="360" loading="lazy"><span class="cat">Control</span><span class="nm">Placa Arduino</span><span class="nm-en en" lang="en">Arduino board</span><span class="fn">Decide y da las órdenes</span><span class="seen" aria-hidden="true">✓</span></button></li>
+      <li><button type="button" id="p-laser" data-p="laser" aria-pressed="false"><img class="thumb" src="../assets/image-41dfe99cd11fc99f.jpg" alt="Foto de referencia del módulo láser: un tubito dorado sobre una placa roja con tres patitas" width="480" height="360" loading="lazy"><span class="cat">Emisión</span><span class="nm">Módulo láser</span><span class="nm-en en" lang="en">Laser module</span><span class="fn">Lanza el haz de luz</span><span class="seen" aria-hidden="true">✓</span></button></li>
+      <li><button type="button" id="p-sensor" data-p="sensor" aria-pressed="false"><img class="thumb" src="../assets/image-d949e15ea660c603.jpg" alt="Foto de referencia del sensor de luz: un disco naranja con un zigzag y dos patas largas" width="480" height="360" loading="lazy"><span class="cat">Detección</span><span class="nm">Sensor de luz</span><span class="nm-en en" lang="en">Light sensor (LDR)</span><span class="fn">Nota si llega la luz</span><span class="seen" aria-hidden="true">✓</span></button></li>
+      <li><button type="button" id="p-servo" data-p="servo" aria-pressed="false"><img class="thumb" src="../assets/image-407e7ee8fad21306.jpg" alt="Foto de referencia del servomotor SG90: una cajita azul con un brazo blanco arriba y su cable" width="480" height="360" loading="lazy"><span class="cat">Movimiento</span><span class="nm">Servomotor SG90</span><span class="nm-en en" lang="en">Servo motor</span><span class="fn">Sostiene y apunta el láser</span><span class="seen" aria-hidden="true">✓</span></button></li>
+      <li><button type="button" id="p-protoboard" data-p="protoboard" aria-pressed="false"><img class="thumb" src="../assets/image-b2e967b83e4be303.jpg" alt="Foto de referencia de una protoboard blanca llena de agujeritos con dos resistencias puestas" width="480" height="360" loading="lazy"><span class="cat">Montaje</span><span class="nm">Protoboard y resistencias</span><span class="nm-en en" lang="en">Breadboard and resistors</span><span class="fn">Une piezas sin soldar</span><span class="seen" aria-hidden="true">✓</span></button></li>
+      <li><button type="button" id="p-cables" data-p="cables" aria-pressed="false"><img class="thumb" src="../assets/image-a01c543778ee47d3.jpg" alt="Foto de referencia de un manojo de cables de colores con puntas negras" width="480" height="360" loading="lazy"><span class="cat">Conexión</span><span class="nm">Cables de colores</span><span class="nm-en en" lang="en">Jumper wires</span><span class="fn">Llevan energía y señales</span><span class="seen" aria-hidden="true">✓</span></button></li>
+      <li><button type="button" id="p-alerta" data-p="alerta" aria-pressed="false"><img class="thumb" src="../assets/image-c6c9a22eebfdeb84.jpg" alt="Foto de referencia de un LED rojo y un zumbador negro y redondo" width="480" height="360" loading="lazy"><span class="cat">Alerta</span><span class="nm">LED y zumbador</span><span class="nm-en en" lang="en">LED and buzzer</span><span class="fn">Avisan con luz y sonido</span><span class="seen" aria-hidden="true">✓</span></button></li>
+      <li><button type="button" id="p-bateria" data-p="bateria" aria-pressed="false"><img class="thumb" src="../assets/image-e53cdac42479e265.jpg" alt="Foto de referencia de una batería de 9 V con su broche y un cable que termina en un conector redondo" width="480" height="360" loading="lazy"><span class="cat">Energía</span><span class="nm">Batería de 9 V</span><span class="nm-en en" lang="en">9 V battery</span><span class="fn">Da la energía</span><span class="seen" aria-hidden="true">✓</span></button></li>
     </ul>
   </section>
 
@@ -709,6 +735,40 @@ nav.parts a{white-space:nowrap}
 
 
 
+  <section id="glosario" aria-labelledby="glosarioTitle">
+    <p class="eyebrow">Palabras en inglés</p>
+    <h2 id="glosarioTitle">Glosario · <span class="en" lang="en">Glossary</span></h2>
+    <p class="lead">Las palabras clave del proyecto, en inglés y en español.</p>
+    <div class="glossary">
+      <table class="glossary-table" aria-label="Glosario, parte 1 de 2">
+        <thead><tr><th scope="col" lang="en">English</th><th scope="col">Español</th></tr></thead>
+        <tbody>
+          <tr><th scope="row" lang="en">beam</th><td>haz (de luz)</td></tr>
+          <tr><th scope="row" lang="en">light sensor</th><td>sensor de luz</td></tr>
+          <tr><th scope="row" lang="en">threshold</th><td>umbral</td></tr>
+          <tr><th scope="row" lang="en">servo motor</th><td>servomotor</td></tr>
+          <tr><th scope="row" lang="en">buzzer</th><td>zumbador</td></tr>
+          <tr><th scope="row" lang="en">breadboard</th><td>protoboard</td></tr>
+          <tr><th scope="row" lang="en">jumper wire</th><td>cable (de conexión)</td></tr>
+          <tr><th scope="row" lang="en">resistor</th><td>resistencia</td></tr>
+        </tbody>
+      </table>
+      <table class="glossary-table" aria-label="Glosario, parte 2 de 2">
+        <thead><tr><th scope="col" lang="en">English</th><th scope="col">Español</th></tr></thead>
+        <tbody>
+          <tr><th scope="row" lang="en">pin</th><td>pin</td></tr>
+          <tr><th scope="row" lang="en">ground (GND)</th><td>tierra (GND)</td></tr>
+          <tr><th scope="row" lang="en">voltage</th><td>voltaje</td></tr>
+          <tr><th scope="row" lang="en">battery</th><td>batería</td></tr>
+          <tr><th scope="row" lang="en">alarm</th><td>alarma</td></tr>
+          <tr><th scope="row" lang="en">to calibrate</th><td>calibrar</td></tr>
+          <tr><th scope="row" lang="en">circuit</th><td>circuito</td></tr>
+          <tr><th scope="row" lang="en">signal</th><td>señal</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <section>
     <p class="eyebrow">Compártelo</p>
     <div class="panel share">
@@ -760,35 +820,35 @@ nav.parts a{white-space:nowrap}
 
   // Las 8 piezas: categoría, nombre, qué hace, su papel y una comparación para entenderla
   const PIECES = {
-    arduino: { cat: 'Control', name: 'Placa Arduino',
+    arduino: { en: 'Arduino board', cat: 'Control', name: 'Placa Arduino',
       what: 'Ejecuta el programa: recibe la señal del sensor, la compara y ordena la alerta.',
       role: 'Es el cerebro de la misión: decide cuándo dar la alarma y le indica al servo hacia dónde mover el láser.',
       analog: 'Es como quien dirige un equipo: escucha a todos y da las órdenes.' },
-    laser: { cat: 'Emisión', name: 'Módulo láser',
+    laser: { en: 'Laser module', cat: 'Emisión', name: 'Módulo láser',
       what: 'Produce un haz de luz roja, delgado y recto.',
       role: 'Forma la barrera de luz: su haz viaja hasta el sensor.',
       analog: 'Es como un hilo de luz tendido de un lado al otro de la entrada.' },
-    sensor: { cat: 'Detección', name: 'Sensor de luz',
+    sensor: { en: 'Light sensor (LDR)', cat: 'Detección', name: 'Sensor de luz',
       what: 'Detecta el cambio de luz cuando el haz deja de llegar.',
       role: 'Le manda al Arduino cuánta luz recibe. El sensor solo no decide nada: el Arduino interpreta su señal.',
       analog: 'Son los ojos del sistema: ven, pero quien decide es el cerebro.' },
-    servo: { cat: 'Movimiento', name: 'Servomotor SG90',
+    servo: { en: 'Servo motor', cat: 'Movimiento', name: 'Servomotor SG90',
       what: 'Mueve el soporte para orientar el láser.',
       role: 'Apunta el haz justo al sensor, para que la barrera quede bien alineada.',
       analog: 'Es como una mano que apunta una linterna.' },
-    protoboard: { cat: 'Montaje', name: 'Protoboard y resistencias',
+    protoboard: { en: 'Breadboard and resistors', cat: 'Montaje', name: 'Protoboard y resistencias',
       what: 'La protoboard permite montar el circuito sin soldar; las resistencias adaptan las conexiones.',
       role: 'Usamos dos resistencias: una protege al LED y la otra ayuda al sensor de luz a dar su señal.',
       analog: 'La protoboard es como la base de un rompecabezas; la resistencia, como una llave que deja pasar solo la corriente justa.' },
-    cables: { cat: 'Conexión', name: 'Cables de colores',
+    cables: { en: 'Jumper wires', cat: 'Conexión', name: 'Cables de colores',
       what: 'Unen las piezas para que la energía y las señales viajen entre ellas.',
       role: 'Rojo lleva la energía, negro es el camino de regreso y los de otros colores llevan las señales. En el módulo 05 ves a dónde va cada uno.',
       analog: 'Son como los caminos de un mapa: sin caminos, nadie llega a ningún lado.' },
-    alerta: { cat: 'Alerta', name: 'LED y zumbador',
+    alerta: { en: 'LED and buzzer', cat: 'Alerta', name: 'LED y zumbador',
       what: 'El LED avisa con luz; el zumbador, con sonido.',
       role: 'Cuando el Arduino da la orden, hacen que todos se enteren de que alguien pasó.',
       analog: 'Son como las luces y la sirena de una patrulla.' },
-    bateria: { cat: 'Energía', name: 'Batería de 9 V',
+    bateria: { en: '9 V battery', cat: 'Energía', name: 'Batería de 9 V',
       what: 'Da la energía a todo el montaje. Usamos una batería de 9 V: su cable entra en el conector redondo del Arduino, y el Arduino la convierte en 5 V para las demás piezas.',
       role: 'Sin ella no se encienden ni el Arduino, ni el láser, ni la alarma.',
       analog: 'Es como la pila de una linterna: sin energía, nada se enciende.' },
@@ -862,6 +922,7 @@ nav.parts a{white-space:nowrap}
     $('iEmpty').hidden = !!p; $('iBody').hidden = !p;
     $('iCat').textContent = p ? p.cat : 'Ficha de la pieza';
     $('iName').textContent = p ? p.name : 'Elige una pieza';
+    if (p) { const en = document.createElement('span'); en.className = 'en'; en.lang = 'en'; en.textContent = ' · ' + p.en; $('iName').append(en); }
     const rb = $('removeBtn'); rb.disabled = !p;
     if (p) {
       $('iWhat').textContent = p.what; $('iRole').textContent = p.role; $('iAnalog').textContent = p.analog;
