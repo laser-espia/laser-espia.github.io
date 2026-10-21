@@ -132,7 +132,7 @@
 :root{
   --paper:#EEF2F6; --grid:#DCE3EB; --card:#FFFFFF; --ink:#16212E; --muted:#56657A; --line:#C9D3DE;
   --laser:#C91D28; --laser-glow:rgba(227,38,46,.35); --ok:#176D3B; --ok-bg:#E2F4EA; --alarm-bg:#FDE4E5;
-  --amber:#F2B53A; --focus:#8A5A00; --on-laser:#FFFFFF; --room:#FFFFFF; --floor:#C9D3DE; --wall:#7C8BA0; --warn-bg:#FFF3D6; --warn:#8A5A00;
+  --amber:#F2B53A; --focus:#8A5A00; --on-laser:#FFFFFF; --on-ok:#FFFFFF; --room:#FFFFFF; --floor:#C9D3DE; --wall:#7C8BA0; --warn-bg:#FFF3D6; --warn:#8A5A00;
   --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
   --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
@@ -140,11 +140,11 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#0F1722; --grid:#18222F; --card:#152030; --ink:#E6ECF3; --muted:#93A2B6; --line:#26354A;
   --laser:#FF4048; --laser-glow:rgba(255,64,72,.45); --ok:#4CC383; --ok-bg:#12301F; --alarm-bg:#3A1418;
-  --amber:#F2B53A; --focus:#F2B53A; --on-laser:#FFFFFF; --room:#1A2738; --floor:#2A3A50; --wall:#53647C; --warn-bg:#33270F; --warn:#F2B53A; color-scheme:dark}}
+  --amber:#F2B53A; --focus:#F2B53A; --on-laser:#FFFFFF; --on-ok:#0F1722; --room:#1A2738; --floor:#2A3A50; --wall:#53647C; --warn-bg:#33270F; --warn:#F2B53A; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#0F1722; --grid:#18222F; --card:#152030; --ink:#E6ECF3; --muted:#93A2B6; --line:#26354A;
   --laser:#FF4048; --laser-glow:rgba(255,64,72,.45); --ok:#4CC383; --ok-bg:#12301F; --alarm-bg:#3A1418;
-  --amber:#F2B53A; --focus:#F2B53A; --on-laser:#FFFFFF; --room:#1A2738; --floor:#2A3A50; --wall:#53647C; --warn-bg:#33270F; --warn:#F2B53A; color-scheme:dark}
+  --amber:#F2B53A; --focus:#F2B53A; --on-laser:#FFFFFF; --on-ok:#0F1722; --room:#1A2738; --floor:#2A3A50; --wall:#53647C; --warn-bg:#33270F; --warn:#F2B53A; color-scheme:dark}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -196,7 +196,7 @@ button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid 
 .kit .cat{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--laser);text-transform:uppercase;font-weight:600}
 .kit .nm{font-family:var(--display);font-weight:800;font-size:1.08rem;line-height:1.15}
 .kit .nm-en{display:block;font-size:.9rem;line-height:1.2;margin-top:-2px}
-.kit button > .seen{position:absolute;right:18px;top:18px;width:28px;height:28px;border-radius:50%;box-shadow:0 0 0 2px #fff;background:var(--ok);color:var(--on-laser);font-size:.8rem;display:none;align-items:center;justify-content:center}
+.kit button > .seen{position:absolute;right:18px;top:18px;width:28px;height:28px;border-radius:50%;box-shadow:0 0 0 2px #fff;background:var(--ok);color:var(--on-ok);font-size:.8rem;display:none;align-items:center;justify-content:center}
 .kit button.seen > .seen{display:inline-flex}
 .kit button.gone{border-style:dashed}
 .kit button.gone .thumb{opacity:.3;filter:grayscale(1)}
@@ -274,6 +274,51 @@ button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid 
 .info .falta button{min-height:46px}
 .info .falta button.removed{border-color:var(--ok);color:var(--ok)}
 .info .gonenote{font-size:.9rem;color:var(--muted)}
+/* foto de la pieza elegida (la misma miniatura 4:3 de su tarjeta: todas del mismo tamaño) */
+.info .iphoto{display:block;width:100%;max-width:220px;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;background:#1F5FA8}
+.info .iphoto[hidden]{display:none}
+.info h3 .en{display:block;font-family:var(--body);font-size:.72em;margin-top:2px}
+/* Recorrido de Lumi: la maqueta queda fija y grande; al lado, la ficha de la pieza con su foto y su nombre,
+   y su explicación justo debajo de la maqueta (así nada deja huecos y todo cabe sin achicar el dibujo).
+   Cada momento solo cambia la pieza resaltada y la ficha. */
+.info .ihead,.info .ibody{display:flex;flex-direction:column;gap:10px;min-width:0}
+.sim.touring .info .falta{display:none}
+/* modo exposición fuera del recorrido: la ficha va debajo de la mesa; foto a la izquierda del nombre */
+@media (min-width:861px){html[data-presentation="true"] .sim:not(.touring) .info .ihead{display:grid;grid-template-columns:260px minmax(0,1fr);grid-template-areas:"ph ." "ph cat" "ph name";grid-template-rows:1fr auto auto;column-gap:20px;row-gap:4px}
+  html[data-presentation="true"] .sim:not(.touring) .info .iphoto{grid-area:ph;max-width:none}
+  html[data-presentation="true"] .sim:not(.touring) .info #iCat{grid-area:cat}
+  html[data-presentation="true"] .sim:not(.touring) .info #iName{grid-area:name}
+  html[data-presentation="true"] .sim:not(.touring) .info .ihead:has(.iphoto[hidden]){display:flex}}
+@media (min-width:861px){
+  .sim.touring .mesa-stage,html[data-presentation="true"] .sim.touring .mesa-stage{grid-template-columns:minmax(0,68fr) minmax(0,32fr);grid-template-areas:"bench head" "body head";align-items:start;gap:14px 18px}
+  .sim.touring #benchStage{grid-area:bench}
+  .sim.touring .info{display:contents}
+  .sim.touring .info .ihead,.sim.touring .info .ibody{padding:16px;border-radius:12px;border:2px solid var(--amber);background:var(--paper)}
+  .sim.touring .info .ihead{grid-area:head;align-self:stretch;gap:8px}
+  .sim.touring .info .ibody{grid-area:body;border-color:var(--line)}
+  .sim.touring .info .iphoto{max-width:none}
+  .sim.touring .info h3{font-size:1.9rem;line-height:1.12}
+  .sim.touring .info .cat{font-size:.95rem}
+  .sim.touring .info dl:not([hidden]){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-flow:column;grid-template-rows:auto auto;column-gap:22px;row-gap:4px}
+  .sim.touring .info dt{font-size:.8rem}
+  .sim.touring .info dd{font-size:1.12rem;line-height:1.4;margin:0}
+}
+@media (max-width:860px){.sim.touring .mesa-stage{display:flex;flex-direction:column;gap:12px}}
+@media (max-width:700px){
+  .sim.touring .info{padding:12px;gap:8px}
+  .info .ihead{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);grid-template-areas:"ph cat" "ph name";grid-template-rows:auto 1fr;column-gap:12px;row-gap:2px;align-items:start}
+  .info .iphoto{grid-area:ph;max-width:none}
+  .info #iCat{grid-area:cat}
+  .info #iName{grid-area:name;font-size:1.15rem}
+  .info .ihead:has(.iphoto[hidden]){display:flex}
+  .sim.touring .info{padding:10px}
+  .info .ihead{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+  .sim.touring .info dl{gap:4px}
+  .sim.touring .info dd{font-size:.9rem;line-height:1.35}
+}
+/* en el celular el mensaje de la mesa va debajo del dibujo: durante el recorrido su lugar queda reservado (2 líneas),
+   así la maqueta + ficha no cambian de alto cuando aparece */
+@media (max-width:600px){.sim.touring .scene-msg{min-height:calc(2.5em + 14px)}.sim.touring .scene-msg[hidden]{display:block!important;visibility:hidden}}
 
 /* Retos */
 .mission{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--paper);transition:border-color .3s,background .3s}
@@ -285,7 +330,7 @@ button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid 
 .mdots{display:flex;gap:6px}
 .mdots button{width:30px;height:30px;padding:0;border-radius:50%;justify-content:center;font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--muted)}
 .mdots button[aria-current="step"]{border-color:var(--laser);color:var(--ink);border-width:2px}
-.mdots button.ok{background:var(--ok);border-color:var(--ok);color:var(--on-laser)}
+.mdots button.ok{background:var(--ok);border-color:var(--ok);color:var(--on-ok)}
 .mission h3{font-size:1.2rem}
 .mission .goal{margin:0}
 .mlive{margin:0;font-family:var(--mono);font-size:.84rem;line-height:1.5;color:var(--ink);border-left:3px solid var(--amber);padding:4px 0 4px 10px;min-height:2.6em}
@@ -296,7 +341,7 @@ button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid 
 .quiz{display:flex;flex-wrap:wrap;gap:8px}
 .quiz button{min-height:44px}
 .quiz button.wrong{border-color:var(--laser);color:var(--laser);text-decoration:line-through}
-.quiz button.right{background:var(--ok);border-color:var(--ok);color:var(--on-laser)}
+.quiz button.right{background:var(--ok);border-color:var(--ok);color:var(--on-ok)}
 .mdone{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
 .mdone p{margin:0;flex:1 1 260px;color:var(--ink)}
 .mdone p:empty{display:none}
@@ -328,7 +373,7 @@ details p{margin-top:8px;color:var(--muted)}
 .safety{display:flex;gap:14px;align-items:flex-start;border:2px solid var(--amber);border-radius:12px;padding:14px 16px;background:var(--card)}
 .safety .ico{font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--amber);line-height:1}
 footer{color:var(--muted);font-size:.85rem}
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ok);color:var(--on-laser);font-weight:700;padding:10px 18px;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.2);z-index:20;max-width:calc(100% - 32px);text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ok);color:var(--on-ok);font-weight:700;padding:10px 18px;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.2);z-index:20;max-width:calc(100% - 32px);text-align:center}
 .sim.touring .controls button:not(#sound),.sim.touring .mission button,.sim.touring .info button,.sim.touring .piece{pointer-events:none}
 .sim.touring .controls button:not(#sound),.sim.touring .mission button,.sim.touring .info button{opacity:.55}
 /* Recorrido guiado por Lumi: foco con sombra gigante, robot que viaja y barra de subtítulos */
@@ -698,8 +743,12 @@ header>.en-summary{margin-top:16px}
       </div>
 
       <aside class="info" id="pieceInfo" aria-label="Ficha de la pieza">
+        <div class="ihead">
+        <img class="iphoto" id="iPhoto" alt="" width="480" height="360" hidden>
         <p class="eyebrow cat" id="iCat">Ficha de la pieza</p>
         <h3 id="iName" aria-live="polite">Elige una pieza</h3>
+        </div>
+        <div class="ibody">
         <p class="empty" id="iEmpty">Toca una pieza en la mesa o en las tarjetas de arriba para ver qué hace y su papel en la misión.</p>
         <dl id="iBody" hidden>
           <dt>¿Qué hace?</dt><dd id="iWhat"></dd>
@@ -710,6 +759,7 @@ header>.en-summary{margin-top:16px}
           <p class="eyebrow">¿Qué pasa si falta…?</p>
           <button type="button" id="removeBtn" disabled>Quitar esta pieza</button>
           <p class="gonenote" id="goneNote" hidden></p>
+        </div>
         </div>
       </aside>
       </div>
@@ -925,12 +975,19 @@ header>.en-summary{margin-top:16px}
   }
   function clearScene(){ st.w = null; st.alarmUntil = 0; st.detUntil = 0; setMsg(''); }
 
+  let lockingInfo = false, infoLock = '';
   function paintInfo(){
+    // durante el recorrido la ficha no se vacía entre momentos (cada momento vuelve a elegir su pieza enseguida)
+    if (st.tour && !st.sel && !lockingInfo) return;
     const k = st.sel, p = k && PIECES[k];
     $('iEmpty').hidden = !!p; $('iBody').hidden = !p;
     $('iCat').textContent = p ? p.cat : 'Ficha de la pieza';
     $('iName').textContent = p ? p.name : 'Elige una pieza';
-    if (p) { const en = document.createElement('span'); en.className = 'en'; en.lang = 'en'; en.textContent = ' · ' + p.en; $('iName').append(en); }
+    if (p) { const en = document.createElement('span'); en.className = 'en'; en.lang = 'en'; en.textContent = ' ' + p.en; $('iName').append(en); }
+    // foto: la misma miniatura 4:3 de su tarjeta (y su texto alternativo)
+    const ph = $('iPhoto'), th = p && cardEl[k].querySelector('.thumb');
+    ph.hidden = !th;
+    if (th) { if (ph.getAttribute('src') !== th.getAttribute('src')) ph.src = th.getAttribute('src'); ph.alt = th.alt; }
     const rb = $('removeBtn'); rb.disabled = !p;
     if (p) {
       $('iWhat').textContent = p.what; $('iRole').textContent = p.role; $('iAnalog').textContent = p.analog;
@@ -940,6 +997,25 @@ header>.en-summary{margin-top:16px}
       $('goneNote').hidden = !gone;
       $('goneNote').textContent = gone ? 'Esta pieza está quitada. Pulsa «Probar: que pase alguien» y mira qué pasa.' : '';
     } else { rb.textContent = '✕ Quitar esta pieza'; rb.classList.remove('removed'); $('goneNote').hidden = true; }
+  }
+  // Durante el recorrido la ficha mide lo que la más larga de las 8: así la maqueta + ficha no cambian de tamaño
+  // al pasar de pieza y el zoom del recorrido no se reajusta (se vuelve a medir si cambia la pantalla o el modo)
+  function lockInfo(){
+    const info = $('pieceInfo'), de = document.documentElement, parts = [info.querySelector('.ihead'), info.querySelector('.ibody')];
+    const key = st.tour ? [innerWidth, innerHeight, de.dataset.presentation, document.fonts ? document.fonts.status : ''].join('|') : '';
+    if (key === infoLock) return;
+    infoLock = key; parts.forEach(e => e.style.minHeight = ''); bar.style.minHeight = '';
+    if (!st.tour) return;
+    const keep = st.sel, hs = parts.map(() => 0);
+    lockingInfo = true;
+    for (const k of IDS) { st.sel = k; paintInfo(); parts.forEach((e, i) => hs[i] = Math.max(hs[i], e.offsetHeight)); }
+    st.sel = keep; paintInfo();
+    lockingInfo = false;
+    parts.forEach((e, i) => e.style.minHeight = hs[i] + 'px');
+    // la barra de subtítulos también mide lo que su texto más largo: el espacio libre (y el zoom) no cambia entre pasos
+    const say = $('tourSay'), tag = $('tourStep'), cur = [say.textContent, tag.textContent]; let bh = 0;
+    STEPS.forEach((x, i) => { say.textContent = x.text; tag.textContent = `${x.tag} · ${i + 1} de ${STEPS.length}`; bh = Math.max(bh, bar.offsetHeight); });
+    [say.textContent, tag.textContent] = cur; bar.style.minHeight = bh + 'px';
   }
   function paintKit(){
     IDS.forEach(k => {
@@ -1223,23 +1299,27 @@ header>.en-summary{margin-top:16px}
   const AUDIO = ["../assets/audio-bb295b571543c97b.mp3", "../assets/audio-e7975960988d8033.mp3", "../assets/audio-d37691c1780b9eac.mp3", "../assets/audio-48017b670bc505a8.mp3", "../assets/audio-7c87fc6ddd42c634.mp3", "../assets/audio-26358851bbac12ea.mp3"];
   const DUR = [4.73, 7.37, 8.12, 6.92, 5.04, 9.2];
   const TOTAL = DUR.reduce((a, b) => a + b, 0);
-  const sel = k => () => select(k, false);
+  // sel(k): elige la pieza (marcada como «solo elegir»: no hace falta repetirla como demostración)
+  const sel = k => Object.assign(() => select(k, false), { pure: true });
   const noBattery = () => { select('bateria', false); setHas('bateria', false); };
-  const backAll = () => { resetKit(); select('cables', false); };
+  const backAll = () => { resetKit(); select('bateria', false); };
+  // Desde el paso 1 todo ocurre en la maqueta (#mesaStage, fija): cada momento solo cambia la pieza resaltada
+  // y su ficha con foto; la acción de cada momento ocurre al empezar ese momento.
   // demo: cuánto dura la demostración después de su última acción (para repetirla en paso a paso sin cortarla)
   const STEPS = [
     { tag: 'Inicio', text: '¡Hola! Soy Lumi. Les presento nuestro kit de robótica: cada pieza cumple una función.',
       look: [[0, '.lumi-card'], [1.0, '#piezas']], at: [] },
     { tag: 'El cerebro', text: 'El Arduino es el cerebro: recibe la señal del sensor, decide y ordena la alerta. Es como quien dirige un equipo.',
-      look: [[0, '#p-arduino'], [1.7, '#mesaStage']], at: [[1.7, sel('arduino')]], demo: 3 },
+      look: [[0, '#mesaStage']], at: [[0, sel('arduino')]], demo: 3 },
     { tag: 'Láser y sensor', text: 'El módulo láser emite el haz de luz roja, y el sensor de luz es como los ojos del sistema: nota cuando el haz deja de llegar.',
-      look: [[0, '#p-laser'], [1.2, '#mesaStage']], at: [[1.2, sel('laser')], [2.9, sel('sensor')]], demo: 3 },
+      look: [[0, '#mesaStage'], [2.9, '#mesaStage']], at: [[0, sel('laser')], [2.9, sel('sensor')]], demo: 3 },
     { tag: 'El servo', text: 'El servomotor SG90 mueve el soporte para apuntar el láser, como una mano que apunta una linterna.',
-      look: [[0, '#p-servo'], [1.4, '#mesaStage']], at: [[1.4, sel('servo')]], demo: 3 },
+      look: [[0, '#mesaStage']], at: [[0, sel('servo')]], demo: 3 },
     { tag: 'La alerta', text: 'El LED y el zumbador dan la alerta: uno con luz y el otro con sonido.',
-      look: [[0, '#p-alerta'], [1.3, '#mesaStage']], at: [[1.3, sel('alerta')], [1.9, test]], demo: 4.5 },
+      look: [[0, '#mesaStage'], [1.3, '#mesaStage']], at: [[0, sel('alerta')], [1.3, sel('alerta')], [1.9, test]], demo: 4.5 },
     { tag: 'Conexiones y energía', text: 'La protoboard, las resistencias y los cables de colores conectan todo, y la batería da la energía. ¡Sin una sola pieza, la misión no funciona!',
-      look: [[0, '#p-protoboard'], [1.0, '#mesaStage']], at: [[1.0, sel('protoboard')], [2.2, sel('cables')], [5.1, noBattery], [5.8, test], [8.9, backAll]], demo: 2 },
+      look: [[0, '#mesaStage'], [2.2, '#mesaStage'], [5.1, '#mesaStage']],
+      at: [[0, sel('protoboard')], [2.2, sel('cables')], [5.1, noBattery], [5.8, test], [8.9, backAll]], demo: 2 },
   ];
   const tour = { i: -1, fired: 0, target: null, paused: false, fake: null, level: 0, advancing: false, pendingNext: false, manual: false, beat: 0 };
   let audio = null, analyser = null, buf = null;
@@ -1448,6 +1528,7 @@ header>.en-summary{margin-top:16px}
     const r = el.getBoundingClientRect(); return { el, l: r.left, t: r.top, w: r.width, h: r.height };
   }
   function tourFrame(){
+    lockInfo();
     if (st.tour && tour.i >= 0 && !tour.advancing) {
       const step = STEPS[tour.i];
       let t, sel;
@@ -1458,7 +1539,7 @@ header>.en-summary{margin-top:16px}
         while (tour.fired < acts.length && acts[tour.fired][0] <= t) acts[tour.fired++][1]();
         // la demostración de este momento se repite sola mientras quien presenta sigue hablando
         const end = acts.length ? Math.max(b1, acts[acts.length - 1][0] + (step.demo || 0)) : 0;
-        if (acts.length && tour.fired === acts.length && t >= end + 2) { resetSim(); tour.fired = 0; tour.fake = null; useFakeClock(0); }
+        if (acts.some(a => !a[1].pure) && tour.fired === acts.length && t >= end + 2) { resetSim(); tour.fired = 0; tour.fake = null; useFakeClock(0); }
         sel = L[tour.beat][1];
       } else {
         t = now();
