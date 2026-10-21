@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Simulador del láser espía: corta el haz, mira cómo decide el Arduino y supera los tres retos. Proyecto de robótica de 7.º grado.">
-<meta property="og:title" content="Láser espía: el laboratorio">
+<meta property="og:title" content="Láser espía · 03 Desarrollo">
 <meta property="og:description" content="Corta el haz y mira qué piensa el Arduino. Proyecto de robótica de 7.º grado.">
 <meta property="og:image" content="https://laser-espia.github.io/assets/hero_web.jpg">
 <meta property="og:url" content="https://laser-espia.github.io/desarrollo/">
@@ -126,7 +126,7 @@
 }
 
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Laboratorio Láser Espía</title>
+<title>Láser espía · 03 Desarrollo</title>
 <style>
 /* Layout: cuaderno de laboratorio en papel cuadriculado; el simulador manda, todo lo demás lo acompaña en una sola columna */
 :root{
@@ -183,8 +183,10 @@ button:focus-visible,.btn:focus-visible,input:focus-visible,summary:focus-visibl
 /* Simulador */
 .sim{display:flex;flex-direction:column;gap:16px;padding:16px}
 .stage{position:relative;border-radius:10px;overflow:hidden;background:var(--paper);border:1px solid var(--line)}
+/* en celular, la guía del reto se repite sobre la escena mientras se arrastra un control */
+.scene-msg{position:absolute;left:50%;top:6px;transform:translateX(-50%);max-width:calc(100% - 20px);width:max-content;text-align:center;margin:0;font-family:var(--display);font-weight:800;font-size:clamp(.85rem,2.6vw,1.1rem);line-height:1.25;padding:6px 12px;border-radius:12px;background:var(--card);color:var(--ink);border:2px solid var(--line);box-shadow:0 6px 18px rgba(0,0,0,.18);pointer-events:none}
 @media (max-width:820px){.stage{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;box-shadow:0 8px 18px rgba(0,0,0,.35)}.sim.touring .stage{position:relative;box-shadow:none}}
-.stage svg{display:block;width:100%;height:auto;touch-action:none;cursor:grab;user-select:none}
+.stage svg{display:block;width:100%;height:auto;touch-action:pan-y;cursor:grab;user-select:none}
 @media (max-width:600px){.hint{display:none!important}.pill{font-size:1.02rem;padding:7px 12px}}
 .hint{position:absolute;left:12px;bottom:10px;font-size:.92rem;color:var(--muted);font-family:var(--mono);pointer-events:none}
 .status{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
@@ -311,10 +313,6 @@ footer{color:var(--muted);font-size:.85rem}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ok);color:var(--on-laser);font-weight:700;padding:10px 18px;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.2)}
 .sim.touring .side button:not(#sound),.sim.touring input,.sim.touring .mission button{pointer-events:none;opacity:.55}
 /* Recorrido guiado por Lumi: foco con sombra gigante, robot que viaja y barra de subtítulos */
-.crumb{font-family:var(--mono);font-size:.78rem;color:var(--muted);text-decoration:none;letter-spacing:.04em}
-.crumb:hover{color:var(--laser)}
-.crumbs{display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:4px}
-.crumbs .crumb{padding:4px 0;white-space:nowrap}
 .lumi-card{display:flex;align-items:center;gap:12px;margin-top:6px}
 .lumi-card .avatar{width:58px;flex:none}
 .lumi-card p{font-size:.92rem;color:var(--muted);margin:0}
@@ -389,10 +387,9 @@ html[data-presentation="true"] .meter{margin-top:24px}html[data-presentation="tr
 /* Objetivos táctiles de al menos 44 px en todas las partes (iPad, celular) */
 .presentation-tools button[hidden]{display:none}
 .mdots button{width:44px;height:44px}
-.crumbs a,main[data-module] .topline a,main[data-module] .pager a,main[data-module] details.legend>summary,nav.parts a{min-height:44px;display:inline-flex;align-items:center}
+main[data-module] details.legend>summary{min-height:44px;display:inline-flex;align-items:center}
 input#servo,input#umbral,input#servoAngle{height:44px}
 #walk,#sound,#lampBtn{min-height:44px}
-nav.parts a{white-space:nowrap}
 /* Inglés ligero: el sitio sigue en español; el inglés va en estilo secundario */
 .en{font-style:italic;font-weight:400;color:var(--muted,#56657A);font-size:.82em;letter-spacing:0;text-transform:none}
 .en-summary{margin:0;max-width:62ch;border:1px solid var(--line,#C9D3DE);border-left:4px solid var(--laser,#C91D28);border-radius:12px;background:var(--card,#fff);color:var(--ink,#16212E);padding:0 16px;font-size:.92em;line-height:1.5}
@@ -419,6 +416,80 @@ header>.en-summary{margin-top:16px}
 .pin-table .en{display:block;font-size:.8em;line-height:1.25;margin-top:2px}
 .es-sub{margin:4px 0 0;color:var(--muted,#56657A);font-weight:600;line-height:1.25;letter-spacing:0}.es-sub.es-h1{font-size:clamp(1.05rem,2.2vw,1.6rem)}.es-sub.es-h2{font-size:1rem}
 .es-card{display:block;margin-top:2px;font-size:.62em;font-weight:600;color:var(--muted,#56657A)}
+</style><style>/* Navegación común entre las seis partes: en el flujo de la página, nunca fija */
+.part-nav{display:flex;flex-direction:column;gap:6px;margin:10px 0 4px;font-family:var(--mono,ui-monospace,monospace);font-size:15px;color:var(--ink,#16212E);line-height:1.2}
+.part-nav a{color:inherit;text-decoration:none}
+.part-nav a:focus-visible,.part-next a:focus-visible{outline:3px solid var(--focus,#8A5A00);outline-offset:3px;border-radius:12px}
+.pn-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.pn-home{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;font-weight:700}
+.pn-home:hover,.pn-step:hover{color:var(--laser,#C91D28);text-decoration:underline}
+.pn-where,.pn-medals{color:var(--muted,#56657A);font-weight:600}
+.pn-hub .pn-row{min-height:28px}
+.pn-track{display:flex;align-items:flex-start;justify-content:center;gap:16px}
+.pn-step{display:none;align-items:center;height:44px;padding:0 10px;font-weight:700;white-space:nowrap}
+@media (min-width:720px){.pn-step{display:inline-flex}}
+.pn-dots{list-style:none;margin:0;padding:0 0 26px;display:flex;gap:10px;justify-content:center}
+.pn-dots li{position:relative}
+.pn-dot{position:relative;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:2px solid var(--line,#C9D3DE);background:var(--card,#fff);font-weight:700;font-size:15px}
+.pn-dot:hover{border-color:var(--laser,#C91D28)}
+.pn-dot.pn-support{border-style:dashed;border-color:var(--muted,#56657A)}
+.pn-dot[aria-current="page"]{background:var(--ink,#16212E);border-color:var(--ink,#16212E);color:var(--card,#fff)}
+.pn-dot[aria-current="page"].pn-support{border-style:dashed;outline:2px dashed var(--ink,#16212E);outline-offset:2px}
+.pn-name{position:absolute;top:calc(100% + 4px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:13px;font-weight:700;color:var(--ink,#16212E)}
+.pn-dots li:first-child .pn-name{left:0;transform:none}
+.pn-dots li:last-child .pn-name{left:auto;right:0;transform:none}
+.pn-hub .pn-dots{padding-bottom:4px}
+.pn-check{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:1;background:var(--ok,var(--ok-ink,#1B7A3D));color:var(--card,#fff);border:2px solid var(--card,#fff)}
+/* Tarjetas grandes al final de la página */
+.part-next{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0 8px}
+.pn-card{display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:64px;padding:14px 18px;border-radius:14px;border:1px solid var(--line,#C9D3DE);background:var(--card,#fff);color:var(--ink,#16212E);text-decoration:none}
+.pn-card:hover{border-color:var(--laser,#C91D28)}
+.pn-card-next{text-align:right}
+.pn-k{font-family:var(--mono,ui-monospace,monospace);font-size:14px;color:var(--muted,#56657A);font-weight:600}
+.pn-card-name{font-family:var(--display,inherit);font-weight:800;font-size:1.15rem;line-height:1.15}
+@media (max-width:479px){.part-next{grid-template-columns:1fr}.pn-card-next{text-align:left}}
+@media (max-width:380px){.pn-dots{gap:6px}}
+@media (min-width:1000px){
+  html[data-presentation="true"] .pn-dot{width:56px;height:56px;font-size:1.1rem}
+  html[data-presentation="true"] .pn-step{height:56px}
+  html[data-presentation="true"] .pn-name,html[data-presentation="true"] .pn-where,html[data-presentation="true"] .pn-home,html[data-presentation="true"] .pn-step,html[data-presentation="true"] .pn-medals{font-size:1.1rem}
+  html[data-presentation="true"] .pn-dots{padding-bottom:34px;gap:14px}
+  html[data-presentation="true"] .pn-hub .pn-dots{padding-bottom:4px}
+  html[data-presentation="true"] .pn-card-name{font-size:1.4rem}
+  html[data-presentation="true"] .pn-k{font-size:1rem}
+  html[data-presentation="true"] .pn-check{width:24px;height:24px;font-size:14px}
+}
+/* Medalla al completar los retos de una parte */
+.medalla{display:flex;gap:14px;align-items:center;margin:12px 0;padding:14px 16px;border-radius:14px;border:2px solid var(--amber,#F2B53A);background:var(--card,#fff);color:var(--ink,#16212E)}
+.medalla svg{flex:none;width:64px;height:76px}
+/* dentro de la tarjeta del reto: ocupa toda la fila y no hereda «Lo que aprendiste» */
+.medalla{flex:1 1 100%;box-sizing:border-box}.medalla p{flex:none!important;margin:0}.medalla p::before{content:none!important}
+.medalla-txt{display:flex;flex-direction:column;gap:4px;min-width:0}
+.medalla-k{margin:0;font-family:var(--display,inherit);font-weight:800;font-size:1.15rem;line-height:1.15}
+.medalla-n{margin:0;color:var(--muted,#56657A);font-size:.95rem}
+.medalla-all{margin:0;font-family:var(--display,inherit);font-weight:800;font-size:1.25rem;color:var(--laser,#C91D28)}
+.medalla-go{align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;margin-top:4px;padding:8px 14px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--ink,#16212E);color:var(--card,#fff);border:1px solid var(--ink,#16212E)}
+.medalla-go:focus-visible{outline:3px solid var(--focus,#8A5A00);outline-offset:3px}
+@media (min-width:1000px){
+  html[data-presentation="true"] .medalla-k{font-size:1.4rem}
+}
+.confeti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:2000}
+.confeti i{position:absolute;top:-16px;width:10px;height:14px;border-radius:2px;animation:confeti-cae 1.2s ease-in forwards}
+@keyframes confeti-cae{to{transform:translate(var(--dx,0),105vh) rotate(var(--r,360deg));opacity:.2}}
+@keyframes pulso-suave{0%,100%{box-shadow:0 0 0 0 rgba(242,181,58,0)}50%{box-shadow:0 0 0 8px rgba(242,181,58,.55)}}
+.pulso-once{animation:pulso-suave 1.2s ease-in-out 1}
+@media (prefers-reduced-motion: reduce){.pulso-once{animation:none}.confeti{display:none}}
+/* 04 y 05 usan tamaños en px más grandes: la navegación los acompaña */
+html[data-support="true"] .part-nav{font-size:18px}
+html[data-support="true"] .pn-k{font-size:16px}
+html[data-support="true"] .pn-card-name{font-size:22px}
+html[data-support="true"] .pn-name{font-size:15px}
+@media (min-width:1000px){
+  html[data-presentation="true"][data-support="true"] .pn-name,html[data-presentation="true"][data-support="true"] .pn-where,html[data-presentation="true"][data-support="true"] .pn-home,html[data-presentation="true"][data-support="true"] .pn-step,html[data-presentation="true"][data-support="true"] .pn-dot{font-size:23px}
+  html[data-presentation="true"][data-support="true"] .pn-k{font-size:21px}
+  html[data-presentation="true"][data-support="true"] .pn-card-name{font-size:30px}
+  html[data-presentation="true"][data-support="true"] .medalla-k{font-size:30px}
+}
 </style></head>
 <body>
 <main class="wrap" id="contenido"><div class="presentation-tools" role="group" aria-label="Preparar el monitor">
@@ -426,10 +497,9 @@ header>.en-summary{margin-top:16px}
 <button type="button" id="presentationFullscreen" aria-pressed="false">⛶ Pantalla completa</button>
 <button type="button" id="themeToggle" data-theme-choice="auto" aria-label="Tema: automático (sigue al dispositivo). Pulsa para cambiar a claro."><span aria-hidden="true">◐</span> Tema: automático</button>
 <span class="presentation-hint">Letras más grandes para proyectar.</span>
-<span id="presentationStatus" role="status"></span></div>
+<span id="presentationStatus" role="status"></span></div><nav class="part-nav" aria-label="Partes del proyecto" data-part="03"><div class="pn-row"><a class="pn-home" href="../">← Inicio</a><span class="pn-where">Parte 03 de 06</span></div><div class="pn-track"><a class="pn-step pn-prev" href="../materiales/" aria-label="Anterior: 02 · Materiales">← Anterior</a><ol class="pn-dots"><li><a class="pn-dot" href="../proyecto/" data-part="01" aria-label="Parte 01: Proyecto"><span class="pn-num">01</span></a></li><li><a class="pn-dot" href="../materiales/" data-part="02" aria-label="Parte 02: Materiales"><span class="pn-num">02</span></a></li><li><a class="pn-dot" href="../desarrollo/" data-part="03" aria-label="Parte 03: Desarrollo" aria-current="page"><span class="pn-num">03</span></a><span class="pn-name" aria-hidden="true">Desarrollo</span></li><li><a class="pn-dot pn-support" href="../especificaciones/" data-part="04" aria-label="Parte 04: Especificaciones SG90"><span class="pn-num">04</span></a></li><li><a class="pn-dot pn-support" href="../montaje/" data-part="05" aria-label="Parte 05: Montaje"><span class="pn-num">05</span></a></li><li><a class="pn-dot" href="../equipo/" data-part="06" aria-label="Parte 06: Equipo"><span class="pn-num">06</span></a></li></ol><a class="pn-step pn-next" href="../especificaciones/" aria-label="Siguiente: 04 · Especificaciones SG90">Siguiente →</a></div></nav>
   <header class="hero">
     <div class="txt">
-      <nav class="crumbs" aria-label="Navegación superior"><a class="crumb" href="../">← Volver al inicio</a><a class="crumb" href="../materiales/">← Parte 02 · Materiales</a><a class="crumb" href="../especificaciones/">Parte 04 · SG90 →</a></nav>
       <p class="eyebrow">Laser spy · Part 03 · Development</p>
       <h1 lang="en">How the mission <span>activates</span></h1><p class="es-sub es-h1">Así se activa la misión</p>
       <p class="lead">Cuatro pasos: <b>activar, alinear, detectar y avisar</b>. Mira cómo el láser espía atrapa a quien cruza el haz, y pruébalo tú en el simulador.</p>
@@ -546,6 +616,7 @@ header>.en-summary{margin-top:16px}
           </g>
         </svg>
         <span class="hint" id="hint">Mantén presionado y cruza el haz</span>
+        <p class="scene-msg" id="sceneMsg" aria-hidden="true" hidden></p>
       </div>
 
       <div class="mission" id="retos" aria-label="Retos">
@@ -636,11 +707,11 @@ header>.en-summary{margin-top:16px}
 
   <div class="safety" role="note">
     <span class="ico">!</span>
-    <p><b>Seguridad:</b> nunca mires el láser directo ni lo apuntes a ojos, espejos o pantallas. Apúntalo siempre al sensor o a la mesa. <span style="color:var(--muted)">(Láser clase 3R, hasta 5 mW aprox.)</span></p>
+    <p><b>Seguridad:</b> nunca mires el láser directo ni lo apuntes a ojos, espejos o pantallas. Apúntalo siempre al sensor o a la mesa. <span style="color:var(--muted)">(Láser clase 3R, hasta ≈5 mW)</span></p>
   </div>
 
-  <nav class="support-links" aria-label="Módulos de apoyo"><a class="btn" href="../especificaciones/">04 · Especificaciones del SG90 →</a> <a class="btn" href="../montaje/">05 · Cómo se conecta el montaje →</a></nav>
-  <footer>Simulador educativo. Los valores de lectura son aproximados y sirven para explicar la idea, no para medir. Narración e ilustraciones generadas con IA.</footer>
+  <nav class="part-next" aria-label="Seguir a otra parte"><a class="pn-card pn-card-prev" href="../materiales/"><span class="pn-k">← Anterior · 02</span><span class="pn-card-name">Materiales</span></a><a class="pn-card pn-card-next" href="../especificaciones/"><span class="pn-k">Siguiente · 04 →</span><span class="pn-card-name">Especificaciones SG90</span></a></nav>
+<footer>Simulador educativo. Los valores de lectura son aproximados y sirven para explicar la idea, no para medir. Narración e ilustraciones generadas con IA.</footer>
 </main>
 <div class="toast" id="toast" role="status" hidden></div>
 <div class="tour-spot" id="tourSpot" hidden></div>
@@ -707,6 +778,18 @@ header>.en-summary{margin-top:16px}
   $('bugBtn').addEventListener('click', () => setBug(!st.bug));
   servo.addEventListener('input', () => setServo(servo.value));
   umbral.addEventListener('input', () => setUmbral(umbral.value));
+  // Celular: el simulador fijo arriba tapa la tarjeta del reto; mientras se arrastra un control, su guía se ve sobre la escena
+  const sceneMsg = $('sceneMsg'); let ctlDrag = false, ctlT;
+  function syncSceneMsg(){
+    const text = ctlDrag && innerWidth <= 820 && !st.tour && !mEl.live.hidden ? mEl.live.textContent : '';
+    sceneMsg.textContent = text; sceneMsg.hidden = !text;
+  }
+  [servo, umbral].forEach(ctl => {
+    ctl.addEventListener('pointerdown', () => { clearTimeout(ctlT); ctlDrag = true; syncSceneMsg(); });
+    ctl.addEventListener('input', () => { if (ctlDrag) requestAnimationFrame(() => requestAnimationFrame(syncSceneMsg)); });
+    const release = () => { clearTimeout(ctlT); ctlT = setTimeout(() => { ctlDrag = false; syncSceneMsg(); }, 1500); };
+    ['pointerup', 'pointercancel', 'change'].forEach(type => ctl.addEventListener(type, release));
+  });
 
   // Zumbador con Web Audio
   let ac, gain, osc;
@@ -748,7 +831,10 @@ header>.en-summary{margin-top:16px}
   ];
   const M = { i: 0, phase: 0, solved: false, cutThr: null, all: false, live: '' };
   const mEl = { card: $('retos'), num: $('mNum'), title: $('mTitle'), goal: $('mGoal'), live: $('mLive'), done: $('mDone'), lesson: $('mLesson'), next: $('mNext'), dots: [...document.querySelectorAll('#mDots button')] };
+  let toastT;
   function showReto(i){
+    // el aviso del reto anterior no debe tapar las respuestas de este
+    clearTimeout(toastT); $('toast').hidden = true; if (window.LaserMedallas) LaserMedallas.hide(mEl.card);
     M.i = i; M.phase = 0; M.solved = false; M.cutThr = null; M.all = false; M.live = ''; mEl.live.textContent = '';
     const r = RETOS[i];
     mEl.num.textContent = i + 1; mEl.title.textContent = r.title; mEl.goal.textContent = r.goal;
@@ -760,7 +846,10 @@ header>.en-summary{margin-top:16px}
     mEl.lesson.textContent = RETOS[M.i].lesson; mEl.live.hidden = true; mEl.done.hidden = false; mEl.card.classList.add('solved');
     const left = mEl.dots.filter(d => !d.classList.contains('ok')).length;
     mEl.next.textContent = left ? 'Siguiente reto' : 'Ver resultado';
-    toast('¡Reto cumplido: ' + RETOS[M.i].title.toLowerCase() + '!');
+    // el tercer reto da la medalla de la parte (reemplaza al aviso)
+    if (!left && window.LaserMedallas) LaserMedallas.award('03', { before: mEl.next, sound: st.sound });
+    else toast('¡Reto cumplido: ' + RETOS[M.i].title.toLowerCase() + '!');
+    if (window.LaserMedallas) { LaserMedallas.nudgeSound($('sound')); LaserMedallas.reveal(mEl.card, st.tour); }
   }
   function nextReto(){
     const pending = mEl.dots.map((d, k) => d.classList.contains('ok') ? -1 : k).filter(k => k >= 0);
@@ -778,6 +867,8 @@ header>.en-summary{margin-top:16px}
     nextReto();
   });
   mEl.dots.forEach((d, k) => d.addEventListener('click', () => showReto(k)));
+  // en celular, el simulador fijo arriba no debe tapar la tarjeta del reto
+  mEl.next.addEventListener('click', () => { if (window.LaserMedallas) LaserMedallas.reveal(mEl.card, st.tour); });
 
   function retoTick(alarm, end, read, thr){
     // el recorrido de Lumi mueve el simulador: lo que pase ahí no cuenta para los retos
@@ -791,8 +882,8 @@ header>.en-summary{margin-top:16px}
     else if (M.i === 0) {
       if (st.lamp) live = 'Para este reto, apaga la lámpara.';
       else if (!aligned) live = 'El láser no llega al sensor. Pon el servo en 90° para este reto.';
-      else if (thr > 880) live = `El umbral (${thr}) está por encima de la lectura con el haz libre (~900): la alarma nunca calla. Bájalo.`;
-      else if (thr < 170) live = `El umbral (${thr}) está por debajo de la lectura con el haz cortado (~150): nunca sonará. Súbelo.`;
+      else if (thr > 880) live = `El umbral (${thr}) está por encima de la lectura con el haz libre (≈900): la alarma nunca calla. Bájalo.`;
+      else if (thr < 170) live = `El umbral (${thr}) está por debajo de la lectura con el haz cortado (≈150): nunca sonará. Súbelo.`;
       else if (!cutting) live = 'Mantén el dedo sobre el haz rojo del simulador.';
       else if (alarm) return solveReto();
       else live = `Lectura: ${r10}. Si baja del umbral (${thr}), suena la alarma.`;
@@ -826,11 +917,10 @@ header>.en-summary{margin-top:16px}
         }
       }
     }
-    if (live && live !== M.live) { M.live = live; mEl.live.textContent = live; }
+    if (live && live !== M.live) { M.live = live; mEl.live.textContent = live; if (ctlDrag) syncSceneMsg(); }
   }
   showReto(0);
 
-  let toastT;
   function toast(msg){ const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2200); }
 
   const codeLines = [...document.querySelectorAll('#code div')];
@@ -1063,7 +1153,11 @@ header>.en-summary{margin-top:16px}
     else if (tour.i > 0) playStep(tour.i - 1, tour.manual ? STEPS[tour.i - 1].look.length - 1 : 0);
   };
   // remoteTap: botón Bluetooth (p. ej. palo de selfie que manda teclas de volumen): 1 toque = siguiente, 2 toques rápidos = anterior
-  let remoteTapTimer = null; const remoteTap = () => { if (remoteTapTimer) { clearTimeout(remoteTapTimer); remoteTapTimer = null; goPrev(); } else remoteTapTimer = setTimeout(() => { remoteTapTimer = null; goNext(); }, 450); }; // remoteTap
+  // Un mismo toque puede llegar dos veces: la tecla de volumen y la Av Pág / Re Pág que manda un servicio del sistema
+  // (iMac). Lo que llega por la otra vía en menos de 1 s es el mismo toque y no vuelve a mover el recorrido.
+  let remoteFrom = '', remoteAt = -1e9; const remoteOnce = (via, go) => { const t = performance.now(); if (via !== remoteFrom && t - remoteAt < 1000) return; remoteFrom = via; remoteAt = t; go(); };
+  const keyNav = go => remoteOnce('key', go); // remoteTap: teclas de avance (flechas, Av Pág / Re Pág, espacio)
+  let remoteTapTimer = null; const remoteTap = () => { if (remoteTapTimer) { clearTimeout(remoteTapTimer); remoteTapTimer = null; remoteOnce('vol', goPrev); } else remoteTapTimer = setTimeout(() => { remoteTapTimer = null; remoteOnce('vol', goNext); }, 450); }; // remoteTap
   function setPlayIcon(){ $('tourPlayIcon').textContent = tour.paused ? '▶' : '❚❚'; $('tourPlay').setAttribute('aria-label', tour.paused ? 'Seguir' : 'Pausar'); }
   function togglePause(){
     if (!st.tour || tour.manual) return;
@@ -1264,8 +1358,8 @@ header>.en-summary{margin-top:16px}
     if (e.key === 'AudioVolumeUp' || e.key === 'AudioVolumeDown') { e.preventDefault(); remoteTap(); return; }
     const onControl = e.target && /^(BUTTON|INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName);
     if (e.key === 'Escape' && !tour.manual) { e.preventDefault(); stopTour(); }
-    else if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && !onControl)) { e.preventDefault(); goNext(); }
-    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goPrev(); }
+    else if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && !onControl)) { e.preventDefault(); keyNav(goNext); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); keyNav(goPrev); }
   }, true);
   document.addEventListener('visibilitychange', () => { if (document.hidden && st.tour && !tour.paused && !tour.manual) togglePause(); });
 
@@ -1356,5 +1450,136 @@ header>.en-summary{margin-top:16px}
   document.addEventListener('webkitfullscreenchange',fullscreenState);
   fullscreenState();
 })();
+</script><script>(function (scope) {
+  'use strict';
+  // Medallas entre partes: una por parte al completar sus retos (o la pregunta en 04 y 05).
+  // Se recuerdan en este navegador; sin almacenamiento todo funciona igual, solo no se recuerda.
+  const KEY = 'laser-espia-medallas';
+  const NAMES = { '01': 'Proyecto', '02': 'Materiales', '03': 'Desarrollo', '04': 'Especificaciones SG90', '05': 'Montaje', '06': 'Equipo' };
+  const ORDER = Object.keys(NAMES);
+  let memory = [];
+  const clean = list => ORDER.filter(part => Array.isArray(list) && list.includes(part));
+  function read() {
+    try { const raw = scope.localStorage && scope.localStorage.getItem(KEY); if (raw) memory = clean(JSON.parse(raw)); } catch (_) {}
+    return memory.slice();
+  }
+  function save(list) {
+    memory = clean(list);
+    try { if (scope.localStorage) scope.localStorage.setItem(KEY, JSON.stringify(memory)); } catch (_) {}
+  }
+  const has = part => read().includes(part);
+  const count = () => read().length;
+  // La siguiente parte que aún no tiene medalla (en orden, dando la vuelta); null si están las 6.
+  function nextMissing(part, got) {
+    const start = ORDER.indexOf(part);
+    for (let k = 1; k <= ORDER.length; k++) {
+      const candidate = ORDER[(start + k) % ORDER.length];
+      if (!got.includes(candidate)) return candidate;
+    }
+    return null;
+  }
+  const calm = () => !(scope.matchMedia && scope.matchMedia('(prefers-reduced-motion: no-preference)').matches);
+  if (typeof document === 'undefined') { scope.LaserMedallas = Object.freeze({ has, count, read, save, nextMissing, KEY }); return; }
+
+  function paint() {
+    const got = read();
+    document.querySelectorAll('.part-nav a[data-part]').forEach(link => {
+      const part = link.dataset.part, on = got.includes(part);
+      const holder = link.parentNode; // el ✓ va junto al enlace, fuera de su texto visible
+      let check = holder.querySelector('.pn-check');
+      if (on && !check) { check = document.createElement('span'); check.className = 'pn-check'; check.setAttribute('aria-hidden', 'true'); check.textContent = '✓'; holder.appendChild(check); }
+      if (!on && check) check.remove();
+      link.setAttribute('aria-label', 'Parte ' + part + ': ' + NAMES[part] + (on ? ' · medalla ganada' : ''));
+    });
+    document.querySelectorAll('.pn-medals').forEach(el => { el.hidden = !got.length; el.textContent = got.length === 6 ? '🏅 ¡Agente láser completo!' : '🏅 ' + got.length + ' de 6 medallas'; });
+  }
+  function medalSvg(part) {
+    return '<svg viewBox="0 0 64 76" aria-hidden="true" focusable="false"><path d="M18 2h12l6 22H24z" fill="#C91D28"/><path d="M34 2h12l-6 22H28z" fill="#2B5BA8"/>'
+      + '<circle cx="32" cy="46" r="26" fill="#F2B53A" stroke="#8A5A00" stroke-width="3"/><circle cx="32" cy="46" r="19" fill="none" stroke="#8A5A00" stroke-width="2" stroke-dasharray="3 3"/>'
+      + '<text x="32" y="53" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#3D2700">' + part + '</text></svg>';
+  }
+  function confetti() {
+    if (calm()) return;
+    const box = document.createElement('div');
+    box.className = 'confeti'; box.setAttribute('aria-hidden', 'true');
+    const colors = ['#E3262E', '#F2B53A', '#1F8A4C', '#2B5BA8', '#FF7A7F'];
+    for (let k = 0; k < 24; k++) {
+      const bit = document.createElement('i');
+      bit.style.left = (4 + Math.random() * 92) + '%';
+      bit.style.background = colors[k % colors.length];
+      bit.style.setProperty('--dx', Math.round(Math.random() * 160 - 80) + 'px');
+      bit.style.setProperty('--r', Math.round(Math.random() * 720 - 360) + 'deg');
+      bit.style.animationDelay = Math.round(Math.random() * 200) + 'ms';
+      box.appendChild(bit);
+    }
+    document.body.appendChild(box);
+    setTimeout(() => box.remove(), 1400);
+  }
+  function arpeggio() {
+    try {
+      const AC = scope.AudioContext || scope.webkitAudioContext;
+      if (!AC) return;
+      const ac = new AC();
+      [523.25, 659.25, 783.99].forEach((freq, k) => {
+        const osc = ac.createOscillator(), gain = ac.createGain(), t = ac.currentTime + k * 0.13;
+        osc.type = 'triangle'; osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.0001, t); gain.gain.exponentialRampToValueAtTime(0.12, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.24);
+        osc.connect(gain).connect(ac.destination); osc.start(t); osc.stop(t + 0.26);
+      });
+      setTimeout(() => { try { ac.close(); } catch (_) {} }, 900);
+    } catch (_) {}
+  }
+  function hide(root) { (root || document).querySelectorAll('.medalla').forEach(el => el.remove()); }
+  // Gana (o vuelve a ganar) la medalla de una parte y la muestra dentro de `into`, antes de `before` si se indica.
+  function award(part, options) {
+    const o = options || {};
+    if (!NAMES[part]) return null;
+    const got = read();
+    if (!got.includes(part)) got.push(part);
+    save(got);
+    const now = read();
+    const total = now.length;
+    const panel = document.createElement('div');
+    panel.className = 'medalla'; panel.setAttribute('role', 'status');
+    const next = nextMissing(part, now);
+    let link = '';
+    const home = document.querySelector('.part-nav .pn-home');
+    if (next) {
+      const target = document.querySelector('.part-nav a[data-part="' + next + '"]');
+      if (target) link = '<a class="medalla-go" href="' + target.getAttribute('href') + '">Siguiente: ' + next + ' · ' + NAMES[next] + ' →</a>';
+    } else if (home) link = '<a class="medalla-go" href="' + home.getAttribute('href') + '">Volver a la portada →</a>';
+    panel.innerHTML = medalSvg(part) + '<div class="medalla-txt">'
+      + (total === 6 ? '<p class="medalla-all">¡Agente láser completo!</p>' : '')
+      + '<p class="medalla-k">Medalla ' + part + ' · ' + NAMES[part] + '</p>'
+      + '<p class="medalla-n">' + (total === 6 ? 'Tienes las 6 medallas.' : 'Llevas ' + total + ' de 6 medallas') + '</p>' + link + '</div>';
+    const into = o.into || (o.before && o.before.parentNode);
+    if (into) { hide(into); if (o.before && o.before.parentNode === into) into.insertBefore(panel, o.before); else into.appendChild(panel); }
+    paint();
+    confetti();
+    if (o.sound) arpeggio();
+    return panel;
+  }
+  // Celular: el simulador fijo arriba puede tapar la tarjeta del reto; la trae a la vista debajo de él.
+  function reveal(card, touring) {
+    if (!card || touring || scope.innerWidth > 820) return;
+    const stage = document.querySelector('.stage');
+    card.style.scrollMarginTop = ((stage ? stage.getBoundingClientRect().height : 0) + 12) + 'px';
+    try { card.scrollIntoView({ block: 'nearest', behavior: calm() ? 'auto' : 'smooth' }); } catch (_) { card.scrollIntoView(false); }
+  }
+  // Celular: un pulso suave, una sola vez, en «Activar sonido» al resolver el primer reto.
+  let nudged = false;
+  function nudgeSound(button) {
+    if (nudged) return;
+    nudged = true;
+    if (!button || scope.innerWidth > 820 || button.getAttribute('aria-pressed') !== 'false' || calm()) return;
+    button.classList.add('pulso-once');
+    button.addEventListener('animationend', () => button.classList.remove('pulso-once'), { once: true });
+  }
+  scope.LaserMedallas = Object.freeze({ has, count, read, award, hide, paint, reveal, nudgeSound, nextMissing, KEY });
+  paint();
+  scope.addEventListener('storage', event => { if (event.key === KEY) paint(); });
+  // Volver con «Atrás» puede mostrar la página guardada: actualizar los ✓.
+  scope.addEventListener('pageshow', paint);
+})(typeof globalThis !== 'undefined' ? globalThis : window);
 </script></body>
 </html>
