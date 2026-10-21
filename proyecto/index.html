@@ -342,6 +342,10 @@ footer{color:var(--muted);font-size:.85rem}
   html[data-presentation="true"] .tour-bar button{min-width:52px;min-height:52px;font-size:20px}
   html[data-presentation="true"] .tour-bar .next{font-size:20px}
   html[data-presentation="true"] .lumi-card p{font-size:22px}
+  html[data-presentation="true"] .presentation-tools button{font-size:20px;padding:12px 20px;min-height:52px}
+  html[data-presentation="true"] .presentation-hint,html[data-presentation="true"] .presentation-tools [role="status"]{font-size:18px}
+  /* etiquetas pequeñas (PASO 1, CONTROL, BITÁCORA…) legibles desde el fondo del salón */
+  html[data-presentation="true"]:not([data-support="true"]) .eyebrow,html[data-presentation="true"]:not([data-support="true"]) .n,html[data-presentation="true"]:not([data-support="true"]) .k,html[data-presentation="true"]:not([data-support="true"]) .cat{font-size:.9rem}
 }
 @media(max-width:600px){.presentation-tools{justify-content:flex-start}.presentation-tools button{font-size:14px;padding:9px 11px;min-height:44px}.presentation-hint{width:100%}}
 /* Objetivos táctiles de al menos 44 px en todas las partes (iPad, celular) */
@@ -375,6 +379,8 @@ header>.en-summary{margin-top:16px}
 .glossary-table td{color:var(--ink,#16212E)}
 @media(max-width:600px){.glossary-table th,.glossary-table td{padding:9px 12px}}
 .pin-table .en{display:block;font-size:.8em;line-height:1.25;margin-top:2px}
+.es-sub{margin:4px 0 0;color:var(--muted,#56657A);font-weight:600;line-height:1.25;letter-spacing:0}.es-sub.es-h1{font-size:clamp(1.05rem,2.2vw,1.6rem)}.es-sub.es-h2{font-size:1rem}
+.es-card{display:block;margin-top:2px;font-size:.62em;font-weight:600;color:var(--muted,#56657A)}
 </style></head>
 <body>
 <main class="wrap" id="contenido"><div class="presentation-tools" role="group" aria-label="Preparar el monitor">
@@ -387,8 +393,8 @@ header>.en-summary{margin-top:16px}
 
   <header class="hero">
     <div class="txt">
-      <p class="eyebrow">Láser espía · Parte 01 · Proyecto</p>
-      <h1>Una barrera de luz. <span>Una idea inteligente.</span></h1>
+      <p class="eyebrow">Laser spy · Part 01 · Project</p>
+      <h1 lang="en">A light barrier. <span>A smart idea.</span></h1><p class="es-sub es-h1">Una barrera de luz. Una idea inteligente.</p>
       <p class="lead">Construimos un <b>láser espía</b>: un circuito con Arduino que detecta la interrupción de un haz de luz y activa una alarma. Mira el antes y el después en la escena, y pruébalo tú.</p>
       <details class="en-summary" lang="en"><summary>Project summary <span class="en-hint" lang="es">· parte 01 · resumen en inglés</span></summary><p>The problem: we want to know when someone enters a protected area, but without a warning nobody notices. Our solution is a light barrier: a laser points at a light sensor, and if someone breaks the beam, the Arduino sounds the alarm. The project is for students and teachers who want to learn robotics.</p></details>
       <div class="cta">
@@ -402,7 +408,7 @@ header>.en-summary{margin-top:16px}
 
   <section id="mision">
     <p class="eyebrow">01 · Nuestra misión</p>
-    <h2>La misión en 3 ideas</h2>
+    <h2 lang="en">Our mission in 3 ideas</h2><p class="es-sub es-h2">La misión en 3 ideas</p>
     <p class="lead">Un láser apunta a un sensor de luz. Si alguien corta el haz, suena una alarma y se enciende una luz.</p>
     <ol class="ideas">
       <li id="idea1"><svg viewBox="0 0 72 72" aria-hidden="true"><rect x="16" y="8" width="34" height="58" rx="3" fill="var(--card)" stroke="var(--ink)" stroke-width="2.5"/><rect x="21" y="13" width="24" height="53" fill="var(--line)"/><circle cx="40" cy="40" r="2.5" fill="var(--ink)"/><path d="M8 66h56" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><circle cx="56" cy="22" r="13" fill="var(--amber)"/><text x="56" y="29" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="20" font-weight="800" fill="#16212E">?</text></svg>
@@ -421,7 +427,7 @@ header>.en-summary{margin-top:16px}
 
   <section>
     <p class="eyebrow">Antes y después</p>
-    <h2>¿Quién vigila la entrada?</h2>
+    <h2 lang="en">Who is watching the door?</h2><p class="es-sub es-h2">¿Quién vigila la entrada?</p>
     <p class="lead">Elige <b>Sin barrera</b> o <b>Con barrera de luz</b> y pulsa <b>Que pase alguien</b>. Mira qué pasa con el trofeo.</p>
     <div class="panel sim" id="escena">
       <div class="stage" id="sceneStage">
@@ -534,7 +540,7 @@ header>.en-summary{margin-top:16px}
     <div class="uses">
       <figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="../assets/image-a20af044fde96495.jpg" alt="Cuatro ilustraciones de barreras de luz: arriba a la izquierda, la puerta de un ascensor; arriba a la derecha, un portón eléctrico con un carro; abajo a la izquierda, una sala de museo vigilada; abajo a la derecha, una banda de fábrica que cuenta productos"><figcaption style="color:var(--muted);font-size:.85rem">En la ilustración los haces se dibujan rojos para que se vean; en la vida real casi siempre son infrarrojos e invisibles.</figcaption></figure>
       <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
-        <h2>Dónde se usa una barrera de luz</h2>
+        <h2 lang="en">Where light barriers are used</h2><p class="es-sub es-h2">Dónde se usa una barrera de luz</p>
         <ul class="bul">
           <li><b>Ascensores:</b> un haz invisible en la puerta evita que se cierre sobre alguien.</li>
           <li><b>Portones eléctricos:</b> se detienen si un carro está en medio.</li>
@@ -554,7 +560,7 @@ header>.en-summary{margin-top:16px}
     <div class="panel share">
       <img src="../assets/image-ed7f69181cfff147.png" alt="Código QR que abre esta página">
       <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
-        <h2>Escanea y protege la entrada</h2>
+        <h2 lang="en">Scan and protect the door</h2><p class="es-sub es-h2">Escanea y protege la entrada</p>
         <p class="lead">Ábrelo en tu celular y prueba los tres retos.</p>
       </div>
     </div>
@@ -985,7 +991,8 @@ header>.en-summary{margin-top:16px}
     document.querySelector('.sim').classList.remove('touring');
     if (TOUR_BODY_CLASS) document.body.classList.remove('touring');
     spotEl.hidden = lumi.hidden = bar.hidden = true;
-    resetSim(); $('tourBtn').disabled = $('tourManualBtn').disabled = false; $('tourBtn').focus({ preventScroll: true });
+    // la simulación vuelve al inicio: su pista también
+    resetSim(); $('hint').hidden = false; $('tourBtn').disabled = $('tourManualBtn').disabled = false; $('tourBtn').focus({ preventScroll: true });
   }
   function finishTour(){ stopTour(); toast('¡Ahora pruébalo tú: enciende la barrera de luz!'); }
 
@@ -1029,6 +1036,8 @@ header>.en-summary{margin-top:16px}
     if (s1 < 1.08) s1 = 1;
     // más ancho que el hueco junto a Lumi (p. ej. en modo exposición): achicar un poco para que quepa entero
     if (wide && n.w > fr - fl) s1 = Math.max(0.75, (fr - fl) / n.w);
+    // más alto que el hueco sobre la barra (p. ej. la escena en modo exposición): achicar para que no quede cortado ni bajo la barra
+    if (wide && n.h > fb - ft) s1 = Math.min(s1, Math.max(0.5, (fb - ft) / n.h));
     if (wide && n.h * s1 > fb - ft) s1 = Math.max(0.6, Math.min(s1, (fb - ft) / n.h));
     if (s1 !== 1) {
       // se anima en coordenadas de pantalla: aunque la página se desplace, el objetivo se queda en el centro

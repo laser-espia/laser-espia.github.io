@@ -196,6 +196,9 @@ button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid 
   .sim>.controls{grid-column:1;grid-row:3}
   .sim>.mission{grid-column:1 / -1;grid-row:4}
 }
+/* modo exposición: el dibujo usa todo el ancho y la comparación va debajo; durante el recorrido vuelve el diseño lado a lado, que cabe sobre la barra */
+@media (min-width:861px){html[data-presentation="true"] .sim:not(.touring){display:flex;align-items:stretch}html[data-presentation="true"] .sim:not(.touring) .info .cmp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+@media (min-width:701px){html[data-presentation="true"] .closing{grid-template-columns:minmax(0,1fr) minmax(240px,380px)}html[data-presentation="true"] .closing figcaption{max-width:24ch}}
 .stage{position:relative;border-radius:10px;overflow:hidden;background:var(--paper);border:1px solid var(--line)}
 @media (max-width:820px){.stage{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;box-shadow:0 8px 18px rgba(0,0,0,.35)}.sim.touring .stage{position:relative;box-shadow:none}}
 .stage svg{display:block;width:100%;height:auto;touch-action:manipulation;user-select:none;-webkit-user-select:none}
@@ -409,6 +412,10 @@ footer{color:var(--muted);font-size:.85rem}
   html[data-presentation="true"] .tour-bar button{min-width:52px;min-height:52px;font-size:20px}
   html[data-presentation="true"] .tour-bar .next{font-size:20px}
   html[data-presentation="true"] .lumi-card p{font-size:22px}
+  html[data-presentation="true"] .presentation-tools button{font-size:20px;padding:12px 20px;min-height:52px}
+  html[data-presentation="true"] .presentation-hint,html[data-presentation="true"] .presentation-tools [role="status"]{font-size:18px}
+  /* etiquetas pequeñas (PASO 1, CONTROL, BITÁCORA…) legibles desde el fondo del salón */
+  html[data-presentation="true"]:not([data-support="true"]) .eyebrow,html[data-presentation="true"]:not([data-support="true"]) .n,html[data-presentation="true"]:not([data-support="true"]) .k,html[data-presentation="true"]:not([data-support="true"]) .cat{font-size:.9rem}
 }
 @media(max-width:600px){.presentation-tools{justify-content:flex-start}.presentation-tools button{font-size:14px;padding:9px 11px;min-height:44px}.presentation-hint{width:100%}}
 /* Objetivos táctiles de al menos 44 px en todas las partes (iPad, celular) */
@@ -442,6 +449,8 @@ header>.en-summary{margin-top:16px}
 .glossary-table td{color:var(--ink,#16212E)}
 @media(max-width:600px){.glossary-table th,.glossary-table td{padding:9px 12px}}
 .pin-table .en{display:block;font-size:.8em;line-height:1.25;margin-top:2px}
+.es-sub{margin:4px 0 0;color:var(--muted,#56657A);font-weight:600;line-height:1.25;letter-spacing:0}.es-sub.es-h1{font-size:clamp(1.05rem,2.2vw,1.6rem)}.es-sub.es-h2{font-size:1rem}
+.es-card{display:block;margin-top:2px;font-size:.62em;font-weight:600;color:var(--muted,#56657A)}
 </style></head>
 <body>
 <main class="wrap" id="contenido"><div class="presentation-tools" role="group" aria-label="Preparar el monitor">
@@ -454,8 +463,8 @@ header>.en-summary{margin-top:16px}
 
   <header class="hero">
     <div class="txt">
-      <p class="eyebrow">Láser espía · Parte 06 · Equipo</p>
-      <h1>Cinco integrantes. <span>Un mismo proyecto.</span></h1>
+      <p class="eyebrow">Laser spy · Part 06 · Team</p>
+      <h1 lang="en">Five members. <span>One project.</span></h1><p class="es-sub es-h1">Cinco integrantes. Un mismo proyecto.</p>
       <p class="lead">Proyecto grupal de 7.º grado. Aportamos el montaje del circuito, la integración de Arduino, el láser, el sensor, el servomotor y los componentes de conexión y señalización.</p>
       <details class="en-summary" lang="en"><summary>Project summary <span class="en-hint" lang="es">· parte 06 · resumen en inglés</span></summary><p>Our team has five members: Britany, Fernanda, Gabriela, Génesis and Patricia. We learned to connect and program an Arduino and to control a servo motor. The hardest parts were the connections and the servo program; next, we want to improve the connections, adjust the program and make the structure stronger.</p></details>
       <div class="cta">
@@ -469,7 +478,7 @@ header>.en-summary{margin-top:16px}
 
   <section id="equipo">
     <p class="eyebrow">06 · Nuestro equipo</p>
-    <h2>El equipo</h2>
+    <h2 lang="en">The team</h2><p class="es-sub es-h2">El equipo</p>
     <ul class="team" aria-label="Integrantes">
       <li class="member" id="m1"><div class="ava"><svg viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="41" fill="#1F8A4C" stroke="var(--ink)" stroke-width="2.5"/><circle cx="46" cy="46" r="34" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity=".35"/><text x="44" y="61" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="42" font-weight="800" fill="#FFFFFF">B</text><circle cx="73" cy="73" r="14" fill="#16212E" stroke="var(--card)" stroke-width="3"/><rect x="64" y="69" width="9" height="8" rx="1.6" fill="#EEF3F8"/><line x1="73" y1="73" x2="83" y2="73" stroke="#FF4048" stroke-width="2.6" stroke-linecap="round"/></svg></div><span class="nm">Britany</span><span class="gr">7.º grado</span></li>
       <li class="member" id="m2"><div class="ava"><svg viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="41" fill="#2F6FDB" stroke="var(--ink)" stroke-width="2.5"/><circle cx="46" cy="46" r="34" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity=".35"/><text x="44" y="61" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="42" font-weight="800" fill="#FFFFFF">F</text><circle cx="73" cy="73" r="14" fill="#16212E" stroke="var(--card)" stroke-width="3"/><rect x="64" y="69" width="9" height="8" rx="1.6" fill="#EEF3F8"/><line x1="73" y1="73" x2="83" y2="73" stroke="#FF4048" stroke-width="2.6" stroke-linecap="round"/></svg></div><span class="nm">Fernanda</span><span class="gr">7.º grado</span></li>
@@ -485,7 +494,7 @@ header>.en-summary{margin-top:16px}
 
   <section id="bitacora">
     <p class="eyebrow">Bitácora del equipo</p>
-    <h2>Nuestra bitácora</h2>
+    <h2 lang="en">Our logbook</h2><p class="es-sub es-h2">Nuestra bitácora</p>
     <p class="lead">Lo que aprendimos, lo que logramos, lo que nos costó y lo que vamos a mejorar. Toca una tarjeta para darle la vuelta.</p>
     <div class="log">
       <button type="button" class="bcard" id="b-aprendizajes" aria-expanded="false">
@@ -509,7 +518,7 @@ header>.en-summary{margin-top:16px}
 
   <section id="mejora">
     <p class="eyebrow">Próximas mejoras · demostración</p>
-    <h2>La mejora: reforzar la estructura</h2>
+    <h2 lang="en">The improvement: a stronger structure</h2><p class="es-sub es-h2">La mejora: reforzar la estructura</p>
     <p class="lead">Reforzar la estructura es una de nuestras <b>próximas mejoras</b>: si el soporte del láser está flojo, el haz tiembla, deja de llegar al sensor y la alarma suena sin que pase nadie.</p>
     <div class="panel sim" id="escena">
       <div class="stage">
@@ -654,7 +663,7 @@ header>.en-summary{margin-top:16px}
   <section id="cierre" class="panel closing">
     <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
       <p class="eyebrow">Cierre</p>
-      <h2 class="big">Tecnología que se aprende <span>haciendo.</span></h2>
+      <h2 class="big" lang="en">Technology you learn <span>by doing.</span></h2><p class="es-sub es-h2">Tecnología que se aprende haciendo.</p>
       <p class="thanks">¡Gracias!</p>
       <p class="lead">Gracias por acompañarnos en la misión del láser espía. Prueba todas las partes desde tu celular.</p>
       <nav class="parts" aria-label="Todas las partes"><a href="../proyecto/">01 · Proyecto</a><a href="../materiales/">02 · Materiales</a><a href="../desarrollo/">03 · Desarrollo</a><a href="../especificaciones/">04 · Especificaciones</a><a href="../montaje/">05 · Montaje</a><a href="#equipo" aria-current="page">06 · Equipo</a></nav>
@@ -1164,7 +1173,8 @@ header>.en-summary{margin-top:16px}
     document.querySelector('.sim').classList.remove('touring');
     if (TOUR_BODY_CLASS) document.body.classList.remove('touring');
     spotEl.hidden = lumi.hidden = bar.hidden = true;
-    resetSim(); $('tourBtn').disabled = $('tourManualBtn').disabled = false; $('tourBtn').focus({ preventScroll: true });
+    // la simulación vuelve al inicio: su pista también
+    resetSim(); $('hint').hidden = false; $('tourBtn').disabled = $('tourManualBtn').disabled = false; $('tourBtn').focus({ preventScroll: true });
   }
   function finishTour(){ stopTour(); toast('¡Ahora pruébalo tú: abre la bitácora y cambia la estructura!'); }
 
@@ -1208,6 +1218,8 @@ header>.en-summary{margin-top:16px}
     if (s1 < 1.08) s1 = 1;
     // más ancho que el hueco junto a Lumi (p. ej. en modo exposición): achicar un poco para que quepa entero
     if (wide && n.w > fr - fl) s1 = Math.max(0.75, (fr - fl) / n.w);
+    // más alto que el hueco sobre la barra (p. ej. la escena en modo exposición): achicar para que no quede cortado ni bajo la barra
+    if (wide && n.h > fb - ft) s1 = Math.min(s1, Math.max(0.5, (fb - ft) / n.h));
     if (s1 !== 1) {
       // se anima en coordenadas de pantalla: aunque la página se desplace, el objetivo se queda en el centro
       zoom.s += (s1 - zoom.s) * k;

@@ -195,6 +195,10 @@ footer{color:var(--muted);font-size:.85rem}
   html[data-presentation="true"] .tour-bar button{min-width:52px;min-height:52px;font-size:20px}
   html[data-presentation="true"] .tour-bar .next{font-size:20px}
   html[data-presentation="true"] .lumi-card p{font-size:22px}
+  html[data-presentation="true"] .presentation-tools button{font-size:20px;padding:12px 20px;min-height:52px}
+  html[data-presentation="true"] .presentation-hint,html[data-presentation="true"] .presentation-tools [role="status"]{font-size:18px}
+  /* etiquetas pequeñas (PASO 1, CONTROL, BITÁCORA…) legibles desde el fondo del salón */
+  html[data-presentation="true"]:not([data-support="true"]) .eyebrow,html[data-presentation="true"]:not([data-support="true"]) .n,html[data-presentation="true"]:not([data-support="true"]) .k,html[data-presentation="true"]:not([data-support="true"]) .cat{font-size:.9rem}
 }
 @media(max-width:600px){.presentation-tools{justify-content:flex-start}.presentation-tools button{font-size:14px;padding:9px 11px;min-height:44px}.presentation-hint{width:100%}}
 /* Objetivos táctiles de al menos 44 px en todas las partes (iPad, celular) */
@@ -228,6 +232,8 @@ header>.en-summary{margin-top:16px}
 .glossary-table td{color:var(--ink,#16212E)}
 @media(max-width:600px){.glossary-table th,.glossary-table td{padding:9px 12px}}
 .pin-table .en{display:block;font-size:.8em;line-height:1.25;margin-top:2px}
+.es-sub{margin:4px 0 0;color:var(--muted,#56657A);font-weight:600;line-height:1.25;letter-spacing:0}.es-sub.es-h1{font-size:clamp(1.05rem,2.2vw,1.6rem)}.es-sub.es-h2{font-size:1rem}
+.es-card{display:block;margin-top:2px;font-size:.62em;font-weight:600;color:var(--muted,#56657A)}
 </style></head>
 <body>
 <main class="wrap" id="contenido"><div class="presentation-tools" role="group" aria-label="Preparar el monitor">
@@ -239,7 +245,7 @@ header>.en-summary{margin-top:16px}
   <header class="hero">
     <div class="txt">
       <p class="eyebrow">Misión robótica · 7.º grado</p>
-      <h1>Láser <span>espía.</span></h1>
+      <h1 lang="en">Laser <span>spy.</span></h1><p class="es-sub es-h1">Láser espía.</p>
       <p class="lead">Una luz. Una señal. Una alerta. Un láser apunta a un sensor de luz; si algo corta el haz, el Arduino da la alarma. Elige una parte de la exposición.</p>
       <details class="en-summary" lang="en"><summary>Project summary <span class="en-hint" lang="es">· resumen en inglés</span></summary><p>Laser spy is our 7th-grade robotics project. A laser points at a light sensor; if something breaks the beam, the Arduino sounds an alarm. The site has six parts: four for the presentation (01 Project, 02 Materials, 03 Development and 06 Team) and two support modules (04 Specifications and 05 Assembly).</p></details>
       <div class="hello"><div class="lumi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" aria-hidden="true">
@@ -281,23 +287,23 @@ header>.en-summary{margin-top:16px}
   <section style="display:flex;flex-direction:column;gap:14px">
     <p class="eyebrow">La exposición en 4 partes</p><p class="lead">Conservamos la numeración del proyecto original.</p>
     <ul class="parts">
-      <li><a class="part" href="proyecto/"><span class="num">01</span><h2>Proyecto</h2><p>Nuestra misión: una barrera de luz, una idea inteligente.</p><span class="go">Ver la parte →</span></a></li>
-      <li><a class="part" href="materiales/"><span class="num">02</span><h2>Materiales</h2><p>Nuestro kit de robótica: qué hace cada pieza.</p><span class="go">Ver la parte →</span></a></li>
-      <li><a class="part" href="desarrollo/"><span class="num">03</span><h2>Desarrollo</h2><p>Así se activa la misión: activar, alinear, detectar y avisar.</p><span class="go">Ver la parte →</span></a></li>
-      <li><a class="part" href="equipo/"><span class="num">06</span><h2>Equipo</h2><p>Cinco integrantes, un mismo proyecto.</p><span class="go">Ver la parte →</span></a></li>
+      <li><a class="part" href="proyecto/"><span class="num">01</span><h2 lang="en">Project<span class="es-card" lang="es">Proyecto</span></h2><p>Nuestra misión: una barrera de luz, una idea inteligente.</p><span class="go">Ver la parte →</span></a></li>
+      <li><a class="part" href="materiales/"><span class="num">02</span><h2 lang="en">Materials<span class="es-card" lang="es">Materiales</span></h2><p>Nuestro kit de robótica: qué hace cada pieza.</p><span class="go">Ver la parte →</span></a></li>
+      <li><a class="part" href="desarrollo/"><span class="num">03</span><h2 lang="en">Development<span class="es-card" lang="es">Desarrollo</span></h2><p>Así se activa la misión: activar, alinear, detectar y avisar.</p><span class="go">Ver la parte →</span></a></li>
+      <li><a class="part" href="equipo/"><span class="num">06</span><h2 lang="en">Team<span class="es-card" lang="es">Equipo</span></h2><p>Cinco integrantes, un mismo proyecto.</p><span class="go">Ver la parte →</span></a></li>
     </ul>
     <div class="chain" aria-label="La idea en tres palabras"><span>Emitir</span><b>→</b><span>Detectar</span><b>→</b><span>Avisar</span></div>
   </section>
 
   <section aria-labelledby="supportTitle" style="display:flex;flex-direction:column;gap:14px">
-    <p class="eyebrow">Para ampliar o responder preguntas</p><h2 id="supportTitle">Módulos de apoyo</h2>
+    <p class="eyebrow">Para ampliar o responder preguntas</p><h2 id="supportTitle" lang="en">Support modules</h2><p class="es-sub es-h2">Módulos de apoyo</p>
     <p class="lead">También con Lumi, voz y ampliaciones: conoce el servo SG90 y sigue cómo se conecta el montaje.</p>
     <ul class="parts" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-      <li><a class="part" href="especificaciones/"><span class="num">04</span><h2>Especificaciones</h2><p>Explora el SG90: movimiento, alimentación y sus tres conexiones.</p><span class="go">Explorar el servo →</span></a></li>
-      <li><a class="part" href="montaje/"><span class="num">05</span><h2>Montaje</h2><p>Sigue el cableado en seis pasos: cada pieza a su pin del Arduino.</p><span class="go">Seguir el cableado →</span></a></li>
+      <li><a class="part" href="especificaciones/"><span class="num">04</span><h2 lang="en">Specifications<span class="es-card" lang="es">Especificaciones</span></h2><p>Explora el SG90: movimiento, alimentación y sus tres conexiones.</p><span class="go">Explorar el servo →</span></a></li>
+      <li><a class="part" href="montaje/"><span class="num">05</span><h2 lang="en">Assembly<span class="es-card" lang="es">Montaje</span></h2><p>Sigue el cableado en seis pasos: cada pieza a su pin del Arduino.</p><span class="go">Seguir el cableado →</span></a></li>
     </ul>
   </section>
-  <section class="share-qr" aria-labelledby="shareTitle"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAEICAIAAAAslP2oAAAE7ElEQVR4nO3dQW7cNhiAUbvIHWbfC/T+x+gFutcppous2n4CKoAMSfu9XYtAM078gQP9Q/Hz/X5/AP/027/+GxAGNCsGBGFAEAYEYUAQBgRhQBAGBGFAEAYEYUAQBgRhQBAGhB8fD71+/+PjBNdffy75ue5e9+76o97nbtfZzdOfy4oBQRgQhAFBGBCEAUEYEIQBI+YYo+4Tj7LqPvqon/fp+386Jxl1nevhz3v674MVA4IwIAgDgjAgCAOCMCAIA2bOMVbtcxhl1Hxg1Ove2e39fNXfBysGBGFAEAYEYUAQBgRhQBAGrJhjnG7Vc6Kevp9R1+cnKwYEYUAQBgRhQBAGBGFAEAYEc4xfNE84ZX8IP1kxIAgDgjAgCAOCMCAIA4IwYMUcY9U5Caeck73buRynvP/ZrBgQhAFBGBCEAUEYEIQBQRgwc47xVfcJPL3fP+rP7/Z+rm/2PCsrBgRhQBAGBGFAEAYEYUAQBoyYY5zyffpV+xlmWzU/+aq/D3esGBCEAUEYEIQBQRgQhAFBGBA+3+/3xwnPZRp1fsUp9+9XPffpzmvRvo5VrBgQhAFBGBCEAUEYEIQBQRgwcz/GbuctrJpXrNoXMXvOcy16DtWq61gxIAgDgjAgCAOCMCAIA4IwYOb5GKvmCaefw7Db/f6nrkPmM09ZMSAIA4IwIAgDgjAgCAOCMGDmHGO2Vedbz95nMvs+/Slzjzur5lRWDAjCgCAMCMKAIAwIwoAgDBhxPsYqq/YP7PYcrVXnhFybPVdq9vzHigFBGBCEAUEYEIQBQRgQhAEj9mPsdr9/1P6K3aw6Z2O3f8c7s+dFVgwIwoAgDAjCgCAMCMKAIAxY8Vyp07+Xv5tVz9eabfbr2o8BA/goBUEYEIQBQRgQhAFBGHDCc6W+6nkUT53yPKjd5i3O+YaJfJSCIAwIwoAgDAjCgCAMmPlcqVFmzw1OOWd61Os+vc6q/S3XZvtkrBgQhAFBGBCEAUEYEIQBQRgwcz/GKd+/X3U+91O77U94HXL+xqjrWDEgCAOCMCAIA4IwIAgDgjBgxTnfo64/+/3sNofZba4yyux/r1GsGBCEAUEYEIQBwoD/x4oBQRgwYo6x23xg1OvuZtXzrO5c3+ycdSsGBGFAEAYEYUAQBgRhQBAG7LQfY9X5D0+vs9vcZre//9Ofl3XHigFBGBCEAUEYEIQBQRgQhAEr9mPMvt+82/372fOKVa7NztmYvQ/EigFBGBCEAUEYEIQBQRgQhAEz92PsZva5E6vu66/aH3Jn9n6JVfs0rBgQhAFBGBCEAUEYEIQBQRgwYo6x27kHs++7r7pPf8q5H9ch+zTsx4ABfJSCIAwIwoAgDAjCgCAMmDnHmH1/etX3+59a9fyo2fON16Lncd2xHwMW8FEKgjAgCAOCMCAIA4IwYMUcYze7nS8+ym77Q1Y9X8t+DJjIRykIwoAgDAjCgCAMCMKA8O3mGKP2Rey2f2C216D3v9v8544VA4IwIAgDgjAgCAOCMCAIA1bMMU65T3+K2c/pOv05V5dzvmEeH6UgCAOCMCAIA4IwIAgDZs4xTvme/ex9BXfXmX39VX//r0PmHk9ZMSAIA4IwIAgDgjAgCAOCMCB8vt/v+v/wrVkxIAgDgjAgCAOCMCAIA4IwIAgDgjAgCAOCMCAIA4IwIAgDgjDg47/+BmxjIUkMVsmaAAAAAElFTkSuQmCC" alt="Código QR que abre esta portada del láser espía"><div><h2 id="shareTitle">Ábrelo en tu celular</h2><p>Escanea el código para abrir esta portada y elegir cualquier parte. Cada parte tiene además su propio código.</p></div></section>
+  <section class="share-qr" aria-labelledby="shareTitle"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAEICAIAAAAslP2oAAAE7ElEQVR4nO3dQW7cNhiAUbvIHWbfC/T+x+gFutcppous2n4CKoAMSfu9XYtAM078gQP9Q/Hz/X5/AP/027/+GxAGNCsGBGFAEAYEYUAQBgRhQBAGBGFAEAYEYUAQBgRhQBAGhB8fD71+/+PjBNdffy75ue5e9+76o97nbtfZzdOfy4oBQRgQhAFBGBCEAUEYEIQBI+YYo+4Tj7LqPvqon/fp+386Jxl1nevhz3v674MVA4IwIAgDgjAgCAOCMCAIA2bOMVbtcxhl1Hxg1Ove2e39fNXfBysGBGFAEAYEYUAQBgRhQBAGrJhjnG7Vc6Kevp9R1+cnKwYEYUAQBgRhQBAGBGFAEAYEc4xfNE84ZX8IP1kxIAgDgjAgCAOCMCAIA4IwYMUcY9U5Caeck73buRynvP/ZrBgQhAFBGBCEAUEYEIQBQRgwc47xVfcJPL3fP+rP7/Z+rm/2PCsrBgRhQBAGBGFAEAYEYUAQBoyYY5zyffpV+xlmWzU/+aq/D3esGBCEAUEYEIQBQRgQhAFBGBA+3+/3xwnPZRp1fsUp9+9XPffpzmvRvo5VrBgQhAFBGBCEAUEYEIQBQRgwcz/GbuctrJpXrNoXMXvOcy16DtWq61gxIAgDgjAgCAOCMCAIA4IwYOb5GKvmCaefw7Db/f6nrkPmM09ZMSAIA4IwIAgDgjAgCAOCMGDmHGO2Vedbz95nMvs+/Slzjzur5lRWDAjCgCAMCMKAIAwIwoAgDBhxPsYqq/YP7PYcrVXnhFybPVdq9vzHigFBGBCEAUEYEIQBQRgQhAEj9mPsdr9/1P6K3aw6Z2O3f8c7s+dFVgwIwoAgDAjCgCAMCMKAIAxY8Vyp07+Xv5tVz9eabfbr2o8BA/goBUEYEIQBQRgQhAFBGHDCc6W+6nkUT53yPKjd5i3O+YaJfJSCIAwIwoAgDAjCgCAMmPlcqVFmzw1OOWd61Os+vc6q/S3XZvtkrBgQhAFBGBCEAUEYEIQBQRgwcz/GKd+/X3U+91O77U94HXL+xqjrWDEgCAOCMCAIA4IwIAgDgjBgxTnfo64/+/3sNofZba4yyux/r1GsGBCEAUEYEIQBwoD/x4oBQRgwYo6x23xg1OvuZtXzrO5c3+ycdSsGBGFAEAYEYUAQBgRhQBAG7LQfY9X5D0+vs9vcZre//9Ofl3XHigFBGBCEAUEYEIQBQRgQhAEr9mPMvt+82/372fOKVa7NztmYvQ/EigFBGBCEAUEYEIQBQRgQhAEz92PsZva5E6vu66/aH3Jn9n6JVfs0rBgQhAFBGBCEAUEYEIQBQRgwYo6x27kHs++7r7pPf8q5H9ch+zTsx4ABfJSCIAwIwoAgDAjCgCAMmDnHmH1/etX3+59a9fyo2fON16Lncd2xHwMW8FEKgjAgCAOCMCAIA4IwYMUcYze7nS8+ym77Q1Y9X8t+DJjIRykIwoAgDAjCgCAMCMKA8O3mGKP2Rey2f2C216D3v9v8544VA4IwIAgDgjAgCAOCMCAIA1bMMU65T3+K2c/pOv05V5dzvmEeH6UgCAOCMCAIA4IwIAgDZs4xTvme/ex9BXfXmX39VX//r0PmHk9ZMSAIA4IwIAgDgjAgCAOCMCB8vt/v+v/wrVkxIAgDgjAgCAOCMCAIA4IwIAgDgjAgCAOCMCAIA4IwIAgDgjDg47/+BmxjIUkMVsmaAAAAAElFTkSuQmCC" alt="Código QR que abre esta portada del láser espía"><div><h2 id="shareTitle" lang="en">Open it on your phone</h2><p class="es-sub es-h2">Ábrelo en tu celular</p><p>Escanea el código para abrir esta portada y elegir cualquier parte. Cada parte tiene además su propio código.</p></div></section>
   <footer>Proyecto escolar de robótica. Simuladores educativos: los valores son aproximados. Narración e ilustraciones generadas con IA.</footer>
 </main>
 <script>(() => {

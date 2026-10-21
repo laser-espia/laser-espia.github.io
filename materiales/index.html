@@ -211,6 +211,8 @@ button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid 
   .mesa-stage{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:16px;align-items:center;border-radius:12px}
 }
 @media (min-width:1000px){.scene-msg{max-width:70%}}
+/* modo exposición: la mesa usa todo el ancho para que sus etiquetas se lean de lejos; la ficha va debajo, en columnas */
+@media (min-width:861px){html[data-presentation="true"] .mesa-stage{grid-template-columns:minmax(0,1fr)}html[data-presentation="true"] .info dl:not([hidden]){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-flow:column;grid-template-rows:auto auto;column-gap:24px;row-gap:4px;margin:0}html[data-presentation="true"] .info dd{margin:0}}
 .stage{position:relative;border-radius:10px;overflow:hidden;background:var(--paper);border:1px solid var(--line)}
 @media (max-width:820px){.stage{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;box-shadow:0 8px 18px rgba(0,0,0,.35)}.sim.touring .stage{position:relative;box-shadow:none}}
 .stage svg{display:block;width:100%;height:auto;touch-action:manipulation;user-select:none;-webkit-user-select:none}
@@ -392,6 +394,10 @@ footer{color:var(--muted);font-size:.85rem}
   html[data-presentation="true"] .tour-bar button{min-width:52px;min-height:52px;font-size:20px}
   html[data-presentation="true"] .tour-bar .next{font-size:20px}
   html[data-presentation="true"] .lumi-card p{font-size:22px}
+  html[data-presentation="true"] .presentation-tools button{font-size:20px;padding:12px 20px;min-height:52px}
+  html[data-presentation="true"] .presentation-hint,html[data-presentation="true"] .presentation-tools [role="status"]{font-size:18px}
+  /* etiquetas pequeñas (PASO 1, CONTROL, BITÁCORA…) legibles desde el fondo del salón */
+  html[data-presentation="true"]:not([data-support="true"]) .eyebrow,html[data-presentation="true"]:not([data-support="true"]) .n,html[data-presentation="true"]:not([data-support="true"]) .k,html[data-presentation="true"]:not([data-support="true"]) .cat{font-size:.9rem}
 }
 @media(max-width:600px){.presentation-tools{justify-content:flex-start}.presentation-tools button{font-size:14px;padding:9px 11px;min-height:44px}.presentation-hint{width:100%}}
 /* Objetivos táctiles de al menos 44 px en todas las partes (iPad, celular) */
@@ -425,6 +431,8 @@ header>.en-summary{margin-top:16px}
 .glossary-table td{color:var(--ink,#16212E)}
 @media(max-width:600px){.glossary-table th,.glossary-table td{padding:9px 12px}}
 .pin-table .en{display:block;font-size:.8em;line-height:1.25;margin-top:2px}
+.es-sub{margin:4px 0 0;color:var(--muted,#56657A);font-weight:600;line-height:1.25;letter-spacing:0}.es-sub.es-h1{font-size:clamp(1.05rem,2.2vw,1.6rem)}.es-sub.es-h2{font-size:1rem}
+.es-card{display:block;margin-top:2px;font-size:.62em;font-weight:600;color:var(--muted,#56657A)}
 </style></head>
 <body>
 <main class="wrap" id="contenido"><div class="presentation-tools" role="group" aria-label="Preparar el monitor">
@@ -437,8 +445,8 @@ header>.en-summary{margin-top:16px}
 
   <header class="hero">
     <div class="txt">
-      <p class="eyebrow">Láser espía · Parte 02 · Materiales</p>
-      <h1>Nuestro kit <span>de robótica.</span></h1>
+      <p class="eyebrow">Laser spy · Part 02 · Materials</p>
+      <h1 lang="en">Our robotics <span>kit.</span></h1><p class="es-sub es-h1">Nuestro kit de robótica.</p>
       <p class="lead">Cada pieza cumple una función. Toca una pieza para conocerla, o quítala y mira qué pasa.</p>
       <details class="en-summary" lang="en"><summary>Project summary <span class="en-hint" lang="es">· parte 02 · resumen en inglés</span></summary><p>Our robotics kit has eight parts: an Arduino board, a laser module, a light sensor, an SG90 servo motor, a breadboard with resistors, jumper wires, an LED and buzzer, and a 9 V battery. Each part has one job: some give power, others sense, decide, move or alert. If one part is missing, the mission does not work.</p></details>
       <div class="cta">
@@ -452,7 +460,7 @@ header>.en-summary{margin-top:16px}
 
   <section id="piezas">
     <p class="eyebrow">02 · Materiales</p>
-    <h2>Las 8 piezas</h2>
+    <h2 lang="en">The 8 parts</h2><p class="es-sub es-h2">Las 8 piezas</p>
     <p class="lead">Cada componente cumple una función: unos dan energía, otros sienten, deciden, mueven o avisan. Toca una tarjeta para verla en la mesa de trabajo.</p>
     <ul class="kit" id="kit">
       <li><button type="button" id="p-arduino" data-p="arduino" aria-pressed="false"><img class="thumb" src="../assets/image-bb3bc2ea093a4b2b.jpg" alt="Foto de referencia de una placa Arduino Uno azul con su conector USB y su conector redondo de energía" width="480" height="360" loading="lazy"><span class="cat">Control</span><span class="nm">Placa Arduino</span><span class="nm-en en" lang="en">Arduino board</span><span class="fn">Decide y da las órdenes</span><span class="seen" aria-hidden="true">✓</span></button></li>
@@ -468,7 +476,7 @@ header>.en-summary{margin-top:16px}
 
   <section id="mesa">
     <p class="eyebrow">Mesa de trabajo</p>
-    <h2>¿Qué pasa si falta una pieza?</h2>
+    <h2 lang="en">What if a part is missing?</h2><p class="es-sub es-h2">¿Qué pasa si falta una pieza?</p>
     <p class="lead">Este es el láser espía armado. Toca una pieza para ver qué hace, pulsa <b>Quitar esta pieza</b> y luego <b>Probar: que pase alguien</b>.</p>
     <div class="panel sim" id="escena">
       <button type="button" class="bench-zoom" id="benchZoomBtn" aria-pressed="false">Ampliar mesa ↔</button><p class="bench-zoom" id="benchZoomHint" hidden>Desliza la mesa hacia los lados o elige una pieza desde sus tarjetas.</p>
@@ -737,7 +745,7 @@ header>.en-summary{margin-top:16px}
 
   <section id="glosario" aria-labelledby="glosarioTitle">
     <p class="eyebrow">Palabras en inglés</p>
-    <h2 id="glosarioTitle">Glosario · <span class="en" lang="en">Glossary</span></h2>
+    <h2 id="glosarioTitle" lang="en">Glossary</h2><p class="es-sub es-h2">Glosario</p>
     <p class="lead">Las palabras clave del proyecto, en inglés y en español.</p>
     <div class="glossary">
       <table class="glossary-table" aria-label="Glosario, parte 1 de 2">
@@ -774,7 +782,7 @@ header>.en-summary{margin-top:16px}
     <div class="panel share">
       <img src="../assets/image-460d557d2cdc5ecc.png" alt="Código QR que abre esta página">
       <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
-        <h2>Escanea y arma el kit</h2>
+        <h2 lang="en">Scan and build the kit</h2><p class="es-sub es-h2">Escanea y arma el kit</p>
         <p class="lead">Ábrelo en tu celular, quita piezas y prueba los tres retos.</p>
       </div>
     </div>
@@ -1357,7 +1365,8 @@ header>.en-summary{margin-top:16px}
     document.querySelector('.sim').classList.remove('touring');
     if (TOUR_BODY_CLASS) document.body.classList.remove('touring');
     spotEl.hidden = lumi.hidden = bar.hidden = true;
-    resetSim(); $('tourBtn').disabled = $('tourManualBtn').disabled = false; $('tourBtn').focus({ preventScroll: true });
+    // la simulación vuelve al inicio: su pista también
+    resetSim(); $('hint').hidden = false; $('tourBtn').disabled = $('tourManualBtn').disabled = false; $('tourBtn').focus({ preventScroll: true });
   }
   function finishTour(){ stopTour(); toast('¡Ahora pruébalo tú: quita una pieza y mira qué pasa!'); }
 
@@ -1401,6 +1410,8 @@ header>.en-summary{margin-top:16px}
     if (s1 < 1.08) s1 = 1;
     // más ancho que el hueco junto a Lumi (p. ej. en modo exposición): achicar un poco para que quepa entero
     if (wide && n.w > fr - fl) s1 = Math.max(0.75, (fr - fl) / n.w);
+    // más alto que el hueco sobre la barra (p. ej. la escena en modo exposición): achicar para que no quede cortado ni bajo la barra
+    if (wide && n.h > fb - ft) s1 = Math.min(s1, Math.max(0.5, (fb - ft) / n.h));
     if (wide && n.h * s1 > fb - ft) s1 = Math.max(0.6, Math.min(s1, (fb - ft) / n.h));
     if (s1 !== 1) {
       // se anima en coordenadas de pantalla: aunque la página se desplace, el objetivo se queda en el centro
