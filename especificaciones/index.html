@@ -640,6 +640,14 @@ header>.en-summary{margin-top:16px}
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     }
   });
+  // Botón Bluetooth (p. ej. palo de selfie que manda teclas de volumen): 1 toque = siguiente, 2 toques rápidos = anterior
+  let remoteTimer = null;
+  if (typeof document.addEventListener === 'function') document.addEventListener('keydown', event => {
+    if (closed || event.repeat || (event.key !== 'AudioVolumeUp' && event.key !== 'AudioVolumeDown')) return;
+    event.preventDefault();
+    if (remoteTimer) { clearTimeout(remoteTimer); remoteTimer = null; move(-1); }
+    else remoteTimer = setTimeout(() => { remoteTimer = null; if (!closed) move(1); }, 450);
+  }, true);
   window.addEventListener('resize', () => { if (!closed) render(); });
   window.addEventListener('pagehide', close);
 })(typeof globalThis !== 'undefined' ? globalThis : window);
